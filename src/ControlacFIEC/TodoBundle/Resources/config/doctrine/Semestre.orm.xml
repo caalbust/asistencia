@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ControlacFIEC\TodoBundle\Entity\Semestre" table="semestre">
+    <id name="semestreId" type="integer" column="semestre_id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="semestre_semestre_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="semestreName" type="string" column="semestre_name" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="semestreDescripcion" type="string" column="semestre_descripcion" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="semestreActivo" type="integer" column="semestre_activo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="semestreFechaInicio" type="datetime" column="semestre_fecha_inicio" nullable="true"/>
+    <field name="semestreFechaFin" type="datetime" column="semestre_fecha_fin" nullable="true"/>
+  </entity>
+</doctrine-mapping>

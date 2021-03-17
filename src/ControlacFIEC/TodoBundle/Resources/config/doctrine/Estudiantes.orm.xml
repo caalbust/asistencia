@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ControlacFIEC\TodoBundle\Entity\Estudiantes" table="estudiantes">
+    <id name="estId" type="integer" column="est_id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="estudiantes_est_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="estName" type="string" column="est_name" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="estApellido" type="string" column="est_apellido" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="estCorreo" type="string" column="est_correo" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="estActivo" type="integer" column="est_activo" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

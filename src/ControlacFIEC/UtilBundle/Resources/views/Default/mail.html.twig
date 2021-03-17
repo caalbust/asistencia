@@ -1,0 +1,47 @@
+<!doctype html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Solicitud | {% block title %}{% endblock %}</title>
+    <!-- GLOBAL STYLES -->
+    <link rel="stylesheet" href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/util/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ asset('bundles/util/css/main_print.css') }}" />
+    <!--END GLOBAL STYLES -->
+</head>
+<body>
+<div id="top">
+    <h4 class="text-center">Oficina de Admisiones</h4>
+    <div style="clear: both"></div>
+</div>
+<div id="wrap">
+    <div>
+        Estimado Director,<br>
+        <br>
+         {{ justificacion }}<br><br><br>
+        <b>NOTA:</b>Ingreser primero al sistema de control académico, para poder visualizar el siguiente enlace
+        <p><a href="{{ link }}">Link a la página de aprobar clases.</a></p>
+        <p>&nbsp;Si tiene problemas con el enlace, por favor copie y pegue en la barra de b&uacute;squeda:</p>
+        <p>{{ link }}</p>
+        <div style="margin-top: 15px"></div>
+        <b>Datos de la clase </b><br><br>
+        <div style="margin-top:5px"></div>
+        <b>Curso:</b>{{ curso.getCMateria().getMCodigo() ~ ' ' ~ curso.getCMateria().getMNombre() }}<br>
+        <b>Profesor:</b> {{ profesor }}<br>
+
+        <b>Fecha:</b>{{ fecha | date('Y-m-d')}}<br>
+        <b>Descripción:</b><br>
+          {{ descripcion }}
+        <br>
+        <b>Comentario:</b>{{ comentario }}<br>
+        <b>Objetivos:</b><br>
+			{{ objetivos }}
+        <br>
+        Atentamente,<br>
+        <br>
+        Controlac<br>
+        <b>Sistema de Control Académico</b><br>
+    </div>
+    <p>&nbsp;</p>
+</div>
+
+
+</body>

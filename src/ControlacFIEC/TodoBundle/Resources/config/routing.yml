@@ -1,0 +1,3 @@
+todo_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: TodoBundle:Default:index }

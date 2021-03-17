@@ -1,0 +1,117 @@
+{% extends "UtilBundle:Default:baseInicio.html.twig" %}
+{% block title %}
+    INICIO
+{% endblock %}
+{% block extraStyle %}
+<style>
+#tabla_cursos_length{
+	display: none;
+}
+.alert.alert-info {
+    display: block;
+    -webkit-animation: showTooltip .2s ease-out;
+    animation: showTooltip .2s ease-out;
+}
+.alert.alert-warning {
+    display: block;
+    -webkit-animation: showTooltip .2s ease-out;
+    animation: showTooltip .2s ease-out;
+}
+.alert {
+    display: none;
+    width: 256px;
+    /*height: auto;
+    background-color: #3483fa;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.25), 0 -1px 0 0 rgba(0,0,0,.05);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.25), 0 -1px 0 0 rgba(0,0,0,.05);
+    -webkit-border-radius: 2px;
+    border-radius: 2px;*/
+    position: absolute;
+    left: 100%;
+    top: 26%;
+    z-index: 3;
+    will-change: opacity;
+}
+.flecha {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid #d9edf7;
+    left: -8px;
+    top: 17px;
+}
+.flecha_warning {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid #fcf8e3;
+    left: -8px;
+    top: 17px;
+}
+
+</style>
+{% endblock %}
+{% block extraScripts %}
+	<script src="{{ asset('bundles/util/assets/plugins/dataTables/jquery.dataTables.js') }}"></script>
+	<script src="{{ asset('bundles/util/assets/plugins/dataTables/dataTables.bootstrap.js') }}"></script>
+	<script src="{{ asset('bundles/todo/jsAsistencia.js') }}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#tabla_cursos').DataTable({
+				"language": {
+					"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+				}
+			});
+		} );
+	</script>
+{% endblock %}
+{% block contenido %}
+
+	<div id="tabla_resultados">
+		<div class="oculto" id="sec_tablas">	
+			<div class="panel panel-default widget-box">
+					<div class="panel-body widget-content">
+						<div class="row">
+							<div class="col-sm-12" style="margin-top: 36px;">
+								<table id="tabla_cursos" class="table table-striped table-bordered" style="    width: 96%;
+    margin-left: 20px">
+									<thead>
+										<tr>
+											<th>PAR</th>
+											<th>CÓDIGO</th>
+											<th>MATERIA</th>
+											<th width="287px">REVISAR PARA TOMA DE ASISTENCIA</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for value in cursos %}
+											<tr>
+												<td>{{ value.getCursoParalelo() }}</td>
+												<td>{{ value.getCursoMateria().getMateriasCodigo() }}</td>
+												<td>{{ value.getCursoMateria().getMateriasName() }}</td>
+												<td style="text-align: center;">
+													<a  href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':value.getCursoId(),'fecha':0})}}" {% if validaOk ==0 %} disabled {% endif %} type="button" title="Revisar Listado" class="btn btn-success"><span class="glyphicon glyphicon-check"></span></a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+

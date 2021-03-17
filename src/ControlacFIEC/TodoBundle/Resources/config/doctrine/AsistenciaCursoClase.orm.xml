@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ControlacFIEC\TodoBundle\Entity\AsistenciaCursoClase" table="asistencia_curso_clase">
+    <indexes>
+      <index name="IDX_686EA2F9A2CFF73E" columns="asistencia_list_estudiante"/>
+      <index name="IDX_686EA2F9F6AD7FF4" columns="asistencia_curso"/>
+    </indexes>
+    <id name="asistenciaId" type="integer" column="asistencia_id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="asistencia_curso_clase_asistencia_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="asistenciaFecha" type="datetime" column="asistencia_fecha" nullable="true"/>
+    <field name="asistenciaValue" type="integer" column="asistencia_value" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="asistenciaComentario" type="string" column="asistencia_comentario" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="asistenciaTipo" type="string" column="asistencia_tipo" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="asistenciaListEstudiante" target-entity="ListEstudiantes" fetch="LAZY">
+      <join-columns>
+        <join-column name="asistencia_list_estudiante" referenced-column-name="list_estudiantes_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="asistenciaCurso" target-entity="Curso" fetch="LAZY">
+      <join-columns>
+        <join-column name="asistencia_curso" referenced-column-name="curso_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

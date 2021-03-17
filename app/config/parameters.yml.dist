@@ -1,0 +1,31 @@
+# This file is a "template" of what your parameters.yml file should look like
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            en
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    l3_cas_host: auth.espol.edu.ec
+    l3_cas_path: ~
+    l3_cas_port: 443
+    l3_cas_ca: false
+    l3_cas_handleLogoutRequest: true
+    l3_cas_casLogoutTarget: https://auth.espol.edu.ec/logout
+    l3_cas_force: true
+
+    cas_login_target: https://localhost:7070/controlac/web/app_dev.php/backend       #https://your_web_path_application.com
+    cas_host: auth.espol.edu.ec

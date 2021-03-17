@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ControlacFIEC\TodoBundle\Entity\Curso" table="curso">
+    <indexes>
+      <index name="IDX_CA3B40EC44D4F1BA" columns="curso_materia"/>
+      <index name="IDX_CA3B40ECD4BB6C9A" columns="curso_docente"/>
+      <index name="IDX_CA3B40ECB020B6B4" columns="curso_semestre"/>
+    </indexes>
+    <id name="cursoId" type="integer" column="curso_id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="curso_curso_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="cursoName" type="string" column="curso_name" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cursoCodigo" type="string" column="curso_codigo" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cursoParalelo" type="string" column="curso_paralelo" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cursoCargarClase" type="integer" column="curso_cargar_clase" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="cursoMateria" target-entity="Materias" fetch="LAZY">
+      <join-columns>
+        <join-column name="curso_materia" referenced-column-name="materias_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cursoDocente" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="curso_docente" referenced-column-name="user_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cursoSemestre" target-entity="Semestre" fetch="LAZY">
+      <join-columns>
+        <join-column name="curso_semestre" referenced-column-name="semestre_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

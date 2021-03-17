@@ -1,0 +1,68 @@
+util:
+    resource: "@UtilBundle/Resources/config/routing.yml"
+    prefix:   /
+
+todo:
+    resource: "@TodoBundle/Resources/config/routing.yml"
+    prefix:   /root
+
+app:
+    resource: @AppBundle/Controller/
+    type:     annotation
+
+pagina_estatica:
+    pattern: /sitio/{pagina}
+    defaults: { _controller: UtilBundle:Sitio:estatica }
+
+#ROUTER DE LA PAGINA PRINCIPAL
+pagina_index:
+    pattern: /backend/inicio/{action}/
+    defaults: { _controller: TodoBundle:Default:index }
+pagina_listado_asistencia:
+    pattern: /backend/listado_asistencia/{action}/{id_curso}/{fecha}
+    defaults: { _controller: TodoBundle:Default:listado_asistencia }
+pagina_ajax_asistencia:
+    pattern: /backend/ajax_asistencia/
+    defaults: { _controller: TodoBundle:Default:ajax_asistencia }
+function_crear_clase:
+    pattern: /backend/crear_clase/{semestre_id}/{id_curso}
+    defaults: { _controller: TodoBundle:Default:crear_clase }
+# RUTAS DE LOGIN Y LOGOUT
+login:
+    path: /backend/login
+    #defaults: { _controller: TodoBundle:Default:login }
+    defaults: { _controller: TodoBundle:Default:CASLogin }
+
+homepage:
+    path: /
+    #defaults: { _controller: TodoBundle:Default:login }
+    defaults: { _controller: TodoBundle:Default:CASLogin }
+
+login_check:
+    path: /backend/login_check
+    defaults: { _controller: TodoBundle:Default:loginCheck }
+    #defaults: { _controller: TodoBundle:Default:loginCheck2 }
+
+logout:
+    path: /backend/logout
+    defaults: { _controller: TodoBundle:Default:logout }
+
+static_file:
+    path: /backend/manual/{archivo}
+    defaults: { _controller: UtilBundle:Sitio:archivo }
+
+testingCas:
+    pattern: /backend/testing
+    defaults: { _controller: TodoBundle:Default:testingCas }
+
+testingLogin:
+    pattern: /backend/testLogin
+    defaults: { _controller: TodoBundle:Default:testingLogin }
+
+testingforce:
+    pattern: /force
+    defaults: { _controller: TodoBundle:Default:force }
+
+hello:
+    pattern: /hello
+    defaults: { _controller: TodoBundle:Default:testing }

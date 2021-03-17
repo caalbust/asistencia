@@ -1,0 +1,1716 @@
+commit ec6a41fa17c5f77b43d04cbab886449c5c8b3d4c
+Merge: 8e9e4da0 457d7035
+Author: administrador <administrador@GGIECLBMWRK023>
+Date:   Mon Sep 4 14:35:47 2017 -0500
+
+    Merge branch 'master' of 200.9.176.15:/var/www/html/controlac
+
+commit 457d70355cd3d8f352bbd88f282f1f116bba33ee
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Mon Sep 4 14:30:49 2017 -0500
+
+    Correccion de tabla clases, modificacion de comentarios
+
+commit 8e9e4da04e6e518b7500d387919a0b77cb407f55
+Author: administrador <administrador@GGIECLBMWRK023>
+Date:   Mon Sep 4 13:55:27 2017 -0500
+
+    [ADD] Cookies para mostrar el modal una vez en la sesion
+
+commit 41a737e1c541beec3eb677859dc737ed1a674ae3
+Merge: 08445637 8399d092
+Author: administrador <administrador@GGIECLBMWRK023>
+Date:   Mon Sep 4 11:10:39 2017 -0500
+
+    Merge branch 'master' of 200.9.176.15:/var/www/html/controlac
+
+commit 08445637d5654afecd7ec8b594e48702c206bd6c
+Author: administrador <administrador@GGIECLBMWRK023>
+Date:   Mon Sep 4 11:08:59 2017 -0500
+
+    [UPD] Modal de inicio
+
+commit 8399d09268040b2bcba4f9ee27717ac6a4a391d8
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Mon Sep 4 11:08:52 2017 -0500
+
+    correcciones tablekit
+
+commit 927b54e36c3eb184b372ce92e0e6d018c5ed9b5f
+Author: administrador <administrador@GGIECLBMWRK023>
+Date:   Mon Sep 4 10:55:51 2017 -0500
+
+    [ADD] Modal antiguo
+
+commit 53f1f3d09ece7d4638987ac928828861c3ed8327
+Author: administrador <administrador@GGIECLBMWRK023>
+Date:   Mon Sep 4 10:41:05 2017 -0500
+
+    [DEL] Eliminada referencia a api
+
+commit 9122283bd575d0d6c9e19e1f694c0495ed18f2f8
+Author: administrador <administrador@GGIECLBMWRK023>
+Date:   Mon Sep 4 10:26:22 2017 -0500
+
+    [UPD] Ordenamiento de datatables
+
+commit 5c0bb1bbecafac1006350b42e357de3cd1485b45
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Sep 4 09:10:28 2017 -0500
+
+    Nuevos cambios
+
+commit 6f492bd740ad60afb243d82eb8a5b23680d3b157
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Fri Aug 25 16:33:48 2017 -0500
+
+    avance reporte clases x semestre
+
+commit 74fbca570c5110770d045ff5230ab8f2c33c9a0e
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Fri Aug 25 15:45:42 2017 -0500
+
+    actualizacion reportes
+
+commit 735f31e95ae7d0f618240c204dd9b7b28e503722
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Fri Aug 25 15:15:39 2017 -0500
+
+    Remplazo de coincidencias CCODIGO y CNOMBRE
+
+commit fa9b5d4496188e39861cdbcdf07557b5909a70a1
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Fri Aug 25 15:04:41 2017 -0500
+
+    Correcciones html MATERIA
+
+commit 5186c971b437884a0c71d0ffafee8925cf672f2a
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Aug 25 15:00:40 2017 -0500
+
+    Cambios en el modelo
+
+commit 8c5ede6a25ad693ae0e8136bb6cdbb5eaed4440d
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Aug 25 14:46:48 2017 -0500
+
+    Cambios 25-08-2017
+
+commit ed2e9b73b0f7c2a23f21235711d06749344b02e5
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 24 16:18:25 2017 -0500
+
+    Correccion ajax y controller
+
+commit 5aa39c7af925a7def17c5b3e5aa0d030e7e737ea
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 24 15:24:35 2017 -0500
+
+    Correccion contador descripcion
+
+commit 3d40e24a61cc00d4b43da53de3727cde2af48882
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 24 15:09:18 2017 -0500
+
+    cambio en limite de descripcion
+
+commit 35e1b4c703b05ef9dcf998cca09f4a7fea10bb91
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 24 14:47:51 2017 -0500
+
+    arreglado forma de recuperar clase y nueva clase
+
+commit a07cfd298d38abdb11771080ba5eab47e862b5d7
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 24 14:05:21 2017 -0500
+
+    correcciones de forma recuperar clase
+
+commit a2ebce369d6a057dd7178cc0cdf8cfb5cfa58cf4
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 24 12:17:13 2017 -0500
+
+    actualizacion de descripcion sin refresh y descripcion en modal recuperar clases
+
+commit f5865b0a704e42a6b381020cad1e3488c4e9fd8c
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Aug 24 09:30:47 2017 -0500
+
+    Cambios en el modelo
+
+commit 62d777b82fb7b927cc3a37e8e58717503c61f700
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Aug 24 09:12:49 2017 -0500
+
+    Nuevos Cambios
+
+commit 0b1f66c487779afd5cd4a14236859edbab23cc34
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Aug 22 16:07:49 2017 -0500
+
+    Descripcion controller
+
+commit 94f538c37a318464e25857782b7b529d6ebea45d
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Tue Aug 22 15:58:43 2017 -0500
+
+    funcion ajax para guardar descripcion
+
+commit b803baeec4a3988251eeeeb77913763c2a24398c
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Aug 22 14:59:04 2017 -0500
+
+    descripcion3
+
+commit f27187a257038f65a68d33ff39188245ffe86115
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Aug 22 14:36:12 2017 -0500
+
+    descripcion
+
+commit 22f89de9815d862d8f36fda545add9d2e5599b35
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Aug 22 14:33:28 2017 -0500
+
+    descripcion
+
+commit e47e9f4bad180a977342a9d93a5fa0fe98465318
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Aug 22 13:41:04 2017 -0500
+
+    descripcion
+
+commit 029afbdb03bd5e4df7a032c3c7a5e157798aa3db
+Merge: 4b8cf5b0 2c9893ca
+Author: ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Aug 21 13:36:00 2017 -0500
+
+    Merge branch 'master' of 200.9.176.15:/var/www/html/controlac
+
+commit 4b8cf5b012f67be89296303677af3a7f2edf2cfb
+Author: ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Aug 21 13:35:43 2017 -0500
+
+    [ADD] Tipos de reporte
+
+commit 2c9893ca10ba4739ad74c1d0004ceae3403180c0
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Mon Aug 21 12:35:46 2017 -0500
+
+    rol de docente puede ver todas las clases pero no editarlas
+
+commit a5f7bbba5f2da3e431109cce6bd0a18f6600fa78
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Aug 21 10:13:47 2017 -0500
+
+    Cambios en vista reportes
+
+commit 64f7e3a7053ab7a9f5545abe126fc74f176621cb
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Fri Aug 18 15:39:30 2017 -0500
+
+    Resaltar terminado
+
+commit 53466a11c597778a9baa7f3507c38c12704f9055
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Aug 18 14:54:21 2017 -0500
+
+    Reportes
+
+commit b2f3ee340312cf234579f3cbd9f2de12d91bd980
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Aug 18 12:36:58 2017 -0500
+
+    Cambio en aprobar clases
+
+commit 0277d09d35e44f3877f49b943af2777b7bd92ef5
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Aug 18 12:11:49 2017 -0500
+
+    Vistas Anteriores
+
+commit ce2499c4adaec70be3c53ade98efb67f09a09b10
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Fri Aug 18 11:41:11 2017 -0500
+
+    Se implemento paginacion en las tablas de clases por aprobar
+
+commit 800e0a09c9958ba129d7e04e93ff2cc403881a82
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Fri Aug 18 10:33:45 2017 -0500
+
+    Se termino el controlador de generar reporte
+
+commit 8e4cf240e0f6de10c06ebe49960865d848e302e0
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 17 16:36:15 2017 -0500
+
+    modal descripcion swith
+
+commit 1d25b5dee55df22be6fbc0a62e1fea12610e4f11
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Thu Aug 17 15:11:31 2017 -0500
+
+    objetivos en la descarga del curso
+
+commit c286c3a2528ca62768b73cd495f0acb9e7676739
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Thu Aug 17 14:34:31 2017 -0500
+
+    arreglado boton eliminar clase
+
+commit fdcedc78eebed281fb70d739ed4e13a29177d623
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Thu Aug 17 12:25:36 2017 -0500
+
+    arreglado seleccion de objetivos en recuperar clases
+
+commit 3fa62cdf98e77f95cf832c68fef258117a7fe1da
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Aug 15 15:29:25 2017 -0500
+
+    descripciones activas modal
+
+commit 38319c8acffea1b23fb6125cdec2e36d88473b15
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Aug 15 12:27:50 2017 -0500
+
+    Nueva corrección de resaltado
+
+commit 4f26b80e3798dcecaf249954ac4f357cb6c06942
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Aug 15 09:56:40 2017 -0500
+
+    Correccion resaltado modal descripcion
+
+commit 59034663ebb3800e41fcee78ad1a6a7511afbe9b
+Merge: bf185e6c 9f732a90
+Author: ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Aug 14 13:36:42 2017 -0500
+
+    MERGE
+
+commit bf185e6cbbf70d1f3cf592007f26dd2e7d7a5598
+Author: ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Aug 14 13:29:56 2017 -0500
+
+    [ADD] Reporte por profesor y por materia funcionando correctamente
+
+commit 9f732a90fe2bcb0fa3a9569b1ae2f00bf8e2c69e
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Mon Aug 14 13:29:18 2017 -0500
+
+    mejora de objetivos - actualizacion automatica en la tabla
+
+commit 1e2274d51d2c4343253afbd65cee0aec47834a06
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 10 16:37:53 2017 -0500
+
+    Descripcion modal actualizacion
+
+commit 5ec6d9b6162b9d4161486e86e237163887ab9aa1
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 10 14:58:27 2017 -0500
+
+    Enlace con la tabla Objetivos
+
+commit 36942a71fa6bd665be33dbb6edefe57af06cfd09
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Thu Aug 10 09:47:48 2017 -0500
+
+    login con formato de epsol
+
+commit a3328693eb035e8ae4f18f2090b4fe1d73987437
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed Aug 9 14:59:17 2017 -0500
+
+    estilo login
+
+commit 53ed6737a98af31a7688f3892fa9e66434f400f8
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Tue Aug 8 15:47:59 2017 -0500
+
+    Nueva entidad y objetivos en la tabla de recuperacion clase
+
+commit f91cbd907204a60f3469649bebfe371fc6c3863d
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Aug 8 15:28:47 2017 -0500
+
+    Nuevo resaltado Descripcion
+
+commit 7a20987144a2ff51800cabd92ebb089f3165e21a
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue Aug 8 08:46:21 2017 -0500
+
+    Correciones de la vista clases
+
+commit d428fc3b3abd93cf2d1f9c971d7eea2bba894bbb
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Mon Aug 7 13:44:58 2017 -0500
+
+    objetivos, guardar y eliminar con ajax en tabla de clases
+
+commit 076717fe3052339a63ab183d1c9be06656e9bf66
+Author: ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Aug 7 13:32:47 2017 -0500
+
+    Filtro de profesor aun no funciona bien
+
+commit cf9f2eeb8b00ac8274b0a497131fc20a74577c39
+Author: ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Aug 7 12:58:50 2017 -0500
+
+    Formato de reporte actualizado
+
+commit 709c24be586e0798a3d887d6e34ba0c85b015789
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Mon Aug 7 11:49:57 2017 -0500
+
+    actualizacion de reportes
+
+commit 87fb7e0d5bef882346f9cb1c2d1a5229e221fefb
+Merge: 5682a6d6 f3b4ddbb
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Fri Aug 4 16:25:20 2017 -0500
+
+    Merge branch 'bpovea'
+    
+    Colores de resaltado de modal Descripcion
+
+commit f3b4ddbb2d0f1b3d066671c27de207d045c13fa9
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Fri Aug 4 16:24:06 2017 -0500
+
+    Colores de resaltado de modal Descripcion
+
+commit 5682a6d60739c8d86206d66fea43be475f92b48b
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Fri Aug 4 12:15:16 2017 -0500
+
+    [ADD] Funcion de descargar reporte para el filtro de Todo hasta ahora
+
+commit 67b0de5d764dbf1da308aaa2ffb11fb045cf46ff
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Aug 4 09:08:30 2017 -0500
+
+    Correcion del estilo del boton eliminar
+
+commit 1853e64797e78063537f87d9568db0b1bcb7be76
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Aug 4 08:59:08 2017 -0500
+
+    Correci�n de la vista cursos anteriores
+
+commit 4da78118cd848a1ac5e2d26625516945a3872737
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Aug 4 08:48:10 2017 -0500
+
+    Correci�n de ingreso de clases
+
+commit 774e69169303918731ad717216aa52caf5baae5a
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Thu Aug 3 16:45:02 2017 -0500
+
+    modal objetivos para editar con ajax (falta)
+
+commit ad4947573ca1ef6450364bc23c1a3b83ac394b32
+Merge: 9e2634db 960dcebf
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 3 16:39:04 2017 -0500
+
+    Merge branch 'bpovea' "Resaltar ModalDescripcion"
+
+commit 960dcebf9ff30417f1707ec578cdefa25c44c045
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 3 16:38:23 2017 -0500
+
+    Resaltar Modal Descripcion
+
+commit 9e2634db77752b4ef71b22e86c485d4eccf44692
+Merge: 41a4b17f 1d19e22a
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 3 16:23:37 2017 -0500
+
+    Merge branch 'bpovea'
+
+commit 1d19e22acf432e0a65431fc792a6b7af575bdcbb
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 3 16:23:03 2017 -0500
+
+    Guardar Descripcion
+
+commit 828da6d3567999b991fddf283459895f2118ed1c
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Thu Aug 3 15:20:37 2017 -0500
+
+    iconos en estado y objetivos
+
+commit 41a4b17fbdad2a72a7b2c2a7a1ab2d9d129691b0
+Merge: 68b854fa c44168bd
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Aug 3 14:45:08 2017 -0500
+
+    Merge branch 'master' of 200.9.176.15:/var/www/html/controlac
+
+commit c44168bd761dcc96b21750df52b229b13e8a45c7
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Thu Aug 3 12:20:04 2017 -0500
+
+    correccion mail
+
+commit b8c0baa522f56ae4a81dc57346f5f2fde9293f18
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Thu Aug 3 10:16:49 2017 -0500
+
+    arreglo en mail
+
+commit 633b4b73a0f1d722a3d2f9fca2761d3ff75d3707
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed Aug 2 09:38:58 2017 -0500
+
+    eliminar y guardar final
+
+commit b7c9efcd1cb96d35d4d1f3e14dd3cfb924f20008
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Tue Aug 1 16:08:51 2017 -0500
+
+    checkbox autoguarda con ajax
+
+commit 9998dd4115b8fe737c12798b17ec8899799865da
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Aug 1 15:58:19 2017 -0500
+
+    integracion eliminar y guardar
+
+commit 26a739d52bf959a21d69bcbdd507939e4ab97361
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Aug 1 15:45:38 2017 -0500
+
+    integracion de codigo
+
+commit dbaf8c52abd6d43cfdabd11542b0bb8c81bced19
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Aug 1 15:12:06 2017 -0500
+
+    javascript
+
+commit 86fa4bb30f4c751367b5a430c0275d0d8ca5551e
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Tue Aug 1 15:00:47 2017 -0500
+
+    checkbox with ajax in tablekit
+
+commit e3486318ccd1f83cfbcf9119a5f7007758df89f0
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Tue Aug 1 14:16:43 2017 -0500
+
+    Arreglo del checkbox
+
+commit 68b854fa7643ca4b1b9aaded69b4eaa39220867a
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue Aug 1 09:43:05 2017 -0500
+
+    Modificacion 01-08-2017
+
+commit f8fa2fc021742fcdf4fe702439e946c7a4a7c0f0
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 31 16:11:26 2017 -0500
+
+    Eliminar y agregar con ajax
+
+commit 4d17695327e2c015654e0b569586e9a8cbb202bd
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Mon Jul 31 14:22:33 2017 -0500
+
+    avance con tablekit, uso de modal descripcion
+
+commit 16e8e51ca6c127c1f4ef35617005dc764700c3d0
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Mon Jul 31 14:02:01 2017 -0500
+
+    Agregar checkbox (hay que corregir)
+
+commit 48c78fe17e07b635f3aa0b97ceed5220043b4389
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Jul 31 10:51:58 2017 -0500
+
+    modificacion 31 de julio
+
+commit 92bfa12e510f8121e1a43caa74083da617a7b704
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Fri Jul 28 13:32:46 2017 -0500
+
+    Crear clase en curso
+
+commit 94630a365b6f348361deb570367bce66d394583c
+Author: ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Fri Jul 28 12:34:05 2017 -0500
+
+    [ADD] Opcion de generar reportes
+
+commit 733df7c4f261d377f80e7dc4422114422a263633
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Thu Jul 27 14:39:55 2017 -0500
+
+    avance con tabla editable, input tipo fecha y submit con enter
+
+commit 51130708dbc8664a4b76e445205fa57983f3b028
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Jul 27 14:28:09 2017 -0500
+
+    tabla de clases aprobadas y por aprobar, funcion de search
+
+commit 6118b1e93349557c0e73e7c2c585fa5122528103
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Jul 25 15:22:04 2017 -0500
+
+    Css cursor y correccion de checkbox
+
+commit fc59cea10ba8d730a774928e081c531426f169c5
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Jul 25 14:58:34 2017 -0500
+
+    Modal Syllabus para Rol Especial
+
+commit ec02d4fc4b100b0c1c1b1ce7e395547c4304cb75
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Jul 25 12:01:53 2017 -0500
+
+    Resaltado de subtemas syllabus
+
+commit 495ac59ec82172ae3a825c098607a57ec1a13dcc
+Author: ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Fri Jul 21 12:01:58 2017 -0500
+
+    Se muestra todo el syllabus en la tabla de todas las materias
+
+commit edfe79676d8db169dac1e11c9142d6feb33298f1
+Author: ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Fri Jul 21 10:21:15 2017 -0500
+
+    [FIX] Modal con info funcionando
+
+commit f39b1628ee3d2b85134b310a56b9dd8befa59a95
+Merge: 2f862ef9 edfeba00
+Author: ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Fri Jul 21 09:36:57 2017 -0500
+
+    Merge branch 'master' of 200.9.176.15:/var/www/html/controlac
+
+commit edfeba0038a97357735beb37c643ee2fa3629f62
+Merge: a416b69d 6cc14ee1
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Jul 20 16:59:25 2017 -0500
+
+    cambios Byron descripcion clases
+
+commit 6cc14ee114d6da9b2dbb6f89c6fa67dc4ff5a9e2
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Jul 20 16:50:03 2017 -0500
+
+    cambios Byron Descripcion
+
+commit 068399f7f9959af32b525648a9ae785fd7d40c0a
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Thu Jul 20 16:28:48 2017 -0500
+
+    ajustes en TableKit - sin botones Ok y cancelar, submit con enter
+
+commit ab55ca388086d7a822d7f9c81f7acea6857c8ba9
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Thu Jul 20 14:29:44 2017 -0500
+
+    nueva tabla de clases con libreria TableKit
+
+commit a416b69da42cb06e6a31bb22c493a72888637dab
+Merge: 3b8a4600 e2c7171a
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Jul 20 13:41:10 2017 -0500
+
+    mostrar, guardar y borrar descripcion
+
+commit e2c7171a4cfdf9bcdbe811b0bec08d0670bb0d22
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Jul 20 09:39:14 2017 -0500
+
+    ultimo cambio 20-07-2017
+
+commit 3b8a4600d487fc706b6687b5ecd10894ca2a7e60
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Jul 18 14:51:07 2017 -0500
+
+    Presentar - guardar - eliminar descripcion
+
+commit 81a2a4eca272981846a6c057fa45ab7d1b32b36e
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Jul 18 09:00:57 2017 -0500
+
+    cambio en controlador CursoAction linea 115
+
+commit a6e9a1b9d682632be56c6ffc468f279d932021dc
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue Jul 18 08:46:22 2017 -0500
+
+    clases
+
+commit 76dbc4bf8521fcb2ad510797cf6dbafba7db1fc9
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 17 16:18:06 2017 -0500
+
+    cambio en agregar clases
+
+commit be0c89bc773256e1d494588f7b315e611d5f4734
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 17 15:32:35 2017 -0500
+
+    cambio en agregar clases
+
+commit 55dbde6ca4d1799aeac037c589390f33361e7836
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 17 15:24:42 2017 -0500
+
+    cambio en agregar clases
+
+commit 34bd87b664cb99812249ea1d4cf9a9812299f9e3
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 17 15:17:09 2017 -0500
+
+    cambio en agregar clases
+
+commit aa5b1251bb57460ccdd2c5b12b83b7b0d7502ba2
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 17 15:02:50 2017 -0500
+
+    agregar clases cambios en el controlador
+
+commit 797618f14de7dac55fa0f27f6c44b61bcac8b94f
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 17 14:01:40 2017 -0500
+
+    agregar clases cambios en el controlador
+
+commit 2f862ef9571b9251b32d878c66e2c928412f7d3e
+Merge: d9a97313 b57c6971
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Jul 17 13:39:01 2017 -0500
+
+    Merge branch 'master' of 200.9.176.15:/var/www/html/controlac
+
+commit d9a973137bc8f13d6bc180d03c0907ac8afa5e9a
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Jul 17 13:38:33 2017 -0500
+
+    [ADD] Funcion de llenar el modal con la info del curso seleccionado
+
+commit dbdbdc3c535a55091bcb54a1ff55f602585ad06c
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Jul 17 11:50:52 2017 -0500
+
+    Progreso en la vista recuperar
+
+commit b57c697152a93e25d9854b1a42c637b6bb0a0d75
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 17 11:48:29 2017 -0500
+
+    cambio en agregar clases
+
+commit fea5561b3ced9e3243729bc69fd233b5d1bb21b9
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 17 11:38:37 2017 -0500
+
+    cambio en agregar clases
+
+commit 294beae8a6b82bca7d5dd7dcd2f415419ab5af95
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Jul 17 10:21:27 2017 -0500
+
+    tabla estado
+
+commit 28c44fbc5c3e2f74e8c6f571704a0d0d54706211
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Jul 17 10:12:15 2017 -0500
+
+    Recuperar Clases
+
+commit 7069f791b2ff42fe6bf99c9ff6fb5187bab99f85
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Fri Jul 14 16:33:29 2017 -0500
+
+    Borrado de Copias html
+
+commit 8fc2bdd9771dcd5b6c3047ee80ad86ce4097cb53
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Fri Jul 14 16:12:36 2017 -0500
+
+    reporte Excell
+
+commit 3bd0a3ba0e13bc77ad5b92e77ea30c6e198a7ccf
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Jul 14 14:43:11 2017 -0500
+
+    recuperar clases
+
+commit d63a4e4ac3bb4deca0ac6edca17058e9abed3ee1
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Jul 14 09:10:08 2017 -0500
+
+    Rol especial
+
+commit 447fafe8657aabf699a7228bc98b95c4364d0534
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Jul 13 16:32:09 2017 -0500
+
+    ultima modificacion de bases
+
+commit e140342a539a54fdcf1dafa5823bba258b96141d
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Jul 13 15:51:58 2017 -0500
+
+    Arreglo dle css en la vista baseCurso
+
+commit d166ea582c238fb595e127650c5175a3d756efe8
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Jul 13 15:45:30 2017 -0500
+
+    arreglo del ccs base de inicio 3
+
+commit ae0194459360a334b5b17826b79bb6f2f3baa4a8
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Jul 13 15:32:23 2017 -0500
+
+    arreglo del ccs base de inicio 2
+
+commit 6749cebc5b4096adeb4ba2afb0ca6d322d38f926
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Jul 13 15:23:17 2017 -0500
+
+    arreglo del ccs base de inicio
+
+commit e90d2699820bcb2e631194fb251bb0dbc00a55b6
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Jul 13 12:30:29 2017 -0500
+
+    descripcion clases
+
+commit f722b2364093078127c5496abbdf6257433aab09
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Wed Jul 12 14:30:55 2017 -0500
+
+    Cargar syllabus en la vista mis clases
+
+commit 44420d034918a7cec2d390d61f69423642da7bcc
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Wed Jul 12 14:05:50 2017 -0500
+
+    vista amdinistrador todo curso
+
+commit d2f146362eb240c99971efe4bbdd6970730bfbe7
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Jul 11 15:06:44 2017 -0500
+
+    css menu inicio
+
+commit 51a1d3a91288cdb7d90445e0038b18d9066c8ff5
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Tue Jul 11 11:33:32 2017 -0500
+
+    css response
+
+commit e176c90478fcbf7d91b75c48b16d51b9186da066
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue Jul 11 09:25:51 2017 -0500
+
+    Css de la vista curso para los modal y carga de datos del syllabus
+
+commit c801f0b876d1c51e4f099d09c831628998715f43
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Tue Jul 11 09:01:40 2017 -0500
+
+    cabecera cursos
+
+commit 36d6c095a0740718bd550f5ba59b62bac74a6499
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Jul 10 13:31:43 2017 -0500
+
+    [FIX] Pagina de login y navbar de inicio para que sea responsive
+
+commit 7e0a1884681abb452c3d59b28c7fa644b3732b73
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Jul 10 11:26:45 2017 -0500
+
+    Administrador
+
+commit 0e330d87a8a369a33de2b76985eef7c50b1287cc
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Fri Jul 7 16:33:22 2017 -0500
+
+    css responive curso actividades y anteriores
+
+commit de51daab5ed88dc87223fdbf5164e3a324929e32
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Fri Jul 7 11:55:53 2017 -0500
+
+    [ADD] boton para elimiar registro de clase en la tabla de clases del curso
+
+commit c2e07d16270a13a415508c03f8e3039c039cb6fa
+Merge: 5b142fc7 8c39eaca
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Fri Jul 7 09:47:39 2017 -0500
+
+    [MERGE]
+
+commit 8c39eacac0b78b548559aefe67d322f615b6d125
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Jul 4 15:39:38 2017 -0500
+
+    css clases
+
+commit f5468559c9ea1bd496fc847f58b2ae90a0140595
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Jul 4 10:55:15 2017 -0500
+
+    cambio en el diseño de paginas, cursos anteriores
+
+commit 70c54efd83294289b42925367274fa8a6ac09e4c
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Jul 4 10:48:14 2017 -0500
+
+    cambio en el diseño de paginas, cursos anteriores
+
+commit 41a8c53c287ab277c2fd76f3156c7e4f2a640146
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Jul 4 10:41:48 2017 -0500
+
+    cambio en el diseño de paginas, cursos anteriores
+
+commit 717db99626e0a911aa17f0b282efecb9e40df4b3
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 3 16:20:07 2017 -0500
+
+    cambio en estilo y controladores
+
+commit 027eeb510deb9b91e2562f9441f6056299864ecf
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 3 15:47:03 2017 -0500
+
+    cambio en estilo y controladores
+
+commit 02397cf1411d2b761a4cc8c731c8e30275e61d01
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 3 15:22:04 2017 -0500
+
+    cambio en estilo y controladores
+
+commit 5b142fc7abc3470c1ff31dd6528316bce78dcc5c
+Merge: c41a238a 6d67e616
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Jul 3 13:46:46 2017 -0500
+
+    Merge branch 'master' of 199.9.176.15:/var/www/html/controlac
+
+commit c41a238ad99814ac1b34f6261c23df98ba85e650
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Jul 3 13:45:09 2017 -0500
+
+    Formulario para guardar la informacion de la clase
+
+commit 6d67e61636d96ae2fbb9200027f22f82d5607c05
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 3 13:10:57 2017 -0500
+
+    cambios en cursos anteriores
+
+commit 1bdba388bf679140497838a20344c44cc8adf4a5
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Jul 3 12:39:35 2017 -0500
+
+    FIX MERGE
+
+commit c641d1fe40a86a4f7856560428448b537b0948d0
+Merge: 90ce1eff cf6cdbc0
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Jul 3 12:13:44 2017 -0500
+
+    [MERGE]
+
+commit cf6cdbc02e4064c4039e8e49afcb0c26152d2320
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Jul 3 11:25:36 2017 -0500
+
+    Validaci�n del controlador para carga de Cursos
+
+commit 811c626d10517464676ccd3410a9926ccac26b12
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Jul 3 11:15:07 2017 -0500
+
+    Cambios en el controlador para la vista de Admin
+
+commit e92ab47aa52d9411470eae358407f8e42bdb5d85
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Jul 3 10:03:01 2017 -0500
+
+    NUEVAS VENTANAS - CAMBIOS EN EL CONTROLADOR PARA LA VISTA DEL ADMIN
+
+commit 358f5e9b631b4337dff0882592f79a57812338d3
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 3 09:40:37 2017 -0500
+
+    cambios en controlador para obtener semestres
+
+commit 623666432db31c413772dccb9001458e70dea4b2
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 3 09:32:10 2017 -0500
+
+    cambio en controladores cursos anteriores
+
+commit c89e15fb1d3f5843a46ed0bb8dd8c990cfe5aa37
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jul 3 08:35:31 2017 -0500
+
+    cambio en controladores cursos anteriores
+
+commit 2798ef297402dc92e98d7ca76fa3c6c124682985
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Jun 30 11:17:21 2017 -0500
+
+    Carga de horario en la pagina de curso
+
+commit 6fd767829dfe83916bf1b699af9ffd0c93f634a8
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Jun 29 13:42:00 2017 -0500
+
+    pagina inicio
+
+commit 1be1f8648830f88b76ebe2a4237d7182bf2af8f1
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Jun 29 12:08:15 2017 -0500
+
+    CARGA DE MATERIAS POR PROFESOR
+
+commit 4574cc944eb885401545da6e2707f010aa446007
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 26 16:14:04 2017 -0500
+
+    cambio en css general del sitio
+
+commit 817c38304186d50ae7c33036cbd9a5ef9a0203cf
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 26 14:13:36 2017 -0500
+
+    actividad reciente - controlador
+
+commit 90ce1eff23f8ac65c2f28ddb99010b106d210ee9
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Jun 26 13:27:09 2017 -0500
+
+    cambios en curso
+
+commit 08bb8a75f820939393183aa69abb1066cb1abd35
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 26 08:13:36 2017 -0500
+
+    controlador actividad reciente
+
+commit 5be52956a6eb86d438dbb346fbacbf97c567ec9f
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Fri Jun 23 15:15:40 2017 -0500
+
+    actividades recientes
+
+commit a6b87f2e6341d2aaa3fb76bb77902c3b49eb0aec
+Merge: 9a87c911 dd4b25fe
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Fri Jun 23 12:49:28 2017 -0500
+
+    [MERGE]
+
+commit 9a87c911f18bc1cc2e9d71b2330733e979459acb
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Fri Jun 23 12:46:19 2017 -0500
+
+    [ADD] funcionalidad en frontend de los botones de la tabla
+
+commit dd4b25fe71ce85b150f847746b9bc656f3b5b5e5
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Fri Jun 23 11:09:29 2017 -0500
+
+    css de clases anteriores
+
+commit 888bb7146210139cf080b68fef295f77707074e9
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Fri Jun 23 09:43:49 2017 -0500
+
+    css de clases anteriores
+
+commit 2ac98e8b9e8d52766d2524b5438d111a3a12b3dc
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Fri Jun 23 09:40:37 2017 -0500
+
+    css de clases anteriores
+
+commit 034d4548317ff87d7abaa0093596893f8a900648
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Thu Jun 22 16:25:11 2017 -0500
+
+    pagina de cursos y clases anteriores
+
+commit 11ae1dd796232b77f37e1d9fe3547825c7a8cc02
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Jun 22 16:18:40 2017 -0500
+
+    boton guardar
+
+commit f758d692e8cd387303daf3b271463208f7712cde
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Jun 22 13:51:44 2017 -0500
+
+    clases, cursos
+
+commit 211f6436e76d61bd35f52f34c19ea59ea4d159e1
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed Jun 21 15:34:07 2017 -0500
+
+    vista y js de clases en cursos anteriores
+
+commit 16a6f37c0898c069049aa6e0b9ff80bdb44578e9
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed Jun 21 15:29:32 2017 -0500
+
+    vista y js de clases en cursos anteriores
+
+commit cf749d30f8a2bb6fa068ca91829144a28066abb1
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed Jun 21 14:26:40 2017 -0500
+
+    vista y js de clases en cursos anteriores
+
+commit 94014a664f38c41378881a79184f77d5cc15a302
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed Jun 21 10:21:10 2017 -0500
+
+    vista y js de clases en cursos anteriores
+
+commit bab7605c1fd1bed2eb73a384cabbf4c6fcf74074
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Jun 20 16:04:55 2017 -0500
+
+    pagina clases desde cursos anteriores
+
+commit bee7bcc40f81f0f297ff246e6531d0b5f15b7241
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue Jun 20 14:51:32 2017 -0500
+
+    CSS en vista cursos
+
+commit 35f9001e94c65138d6f6866f5624c94b0e68a8d6
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Jun 20 12:55:19 2017 -0500
+
+    clases anteriores y entity semestre
+
+commit 1f66faeb0a760fc1eb191e6df43c83a688d373ef
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Jun 20 12:50:28 2017 -0500
+
+    clases anteriores y entity semestre
+
+commit 5665580bb31a37ae1209e3aa51dff9645e11ebbc
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Jun 20 11:54:14 2017 -0500
+
+    clases anteriores y entity semestre
+
+commit 155c5293daf87256136b90c430d5331df4521324
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue Jun 20 09:51:16 2017 -0500
+
+    Mapeo de Entidades
+
+commit 830209001edc2b1167dd7b7feca5426a4758e1ad
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Jun 20 09:24:22 2017 -0500
+
+    pagina clases
+
+commit 5e120b7b6e4d6f94fcf64ab0cf314a9ab72366e0
+Merge: eb5af786 ecfa06df
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Jun 19 13:25:52 2017 -0500
+
+    [MERGE]
+
+commit eb5af786b70909c1f4a30acccb20abf8bcadd38a
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Mon Jun 19 13:23:01 2017 -0500
+
+    [ADD] Vista,ruta y controlador para funcionalidad de actividad reciente
+
+commit ecfa06dfe1d2292e2f6a8dcacb1b56fbc4ac879c
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 19 12:46:34 2017 -0500
+
+    visualizacion de clases anteriores
+
+commit ab3a01debc17e505fbe01a7ed5f5a023d987d71e
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 19 12:18:36 2017 -0500
+
+    Acciones en cursos anteriores
+
+commit 4ec481c56ca7bb0dd2116ba3ed00903386199583
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 19 11:50:38 2017 -0500
+
+    Acciones en cursos anteriores
+
+commit 65eeb073238e04abbeca1f13e5a813f5c0be8f89
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 19 10:54:14 2017 -0500
+
+    Acciones en cursos anteriores
+
+commit 17b0290cf538dd257b5dca525ddffabfcd5b9076
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 19 09:21:39 2017 -0500
+
+    cambios en controlador cursos anteriores
+
+commit a99e2bee8a244e7cf4686dc77e68bc9a6795e21e
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Jun 16 15:20:45 2017 -0500
+
+    Cambios en la vista Curso
+
+commit e2451d1476ee46410665015044091a1384b35dde
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Jun 16 14:28:14 2017 -0500
+
+    Cambios en el css vista Curso
+
+commit 19af74469f19a64664db86f5dfb237447ffe07a3
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Fri Jun 16 12:49:24 2017 -0500
+
+    [FIX] celdas de las tablas
+
+commit a17c57576cdbfce0342e77c8d8fdf2651d84e7a4
+Author: Ayudante <Ayudante@GGIECCLBMWRK025.com>
+Date:   Fri Jun 16 12:37:54 2017 -0500
+
+    [FIX] Ajuste de template curso
+
+commit 58f4ffeb211e86daa438d672ef78d9623b41e41e
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Jun 16 09:38:05 2017 -0500
+
+    Cambios del css en la vista anteriores
+
+commit 618e2e45e03f96e1e7fab1a8055ba14720273cc4
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Jun 15 15:57:27 2017 -0500
+
+    Correcciones css
+
+commit 92aeacf54357ae33ca6dc8acc9602f0bfa3c16bc
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Jun 13 15:41:34 2017 -0500
+
+    Correccion de bases html
+
+commit 6c7a48ed5c0c33d0f6edbf5db3c4185e23561f6a
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Jun 13 11:56:53 2017 -0500
+
+    Mensaje clase recuperada y correccion de opciones en syllabus
+
+commit a79801f3dfdeab13c07ad81bc842d8996bcda66c
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Jun 13 11:21:05 2017 -0500
+
+    controlador obtner cursos anteriores
+
+commit d446f6076512e6c888e31f0d0925c85edd999830
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 12 16:28:06 2017 -0500
+
+    cursos anteriores controlador ajax
+
+commit d21b3d95a2a7aceebc83f9720c198b4f098264d2
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 12 16:27:17 2017 -0500
+
+    cursos anteriores controlador ajax
+
+commit ee8e1a1c2dd1859ab4912eec55f9d6cc03338c12
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 12 16:22:17 2017 -0500
+
+    cursos anteriores controlador ajax
+
+commit 06e90431a70005fe65a66e919a3538ea8b1053ac
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 12 15:55:16 2017 -0500
+
+    cursos anteriores controlador ajax
+
+commit a735d96efcd1bece627e36487155766556726477
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 12 15:36:40 2017 -0500
+
+    cursos anteriores tabla
+
+commit f5c25c3b4df6567376517ef2b18290f6a1cd17d9
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 12 15:17:41 2017 -0500
+
+    cursos anteriores tabla
+
+commit 134783ca966c3d73101e2df7e7cccbb55327c63e
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 12 12:59:30 2017 -0500
+
+    cursos anteriores tabla
+
+commit 7d934eacc04ec7caa31afe16510abbd157966dae
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 12 12:28:54 2017 -0500
+
+    cursos anteriores tabla
+
+commit 8b05e25ca16baa77523aa355a56ff4b99f57ed99
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 12 12:15:25 2017 -0500
+
+    vista cursos anteriores
+
+commit 451740049a8a1ca108520da2f50d96a910dce552
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 12 12:00:08 2017 -0500
+
+    vista cursos anteriores
+
+commit cc7de8ebcfb6a24f91a7ff3776584ee7890aca58
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Jun 12 11:21:10 2017 -0500
+
+    Base:Vista Curso
+
+commit c992a7362960bdfe57822caed4a5bac7f6fa8a32
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 12 10:55:49 2017 -0500
+
+    Controlador cursos anteriores
+
+commit 579737d096cf29a719c1f70fe771bb9b4d294bee
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Fri Jun 9 16:33:29 2017 -0500
+
+    Clase de recuperacion
+
+commit b093df8a6d6590508926b525d7f0003026d257f7
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Fri Jun 9 14:10:39 2017 -0500
+
+    Agregar modal a la caja de competencia
+
+commit 37e59af84a018321b7e61fca2be5d888a542896f
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Jun 8 16:28:40 2017 -0500
+
+    Syllabus
+
+commit 1554454b5de90a12f2942cf21e3c0ce0594040dd
+Author: Administrador <Administrador@Labmovil-40fiec.com>
+Date:   Thu Jun 8 14:54:32 2017 -0500
+
+    mejora de formulario en cursos y correcion de model
+
+commit a58d71b917d137a54e108a3ebda3abc846a63b05
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Jun 8 13:41:27 2017 -0500
+
+    Nueva Plantilla para el sistema
+
+commit 50ae1da1ef0b3543a770ee74f767b30ccf2b5903
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Thu Jun 8 13:17:57 2017 -0500
+
+    cursos anteriores js
+
+commit beda28e0dfd53bee4a4df4e4814ee909b5abec74
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Thu Jun 8 10:37:39 2017 -0500
+
+    controlador de cursos anteriores
+
+commit d9c2eb30cee983b036500eae91fe488537316f30
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Thu Jun 8 10:35:52 2017 -0500
+
+    controlador de cursos anteriores
+
+commit 9e70097f570d0021a1c230b7f478b1846eae22ca
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Thu Jun 8 10:03:45 2017 -0500
+
+    cursos anteriores
+
+commit cb116b6788654de87c1599778dc5e434d97f9e98
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed Jun 7 15:32:48 2017 -0500
+
+    cursos anteriores
+
+commit 7cb81e84ba5780997ff4f98e48432f2d72317d04
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Wed Jun 7 11:14:56 2017 -0500
+
+    Cambios 07_05_2017
+
+commit d0dd99a927973630fbd11ef10865b5465546f1f3
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Jun 6 16:31:22 2017 -0500
+
+    reporte Clases
+
+commit a400b00847fa97c684fdc7c796e9db391ca23a56
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Tue Jun 6 15:57:09 2017 -0500
+
+    Anni: Actualizaciones en la vista curso
+
+commit 40b1abab9242d185b5b42f0c839f366f68fb3994
+Author: Administrador <Administrador@Labmovil-40fiec.com>
+Date:   Tue Jun 6 15:41:20 2017 -0500
+
+    mejora del sidebar de la vista curso -l
+
+commit 2f491e9d78298f0da7fd96c33640b8046290c78f
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Tue Jun 6 13:51:14 2017 -0500
+
+    Actualización del modal para descripción
+
+commit cd89bd1f62acb148d34336febf0c09f67057a47c
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Jun 6 13:50:23 2017 -0500
+
+    fecha
+
+commit 402d0e1a0aae0bc2472a5fd6d8e7abfb88501a93
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue Jun 6 11:45:18 2017 -0500
+
+    cursos anteriores estilo
+
+commit 1c0a761cc207c281b1bbbadbe28b451a5a675210
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Tue Jun 6 11:47:04 2017 -0500
+
+    cambios de estilo tabla
+
+commit 75b894e6b74c57e4fe8287a739e404823b0bca1d
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue Jun 6 10:39:16 2017 -0500
+
+    Cambios de css en la vista CURSOS
+
+commit 4ae021f6740188b97a2e86ea8db65fa19da596b4
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue Jun 6 09:51:39 2017 -0500
+
+    Cambios en las vistas de TodoBundle y UtilBundle
+
+commit f913de61fe12b839fcdc2afe1243036b1bc2f37d
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue Jun 6 08:33:25 2017 -0500
+
+    JavaScript para Boton Nuevo en la vista mis cursos version 0.1
+
+commit 1c6053997d76a81494e1867088a59e4fca50edb2
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue Jun 6 08:22:59 2017 -0500
+
+    JavaScript para Boton Nuevo en la vista mis cursos
+
+commit e1caeebd40cb62f766b12538b9181bb33b7b2d9a
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 5 16:33:21 2017 -0500
+
+    cambios en semestres anteriores
+
+commit 62db3029c2caaddbcb0349af40b379f88b9b9832
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 5 16:31:30 2017 -0500
+
+    cambios en semestres anteriores
+
+commit 5da709721c8c3c6fca006e25a4634898641de093
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 5 16:26:23 2017 -0500
+
+    cambios en semestres anteriores
+
+commit 9bbfa4bed93b6621dc2d8d1471ba0ef9b20c39b0
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Mon Jun 5 15:13:04 2017 -0500
+
+    CONTROLADOR PARA GENERAR EL REPORTE EN EXCEL
+
+commit e5573d0a2549f3b736c1aff9af962da8c1bffd3b
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 5 14:27:53 2017 -0500
+
+    Semestres anteriores - funciones
+
+commit 86838255fd542f022e4ce36857a05058cf6589a9
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Mon Jun 5 14:26:06 2017 -0500
+
+    Semestres anteriores - funciones
+
+commit 5639f411c050fb9bafeb2849012d5c2010147b2c
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Mon Jun 5 13:41:18 2017 -0500
+
+    model de anni para nueva clase
+
+commit a886bb7bbc73388d1cbede34b1f8c27594a8fb84
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Mon Jun 5 13:20:37 2017 -0500
+
+    Miguel: Se integro la tabla dinamica con los datos y el modal para editar
+
+commit 9ca3e8bdaae07b66aa13ab3d8bea116d49a07abf
+Author: Administrador <Administrador@Labmovil-40fiec.com>
+Date:   Mon Jun 5 12:27:49 2017 -0500
+
+    nuevos botones de atras y descargar en cursos, elimine barra superior paralelo, arregle css - luis
+
+commit dcb2db750078c68c355067ff64127b0b1fe0d46d
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Mon Jun 5 11:52:59 2017 -0500
+
+    Actualizacion de la tabla en mis clases
+
+commit ff717c4bb96e42e8bb3708bc0f6de727665cbd7c
+Author: Administrador <Administrador@Labmovil-40fiec.com>
+Date:   Mon Jun 5 11:44:44 2017 -0500
+
+    botones en pagina curso
+
+commit e7b726cb40cff6eb225dbda9853da080accdffb8
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Fri Jun 2 15:41:26 2017 -0500
+
+    semestres anteriores controlador
+
+commit 92b370e854f742f5547914d61f7f99cedfafed9b
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Fri Jun 2 15:28:58 2017 -0500
+
+    semestres anteriores controlador
+
+commit dc05d273dd37377d5b24bba2492906550200dcda
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Fri Jun 2 14:21:23 2017 -0500
+
+    tabla actualizada de Mis clases
+
+commit 29eccea7265d235c04aa5aca75c78a8315e9c284
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Fri Jun 2 14:16:09 2017 -0500
+
+    tabla actualizada de Mis clases
+
+commit b93b6dab2ff3ded8f76d7dadaae4299a6cace7d1
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Fri Jun 2 14:14:06 2017 -0500
+
+    tabla actualizada de Mis clases
+
+commit dfbdff1e3e1c97a9320b957a97ed43fac4503cf4
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Fri Jun 2 08:51:56 2017 -0500
+
+    cursos anteriores
+
+commit bfa1cca28c840dc564bae61af1dfdae63b5d42a3
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Fri Jun 2 08:31:05 2017 -0500
+
+    Link para descarga de documento en excel
+
+commit ee52c63dfc28487c8255281bed120ab5b3bac034
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu Jun 1 16:35:58 2017 -0500
+
+    Configuracion y prueba del bundle de excel
+
+commit ae79472c5f81c2fc34c140699eedbcc280c36f76
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Thu Jun 1 16:28:34 2017 -0500
+
+    mis cursos anteriores
+
+commit f5b6b9aee7bc84a0f16d26e92757b5673812aece
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Thu Jun 1 16:27:08 2017 -0500
+
+    cursos anteriores
+
+commit e3044478d568b5b568486253b84bd15fbf6f487f
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Thu Jun 1 15:58:47 2017 -0500
+
+    Boton volver
+
+commit eaf41abfba0aadd51bd0a537daeb265a2661f35a
+Author: ayudante <Ayudante@GGIECLBMWRK034.com>
+Date:   Thu Jun 1 15:55:06 2017 -0500
+
+    submenu agregar materia
+
+commit 7f110c4968d775090a98224a50cfd00ca8a0231b
+Author: Administrador <Administrador@Labmovil-40fiec.com>
+Date:   Thu Jun 1 12:45:13 2017 -0500
+
+    Nueva tabla de clases en el curso y arreglo de formulario para nueva clase
+
+commit 5b3565f97b4d8cd90452f6612feaa12b9ebdb565
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Wed May 31 11:10:44 2017 -0500
+
+    Cambio de dise�o y tablas
+
+commit 3caccaf99b2e1ab83a7f90f16ed734676e938e63
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Wed May 31 09:45:55 2017 -0500
+
+    Correcion de dise�o y controladores
+
+commit 6d128b0977e7a9dea9e15d396434de67b6aeda10
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue May 30 15:44:56 2017 -0500
+
+    cambio en controlador
+
+commit d6d6524811781134bb8b0bc3d71640e5cafc0385
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue May 30 14:36:51 2017 -0500
+
+    cambio de logo
+
+commit d2ac9ff3759d284c6775a73d5d5f2dc43d7a83c7
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue May 30 14:31:07 2017 -0500
+
+    cambio de logo
+
+commit 1aa37b1b28002719367f597ffe2a647ef2a6f5c1
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue May 30 14:13:48 2017 -0500
+
+    Cambio de parametros
+
+commit b43130895b564c63c169b2f3c41b0c80a371a078
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue May 30 14:10:52 2017 -0500
+
+    Cambios nuevos
+
+commit dd953f4247b60cc4913352d93b274d6789085595
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Tue May 30 13:35:13 2017 -0500
+
+    Agregar Clases-formulario
+
+commit 492723b0ab9e111699cfd535d4d56340d93cb9c8
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Mon May 29 15:54:07 2017 -0500
+
+    Agregar Clases
+
+commit 547d899dd9ea1256260680f9f3eca038297a7666
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Mon May 29 14:12:38 2017 -0500
+
+    cambios en baseCursos
+
+commit e7ff903e4b98499e3c06fd2bb047274e7916a0b5
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Mon May 29 12:07:18 2017 -0500
+
+    cambios
+
+commit b6614e1eaedfc9540a8a8e6d4d73e7e86cf103a9
+Author: Ayudante <Ayudante@GGIECLBMWRK036>
+Date:   Mon May 29 11:37:05 2017 -0500
+
+    Actualizacion de la lista de cursos en pantalla inicial
+
+commit 265f3c65a65398fc36613f0ba281b3153096dd66
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Thu May 25 10:39:53 2017 -0500
+
+    Creacion de nuevas vistas
+
+commit de33bcce688c1671325fca857cec05c70cf7114c
+Author: Administrador <Administrador@Labmovil-40fiec.com>
+Date:   Thu May 25 10:05:57 2017 -0500
+
+    Programacion y diseño de la pestaña Actividades reciente en la vista de inicio
+
+commit 60587d3ebe5ab9462825c47f181e004409bbec99
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed May 24 15:26:02 2017 -0500
+
+    cambios en la vista inicio
+
+commit 53a7863fe4f9fef3e8687aaea9b81f0ddbea6fc3
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed May 24 15:16:18 2017 -0500
+
+    creacion controlador para ver cursos
+
+commit 63dbee8b548a346e60c787c2fb4d8f4eb4d52ec3
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed May 24 12:30:10 2017 -0500
+
+    cambios en la vista (de nuevo)
+
+commit 3fac7a575d3e57d84e09ffe4928c154b66c67b6d
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed May 24 11:22:14 2017 -0500
+
+    cambios chris
+
+commit b8f2fb2ab7e6ab78eb66d06e33bf6590a43c2c02
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Wed May 24 11:12:44 2017 -0500
+
+    cambios por chris
+
+commit f94ac86f9776ec2d5cbadc12cc803491f72ceff8
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue May 23 10:31:28 2017 -0500
+
+    Cambio en la vista
+
+commit ffa3cc695a2a2664eb1bdc48a9faf9babcb001bd
+Author: Admweb <admweb@fiec.espol.edu.ec>
+Date:   Tue May 23 10:19:31 2017 -0500
+
+    Actualizacion de carpetas
+
+commit c228fb6b064693c1c24440d9a585525dcf802df6
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Tue May 23 10:01:48 2017 -0500
+
+    Cambio de la base en el twig
+
+commit e7ba186845799b5c96a5d779b3e27aae5add4d3d
+Author: Vanessa Revelo - Admdev 2016-2017 <admdev@fiec.espol.edu.ec>
+Date:   Wed May 10 09:35:46 2017 -0500
+
+    Primer Comit

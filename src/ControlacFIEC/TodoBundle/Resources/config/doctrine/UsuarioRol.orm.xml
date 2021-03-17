@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ControlacFIEC\TodoBundle\Entity\UsuarioRol" table="usuario_rol">
+    <indexes>
+      <index name="IDX_72EDD1A44BAB96C" columns="rol_id"/>
+      <index name="IDX_72EDD1A4DB38439E" columns="usuario_id"/>
+    </indexes>
+    <id name="usuarioRolId" type="integer" column="usuario_rol_id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="usuario_rol_usuario_rol_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <many-to-one field="rol" target-entity="Rol" fetch="LAZY">
+      <join-columns>
+        <join-column name="rol_id" referenced-column-name="rol_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="usuario" target-entity="Usuario" fetch="LAZY">
+      <join-columns>
+        <join-column name="usuario_id" referenced-column-name="user_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

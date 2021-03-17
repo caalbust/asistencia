@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ControlacFIEC\TodoBundle\Entity\ListEstudiantes" table="list_estudiantes">
+    <indexes>
+      <index name="IDX_3CED9CEAFD6E3ECF" columns="list_estudiante_curso"/>
+      <index name="IDX_3CED9CEAA25E291A" columns="list_estudiantes_usuario"/>
+    </indexes>
+    <id name="listEstudiantesId" type="integer" column="list_estudiantes_id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="list_estudiantes_list_estudiantes_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <many-to-one field="listEstudianteCurso" target-entity="Curso" fetch="LAZY">
+      <join-columns>
+        <join-column name="list_estudiante_curso" referenced-column-name="curso_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="listEstudiantesUsuario" target-entity="Estudiantes" fetch="LAZY">
+      <join-columns>
+        <join-column name="list_estudiantes_usuario" referenced-column-name="est_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ControlacFIEC\TodoBundle\Entity\HorarioClase" table="horario_clase">
+    <indexes>
+      <index name="IDX_D743B58A2668C8CC" columns="horario_clase_curso"/>
+    </indexes>
+    <id name="horarioClaseId" type="integer" column="horario_clase_id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="horario_clase_horario_clase_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="horarioClaseDiaNum" type="integer" column="horario_clase_dia_num" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="horarioClaseName" type="string" column="horario_clase_name" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="horarioClaseTimeInicio" type="time" column="horario_clase_time_inicio" nullable="true"/>
+    <field name="horarioClaseTimeFin" type="time" column="horario_clase_time_fin" nullable="true"/>
+    <many-to-one field="horarioClaseCurso" target-entity="Curso" fetch="LAZY">
+      <join-columns>
+        <join-column name="horario_clase_curso" referenced-column-name="curso_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

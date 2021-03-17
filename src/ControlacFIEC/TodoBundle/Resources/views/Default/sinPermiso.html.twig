@@ -1,0 +1,190 @@
+<!doctype html>
+<html class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Sistema Control Académico | Sin permisos</title>
+    <!-- GLOBAL STYLES -->
+    <link rel="stylesheet" href="{{ asset('bundles/util/assets/css/estilo_espol.css') }}" />
+    <link href="{{ asset('bundles/util/images/logo-gris.png') }}" rel="shortcut icon">
+    <link rel="stylesheet" href="{{ asset('bundles/util/css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/util/assets/css/main.css') }}" />
+    <!--SCRIPTS-->
+    <script src="{{ asset('bundles/util/assets/js/jquery-2.1.4.js.descarga') }}"></script>
+    <script src="{{ asset('bundles/util/js/bootstrap.min.js')}}"></script>
+
+</head>
+<body>
+
+<!-- HEADER SECTION -->
+<div id="header" style="background-color:white; margin-top:-14px">
+    <div class="container">
+        <!--TITULO-->
+        <div class="col-md-12 header_page_start">
+            <section style="margin-left: 70px">
+                <h1 style="margin-top: 31px" id="titulo_principal" class="h_title_end">Control Académico</h1>
+            </section>
+            <section style="margin-left: 70px">
+                <h2 id="titulo_secundario" style="font-size: 25px; margin: 4px 0px 0px 15px">FIEC -ESPOL</h2>
+            </section>
+        </div>
+    </div>
+    <hr class="hr_header">
+    <div id="divNavbar" >
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" id="menuBrand"></a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="container">
+    <div class="col-md-10 col-md-offset-1">
+        <div style="margin-top: 10%" id="ingreso_sesion">
+                <br>
+                <p style="padding: 0px 35px 0px 35px; text-align: center; font-size: medium;color: #25223f;font-weight:bold">
+                    No esta autorizado para usar el sistema CONTROLAC
+                </p>
+                <p style="padding: 0px 35px 0px 35px; text-align: center; font-size:small">
+                    Ha iniciado sesión en el sistema CONTROLAC pero no se encuentra autorizado para usar el sistema. Por favor cierre sesión.
+                </p>
+                <p style="text-align:center">
+                    <button class="btn btn-primary" onclick="window.location.href='https://auth.espol.edu.ec/logout'">Cerrar Sesión</button>
+                </p>
+            </div>
+    </div>
+</div>
+
+</body>
+<!-- Estilo y script para el menu -->
+<style>
+    #divNavbar{
+        height: 52px;
+    }
+    @media (max-width: 1030px) {
+        .navbar-header {
+            float: none;
+        }
+        .navbar-left,.navbar-right {
+            float: none !important;
+        }
+        .navbar-toggle {
+            display: block;
+        }
+        .navbar-collapse {
+            border-top: 1px solid transparent;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .navbar-fixed-top {
+            top: 0;
+            border-width: 0 0 1px;
+        }
+        .navbar-collapse.collapse {
+            display: none!important;
+        }
+        .navbar-nav {
+            float: none!important;
+            margin-top: 7.5px;
+        }
+        .navbar-nav>li {
+            float: none;
+        }
+        .navbar-nav>li>a {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .collapse.in{
+            display:block !important;
+        }
+    }
+    .navbar-default .navbar-nav>li>a{
+        color: white;
+    }
+    .navbar .nav>li{
+        margin-top: 0;
+    }
+    #cerrarSesion{
+        float: initial;
+        margin-top: 8px;
+        width: 100%;
+        height: 0px;
+    }
+    .navbar{
+        z-index: 1;
+    }
+    #menuPrincipal{
+        margin-left: 20px;
+        width: 89%;
+        font-size: 14px;
+        font-family: sans-serif;
+    }
+     #menuPrincipal li a{
+        margin-right: 0px;
+        padding-left: 0px;
+    }
+    .navbar-default {
+        background-color: #001c43;
+        border-color: #001c43;
+    }
+    #menuBrand{
+        color: white;
+    }
+    .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+        color: #f5b400;
+    }
+
+    /*.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+        background-color: #f5b400;
+    }*/
+
+    .navbar-default .navbar-toggle {
+        border-color: #ffffff;
+    }
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #fff;
+    }
+    .navbar {
+        border-radius: 0;
+        margin-left: 10%;
+       /* margin-right: 10%;*/
+
+    }
+    .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+        color: #f7c53b;
+        background-color: #001c43;
+    }
+    .navbar ul.nav li ul {
+        opacity: 1;
+    }
+    .dropdown-menu {
+        top: 125%;
+        left: 20%;
+        margin-top: -1px;
+    }
+    .dropdown-menu>li>a {
+        color: white;
+    }
+    @media (max-width: 767px) {
+        .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+            color: #fff;
+        }
+        .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+            color: #f5b400;
+        }
+    }
+    .dropdown-menu>li>a:hover {
+        color: #f7c53b;
+        text-decoration: none;
+        background-color: #001c43;
+    }
+    @media screen and (max-width: 1204px) {
+        .navbar {
+            border-radius: 0;
+            margin-left: 0%;
+
+        }
+    }
+</style>
+</html>

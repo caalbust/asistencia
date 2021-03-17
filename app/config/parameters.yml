@@ -1,0 +1,23 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_pgsql
+    database_host: localhost
+    database_port: 5433
+    database_name: asistencia
+    database_user: postgres
+    database_password: admin
+    mailer_transport: gmail
+    mailer_host: smtp.gmail.com
+    mailer_user: dst-fiec@fiec.espol.edu.ec
+    mailer_password: yvziwkivnaevhnbo
+    locale: es
+    secret: M33t1ng
+    l3_cas_host: auth.espol.edu.ec
+    l3_cas_path: null
+    l3_cas_port: 443
+    l3_cas_ca: false
+    l3_cas_handleLogoutRequest: true
+    l3_cas_casLogoutTarget: 'https://auth.espol.edu.ec/logout'
+    l3_cas_force: true
+    cas_login_target: 'http://localhost:7070/asistenciaFIECCAS/'
+    cas_host: auth.espol.edu.ec

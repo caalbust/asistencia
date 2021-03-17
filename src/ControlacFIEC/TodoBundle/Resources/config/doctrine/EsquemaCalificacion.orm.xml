@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ControlacFIEC\TodoBundle\Entity\EsquemaCalificacion" table="esquema_calificacion">
+    <id name="esquemaCalificacionId" type="integer" column="esquema_calificacion_id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="esquema_calificacion_esquema_calificacion_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="esquemaCalificacionTipo" type="string" column="esquema_calificacion_tipo" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="esquemaCalificacionValue" type="integer" column="esquema_calificacion_value" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>
