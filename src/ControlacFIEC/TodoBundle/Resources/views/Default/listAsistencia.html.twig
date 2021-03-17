@@ -335,6 +335,12 @@ th.grid__cell , td.grid__cell{
             $("#contener_reunion").css("display", "block");
         }
     }
+    function marcarGeneral(tipo,fecha,id){
+        console.log(tipo);
+        console.log(fecha);
+        console.log(id);
+
+    }
     function configAction(){
          $.ajax({
                 url:'{{ (path('pagina_ajax_asistencia')) }}',
@@ -730,16 +736,74 @@ th.grid__cell , td.grid__cell{
                                             <td class="grid__cell -header -semi-bold">{{ valor.getListEstudiantesUsuario().getEstApellido() }} {{ valor.getListEstudiantesUsuario().getEstName() }}</td>
                                             {% for value in listadoGeneral[valor.getListEstudiantesId()][0]%}
                                                  {% if value.getAsistenciaValue() == -1 %}
-                                                    <td><button id="btnPr_{{ value.getAsistenciaId() }}" class="dropdown-wrapper__button js-trigger-dropdown" onclick="marcarAsistencia('PRESENTE', this.id)">Marcar</button></td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="dropdown-wrapper__button js-trigger-dropdown dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                MARCAR
+                                                            </button>
+                                                            <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
+                                                                <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
+                                                                <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
+                                                                <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                             
+                                                            </div>
+                                                        </div>
+                                                      
+                                                    </td>
                                                 {% else %}
                                                     {% if value.getAsistenciaTipo() == 'PRESENTE' %}
-                                                        <td><button id="btnPr_{{ value.getAsistenciaId() }}"  style="background-color:#ABEB91" class="btnMarcar" onclick="marcarAsistencia('PRESENTE', this.id)"><i class="fa fa-check"></i></button></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button id="btnPr_{{ value.getAsistenciaId() }}"  style="background-color:#ABEB91;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-check"></i></button>
+                                                                <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                                
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     {% elseif value.getAsistenciaTipo() == 'ATRASADO' %}
-                                                        <td><button id="btnAtr_{{ value.getAsistenciaId() }}" style="background-color:#F9ED89" class="btnMarcar" onclick="marcarAsistencia('ATRASADO', this.id)"><i class="fa fa-clock-o"></i></button></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button id="btnAtr_{{ value.getAsistenciaId() }}" style="background-color:#F9ED89;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-clock-o"></i></button>
+                                                                <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                                
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     {% elseif value.getAsistenciaTipo() == 'AUSENTE' %}
-                                                        <td><button id="btnAus_{{ value.getAsistenciaId() }}" style="background-color:#EA7178" class="btnMarcar" onclick="marcarAsistencia('AUSENTE', this.id)"><i class="fa fa-close"></i></button></td>
+                                                        <td>
+                                                             <div class="dropdown">
+                                                                <button id="btnAus_{{ value.getAsistenciaId() }}" style="background-color:#EA7178;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-close"></i></button>
+                                                                <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                                
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     {% else %}
-                                                            <td><button id="btnJust_{{ value.getAsistenciaId() }}" style="background-color:#92E5DC" class="btnMarcar" onclick="marcarAsistencia('JUSTIFICADO', this.id)"><i class="fa fa-ban"></i></button></td>
+                                                            <td>
+                                                                <div class="dropdown">
+                                                                <button id="btnJust_{{ value.getAsistenciaId() }}" style="background-color:#92E5DC;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ban"></i></button>
+                                                                <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                                
+                                                                </div>
+                                                            </div>
+                                                            </td>
                                                     {% endif %}   
                                                 {% endif %}    
                                             
