@@ -19,14 +19,14 @@ pagina_index:
     pattern: /backend/inicio/{action}/
     defaults: { _controller: TodoBundle:Default:index }
 pagina_listado_asistencia:
-    pattern: /backend/listado_asistencia/{action}/{id_curso}/{fecha}
+    pattern: /backend/listado_asistencia/{action}/{id_curso}/{fecha}/{boolAnterior}
     defaults: { _controller: TodoBundle:Default:listado_asistencia }
 pagina_ajax_asistencia:
     pattern: /backend/ajax_asistencia/
     defaults: { _controller: TodoBundle:Default:ajax_asistencia }
-function_crear_clase:
-    pattern: /backend/crear_clase/{semestre_id}/{id_curso}
-    defaults: { _controller: TodoBundle:Default:crear_clase }
+pagina_anteriores_curso:
+    pattern: /backend/pagina_anteriores_curso/{semestre}
+    defaults: { _controller: TodoBundle:Default:pagina_anteriores_curso }
 # RUTAS DE LOGIN Y LOGOUT
 login:
     path: /backend/login

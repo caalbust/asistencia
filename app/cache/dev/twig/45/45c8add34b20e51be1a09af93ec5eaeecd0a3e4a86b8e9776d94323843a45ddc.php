@@ -59,11 +59,20 @@ class __TwigTemplate_61dd83511587257ab7158cadaba69c12963102ab349e7a7391a10405627
         // line 15
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/todo/cssAsistencia.css"), "html", null, true);
         echo "\" />
+    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">
+    <link  rel=\"stylesheet\" href=\"";
+        // line 17
+        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/todo/js/select2-4.0.8/dist/css/select2.css"), "html", null, true);
+        echo "\"  href=\"select2.css\" rel=\"stylesheet\"/>
+    <script src=\"";
+        // line 18
+        echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/todo/js/select2-4.0.8/dist/js/select2.js"), "html", null, true);
+        echo "\"></script>
     <!--END GLOBAL STYLES -->
     ";
-        // line 17
+        // line 20
         $this->displayBlock('extraStyle', $context, $blocks);
-        // line 18
+        // line 21
         echo "\t<style>
         @media screen and (max-width: 300px) {
             #titulo_principal {
@@ -108,22 +117,26 @@ class __TwigTemplate_61dd83511587257ab7158cadaba69c12963102ab349e7a7391a10405627
     </style>
     <!--SCRIPTS-->
     <script src=\"";
-        // line 61
+        // line 64
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/util/assets/js/jquery-2.1.4.js.descarga"), "html", null, true);
         echo "\"></script>
     <script src=\"";
-        // line 62
+        // line 65
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/util/js/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
     ";
-        // line 63
+        // line 66
         $this->displayBlock('extraScripts', $context, $blocks);
-        // line 64
+        // line 67
         echo "\t
 </head>
 <body>
 <!-- HEADER SECTION -->
-<div id=\"header\">
+";
+        // line 71
+        $context["id_user"] = $this->getAttribute($this->getAttribute(($context["app"] ?? null), "session", array()), "get", array(0 => "us_id"), "method");
+        // line 72
+        echo "<div id=\"header\">
     <div class=\"container\">
         <!--TITULO-->
         <div class=\"col-md-12 header_page_start\">
@@ -135,7 +148,7 @@ class __TwigTemplate_61dd83511587257ab7158cadaba69c12963102ab349e7a7391a10405627
                 <!--<h1 id=\"titulo_principal\" class=\"h_title_end\">Control Académico</h1>-->
                 <h2 id=\"titulo_secundario\" style=\"font-size: 25px; margin: 4px 0px 0px 15px\">FIEC -ESPOL</h2>
                 <span style=\"float: right;\" class=\"user_login_right\">";
-        // line 79
+        // line 83
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute(($context["app"] ?? null), "session", array()), "get", array(0 => "name"), "method"), "html", null, true);
         echo "</span><input type=\"hidden\" value=\"";
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute(($context["app"] ?? null), "session", array()), "get", array(0 => "us_id"), "method"), "html", null, true);
@@ -159,41 +172,81 @@ class __TwigTemplate_61dd83511587257ab7158cadaba69c12963102ab349e7a7391a10405627
                 <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">
                     <ul class=\"nav navbar-nav\" id=\"menuPrincipal\">
                         ";
-        // line 98
+        // line 102
         if ($this->env->getExtension('Symfony\Bridge\Twig\Extension\SecurityExtension')->isGranted("ROLE_DOCENTE")) {
-            // line 99
+            // line 103
             echo "                            <li>
                                 <a href=\"";
-            // line 100
+            // line 104
             echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_index", array("action" => "index"));
             echo "\" >
                                     MIS CURSOS
                                 </a>
                             </li>
                             <li>
-                                <a class=\"menu\" href=\"\" >
-                                    MIS CURSOS ANTERIORES
-                                </a>
-                            </li>
-                            <li>
-                                <a class=\"menu\" href=\"\" >
-                                   REPORTES
-                                </a>
+                                <div class=\"dropdown show\">
+                                    <a  style=\"TEXT-DECORATION: NONE;
+    COLOR: WHITE;
+    MARGIN-TOP: 8PX;
+    FONT-STYLE: ;
+    font-weight: bold;
+    MARGIN-LEFT: -10PX;\" class=\"btn btn-secondary dropdown-toggle\" href=\"#\" role=\"button\" id=\"dropdownMenuLink\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                                        MIS CURSOS ANTERIORES
+                                    </a>
+
+                                    <div  style=\"    top: 108%;
+    left: -4%;width: 245px;\" class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\">
+                                        ";
+            // line 121
+            $context["semestr"] = $this->getAttribute($this->getAttribute(($context["app"] ?? null), "session", array()), "get", array(0 => "allsemestre"), "method");
+            // line 122
+            echo "                                        ";
+            if (twig_test_empty(($context["semestr"] ?? null))) {
+                // line 123
+                echo "                                         <i class=\"fa fa-certificate\"></i>NO HAY SEMESTRE ANTERIORES 
+                                        ";
+            } else {
+                // line 124
+                echo " 
+                                         ";
+                // line 125
+                $context['_parent'] = $context;
+                $context['_seq'] = twig_ensure_traversable(($context["semestr"] ?? null));
+                foreach ($context['_seq'] as $context["_key"] => $context["value"]) {
+                    // line 126
+                    echo "                                            <a  href=\"";
+                    echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_anteriores_curso", array("semestre" => $this->getAttribute($context["value"], "getSemestreId", array(), "method"))), "html", null, true);
+                    echo "\" style=\"color:black; font-size:13px\"class=\"dropdown-item\" href=\"#\">  <i class=\"fa fa-certificate\"></i>  ";
+                    echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getSemestreName", array(), "method"), "html", null, true);
+                    echo "</a><br>
+                                        ";
+                }
+                $_parent = $context['_parent'];
+                unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value'], $context['_parent'], $context['loop']);
+                $context = array_intersect_key($context, $_parent) + $_parent;
+                // line 127
+                echo " 
+                                            
+                                        ";
+            }
+            // line 130
+            echo "                                    </div>
+                                    </div>
                             </li>
                         ";
         }
-        // line 115
+        // line 134
         echo "
                         
                         <li id=\"cerrarSesion\">
                             <a id=\"LinkButton1\" class=\"salir pull-right\" title=\"Salir\" onclick=\"setCookie('modal','no')\"href=\"";
-        // line 118
+        // line 137
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("logout");
         echo "\" style=\"width: 30px;\"> </a>
-                            <div class=\"boton\"><a target=\"_blank\" title=\"Manual\" href=\"";
-        // line 119
+                            <!--<div class=\"boton\"><a target=\"_blank\" title=\"Manual\" href=\"";
+        // line 138
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("static_file", array("archivo" => "MPControlac"));
-        echo "\"><span class=\"glyphicon glyphicon-list-alt\"></span></a></div>
+        echo "\"><span class=\"glyphicon glyphicon-list-alt\"></span></a></div>-->
                         </li>
                     </ul>
                 </div>
@@ -214,9 +267,9 @@ class __TwigTemplate_61dd83511587257ab7158cadaba69c12963102ab349e7a7391a10405627
 <div class=\"container\">
     <div class=\"col-md-10 col-md-offset-1\">
         ";
-        // line 139
+        // line 158
         $this->displayBlock('contenido', $context, $blocks);
-        // line 141
+        // line 160
         echo "    </div>
 </div>
 
@@ -388,20 +441,20 @@ class __TwigTemplate_61dd83511587257ab7158cadaba69c12963102ab349e7a7391a10405627
     {
     }
 
-    // line 17
+    // line 20
     public function block_extraStyle($context, array $blocks = array())
     {
     }
 
-    // line 63
+    // line 66
     public function block_extraScripts($context, array $blocks = array())
     {
     }
 
-    // line 139
+    // line 158
     public function block_contenido($context, array $blocks = array())
     {
-        // line 140
+        // line 159
         echo "        ";
     }
 
@@ -417,7 +470,7 @@ class __TwigTemplate_61dd83511587257ab7158cadaba69c12963102ab349e7a7391a10405627
 
     public function getDebugInfo()
     {
-        return array (  405 => 140,  402 => 139,  397 => 63,  392 => 17,  387 => 6,  220 => 141,  218 => 139,  195 => 119,  191 => 118,  186 => 115,  168 => 100,  165 => 99,  163 => 98,  139 => 79,  122 => 64,  120 => 63,  116 => 62,  112 => 61,  67 => 18,  65 => 17,  60 => 15,  56 => 14,  52 => 13,  47 => 11,  43 => 10,  39 => 9,  35 => 8,  30 => 6,  23 => 1,);
+        return array (  458 => 159,  455 => 158,  450 => 66,  445 => 20,  440 => 6,  273 => 160,  271 => 158,  248 => 138,  244 => 137,  239 => 134,  233 => 130,  228 => 127,  217 => 126,  213 => 125,  210 => 124,  206 => 123,  203 => 122,  201 => 121,  181 => 104,  178 => 103,  176 => 102,  152 => 83,  139 => 72,  137 => 71,  131 => 67,  129 => 66,  125 => 65,  121 => 64,  76 => 21,  74 => 20,  69 => 18,  65 => 17,  60 => 15,  56 => 14,  52 => 13,  47 => 11,  43 => 10,  39 => 9,  35 => 8,  30 => 6,  23 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */

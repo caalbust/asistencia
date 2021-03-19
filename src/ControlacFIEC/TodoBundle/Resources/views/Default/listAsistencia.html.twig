@@ -40,9 +40,9 @@
     font-weight: 600;
 }
  .attendance-grade-pill {
-    min-width: 4.375rem;
+    min-width: 9.375rem;
     max-width: 6.875rem;
-    height: 1.875rem;
+    height: 2.875rem;
     border-radius: 1.875rem;
     display: inline-flex;
     align-items: center;
@@ -206,7 +206,7 @@ element.style {
 .btnMarcar:hover {
   background-color: RoyalBlue;
 }
-#tabla_reunion_length,#tabla_general_length{
+#tabla_reunion_length,#tabla_general_length,#tabla_reportes_length{
     display:none;
 }
 .dropbtn {
@@ -312,6 +312,8 @@ th.grid__cell , td.grid__cell{
 	<script src="{{ asset('bundles/util/assets/plugins/dataTables/jquery.dataTables.js') }}"></script>
 	<script src="{{ asset('bundles/util/assets/plugins/dataTables/dataTables.bootstrap.js') }}"></script>
 	<script src="{{ asset('bundles/todo/jsAsistencia.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+
 	<script>
 		$(document).ready(function() {
 			$('#tabla_reunion').DataTable({
@@ -324,21 +326,76 @@ th.grid__cell , td.grid__cell{
 					"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
 				}
 			});
+            $('#tabla_reportes').DataTable({
+				"language": {
+					"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+				}
+			});
+            $("#list_estudiantes").select2();
 		} );
     function actionDiv(action){
         console.log('his');
         if(action=='general'){
             $("#contener_general").css("display", "block");
             $("#contener_reunion").css("display", "none");
+             $("#contener_reportes").css("display", "none");
+        }else if(action=='reunion'){
+            $("#contener_general").css("display", "none");
+             $("#contener_reportes").css("display", "none");
+            $("#contener_reunion").css("display", "block");
         }else{
             $("#contener_general").css("display", "none");
-            $("#contener_reunion").css("display", "block");
+            $("#contener_reunion").css("display", "none");
+             $("#contener_reportes").css("display", "block");
         }
     }
     function marcarGeneral(tipo,fecha,id){
         console.log(tipo);
         console.log(fecha);
         console.log(id);
+        $.ajax({
+                url:'{{ (path('pagina_ajax_asistencia')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    'action':'MARCARGENERAL',
+                    'tipo':tipo,
+                    'id':id,
+                    'fecha':fecha
+                },
+                async: true,
+                success: function (data)
+                {
+                    console.log(data);
+                     switch(tipo){
+                       case 'PRESENTE':
+                            $("#btn_"+id).css("background-color", "#ABEB91");
+                            $("#btn_"+id).css("width", "54px");
+                            $("#btn_"+id).attr("class", "btnMarcar dropdown-toggle");
+                            $("#btn_"+id).html( '<i class="fa fa-check"></i>');
+                           
+                       break;
+                       case 'AUSENTE':
+                            $("#btn_"+id).css("background-color", "#EA7178");
+                            $("#btn_"+id).css("width", "54px");
+                            $("#btn_"+id).attr("class", "btnMarcar dropdown-toggle");
+                            $("#btn_"+id).html( '<i class="fa fa-close"></i>');
+                       break;
+                       case 'JUSTIFICADO':
+                            $("#btn_"+id).css("background-color", "#92E5DC");
+                            $("#btn_"+id).css("width", "54px");
+                            $("#btn_"+id).attr("class", "btnMarcar dropdown-toggle");
+                            $("#btn_"+id).html( '<i class="fa fa-check"></i>');
+                       break;
+                       case 'ATRASADO':
+                            $("#btn_"+id).css("background-color", "#F9ED89");
+                            $("#btn_"+id).css("width", "54px");
+                            $("#btn_"+id).attr("class", "btnMarcar dropdown-toggle");
+                            $("#btn_"+id).html( '<i class="fa fa-ban"></i>');
+                       break;
+                   }
+                }
+            });
 
     }
     function configAction(){
@@ -558,10 +615,13 @@ th.grid__cell , td.grid__cell{
                         <div class="col-sm-4" style="text-align: center;font-size: 24px;">
                         </div>
                         <div class="col-sm-4" style="text-align: right;">
-                                <div class="panel-header-large__actions-wrapper">
+                                <div class="panel-header-large__actions-wrapper" style="margin-left: -67px;">
                                     <div class="grid-view-switcher">
-                                        <ul class="button-group">
+                                        <ul class="button-group" style="width: 300px;">
                                             <li>
+                                                <button class="js-switch-to-meeting-view small right-button button active-switch" onclick="actionDiv('reportes')" data-analytics-id="course.attendance.showMeetingView.button" id="course_reunion" aria-label="Reunión, seleccionada">Reportes</button>
+                                            </li>
+                                            <li style="margin-left: 2px;">
                                                 <div>
                                                     <button class="js-switch-to-overall-view small left-button button " onclick="actionDiv('general')" data-analytics-id="course.attendance.showOverallView.button"  id="course_general" aria-label="General">General</button>
                                                     <span class="ftue-callout hidden"></span>
@@ -570,12 +630,15 @@ th.grid__cell , td.grid__cell{
                                             <li>
                                                 <button class="js-switch-to-meeting-view small right-button button active-switch" onclick="actionDiv('reunion')" data-analytics-id="course.attendance.showMeetingView.button" id="course_reunion" aria-label="Reunión, seleccionada">Reunión</button>
                                             </li>
+                                            
                                         </ul>
                                     </div>
                                     <div>
-                                        <button class="button settings-button clear js-open-settings" title="Ajustes" onclick="configAction()" data-analytics-id="course.attendance.settings.link" aria-label="Ajustes" href="#">
-                                            <span class="glyphicon glyphicon-cog"></span>
-                                        </button>
+                                        {% if boolAnterior == 0 %}
+                                            <button class="button settings-button clear js-open-settings" title="Ajustes" onclick="configAction()" data-analytics-id="course.attendance.settings.link" aria-label="Ajustes" href="#">
+                                                <span class="glyphicon glyphicon-cog"></span>
+                                            </button>
+                                        {% endif %}    
                                     </div>
                                 </div>    
                         </div>
@@ -588,7 +651,7 @@ th.grid__cell , td.grid__cell{
                         <div class="row" style="    margin: 10px;">	
                             <div class="col-sm-4">
                             {% if btnBackBlock %} 
-                                <a type="button" {% if btnBackBlock %} disable {% endif %} href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':id_curso,'fecha':fechaBack | date('Y-m-d 00:00:00') })}}" class="btn btn-secondary"><span class="glyphicon glyphicon-arrow-left" style="margin-top: 3px;font-size: 46px;"></span></a>
+                                <a type="button" {% if btnBackBlock %} disable {% endif %} href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':id_curso,'fecha':fechaBack | date('Y-m-d 00:00:00') ,'boolAnterior':boolAnterior})}}" class="btn btn-secondary"><span class="glyphicon glyphicon-arrow-left" style="margin-top: 3px;font-size: 46px;"></span></a>
                             {% endif %}   
                             </div>
                             <div class="col-sm-4" style="text-align: center;font-size: 24px;margin-top: 20px;">
@@ -596,7 +659,7 @@ th.grid__cell , td.grid__cell{
                             </div>
                             <div class="col-sm-4" style="text-align: right;">
                                 {% if btnNextBlock %}  
-                                    <a type="button"  href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':id_curso,'fecha':fechaNext | date('Y-m-d 00:00:00') })}}" class="btn btn-secondary"><span class="glyphicon glyphicon-arrow-right" style="margin-top: 3px;font-size: 46px;"></span></a>
+                                    <a type="button"  href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':id_curso,'fecha':fechaNext | date('Y-m-d 00:00:00') ,'boolAnterior':boolAnterior})}}" class="btn btn-secondary"><span class="glyphicon glyphicon-arrow-right" style="margin-top: 3px;font-size: 46px;"></span></a>
                                 {% endif %}
                             </div>
                             
@@ -609,12 +672,12 @@ th.grid__cell , td.grid__cell{
                         <div class="row">
                             <div class="col-sm-12" style="margin-top: 36px;">
                                 <div class="dropdown"  >
-                                    <button onclick="allMarcar()" style ="margin-left:20px;" class="dropbtn"><i id="icon-action" class="fa fa-users"></i>Tomar a Todos la Asistencia</button>
+                                    <button onclick="allMarcar()" {% if boolAnterior == 1 %} disabled {% endif %}  style ="margin-left:20px;" class="dropbtn"><i id="icon-action" class="fa fa-users"></i>Tomar a Todos la Asistencia</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a onclick="marcarAll('PRESENTE','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})"><i class="fa fa-check"></i> PRESENTE</a>
-                                        <a onclick="marcarAll('ATRASADO','{{ fecha | date ('Y-m-d 00:00:00 ') }}', {{id_curso}})"><i class="fa fa-clock-o"></i> ATRASADO</a>
-                                        <a onclick="marcarAll('AUSENTE','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})"><i class="fa fa-close"></i> AUSENTE</a>
-                                        <a onclick="marcarAll('JUSTIFICADO','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})"><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                                        <a  onclick="marcarAll('PRESENTE','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class="fa fa-check"></i> PRESENTE</a>
+                                        <a  onclick="marcarAll('ATRASADO','{{ fecha | date ('Y-m-d 00:00:00 ') }}', {{id_curso}})" ><i class="fa fa-clock-o"></i> ATRASADO</a>
+                                        <a  onclick="marcarAll('AUSENTE','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})"><i class="fa fa-close"></i> AUSENTE</a>
+                                        <a  onclick="marcarAll('JUSTIFICADO','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class="fa fa-ban"></i> JUSTIFICADO</a>
                                     </div>
                                     </div>
                                 <table id="tabla_reunion" class="table table-striped table-bordered" style="    width: 96%;margin-left: 20px">
@@ -635,34 +698,34 @@ th.grid__cell , td.grid__cell{
                                                 <td>{{ i }}</td>
                                                 <td>{{ value.getAsistenciaListEstudiante().getListEstudiantesUsuario().getEstApellido() }} {{ value.getAsistenciaListEstudiante().getListEstudiantesUsuario().getEstName() }} </td>
                                                 {% if value.getAsistenciaValue() == -1 %}
-                                                    <td><button id="btnPr_{{ value.getAsistenciaId() }}" class="btnMarcar" onclick="marcarAsistencia('PRESENTE', this.id)"><i class="fa fa-check"></i></button></td>
-                                                    <td><button id="btnAtr_{{ value.getAsistenciaId() }}" class="btnMarcar" onclick="marcarAsistencia('ATRASADO', this.id)"><i class="fa fa-clock-o"></i></button></td>
-                                                    <td><button id="btnAus_{{ value.getAsistenciaId() }}" class="btnMarcar" onclick="marcarAsistencia('AUSENTE', this.id)"><i class="fa fa-close"></i></button></td>
-                                                    <td><button id="btnJust_{{ value.getAsistenciaId() }}" class="btnMarcar " onclick="marcarAsistencia('JUSTIFICADO', this.id)"><i class="fa fa-ban"></i></button></td>
+                                                    <td><button id="btnPr_{{ value.getAsistenciaId() }}" class="btnMarcar"  {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('PRESENTE', this.id)"><i class="fa fa-check"></i></button></td>
+                                                    <td><button id="btnAtr_{{ value.getAsistenciaId() }}" class="btnMarcar"  {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('ATRASADO', this.id)"><i class="fa fa-clock-o"></i></button></td>
+                                                    <td><button id="btnAus_{{ value.getAsistenciaId() }}" class="btnMarcar"  {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('AUSENTE', this.id)" ><i class="fa fa-close"></i></button></td>
+                                                    <td><button id="btnJust_{{ value.getAsistenciaId() }}" class="btnMarcar " {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('JUSTIFICADO', this.id)" ><i class="fa fa-ban"></i></button></td>
                                                     
                                                 {% else %}
                                                     {% if value.getAsistenciaTipo() == 'PRESENTE' %}
-                                                        <td><button id="btnPr_{{ value.getAsistenciaId() }}"  style="background-color:#ABEB91" class="btnMarcar" onclick="marcarAsistencia('PRESENTE', this.id)"><i class="fa fa-check"></i></button></td>
+                                                        <td><button id="btnPr_{{ value.getAsistenciaId() }}"  style="background-color:#ABEB91" class="btnMarcar" {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('PRESENTE', this.id)" ><i class="fa fa-check"></i></button></td>
                                                     {% else %}
-                                                            <td><button id="btnPr_{{ value.getAsistenciaId() }}"  class="btnMarcar" onclick="marcarAsistencia('PRESENTE', this.id)"><i class="fa fa-check"></i></button></td>
+                                                            <td><button id="btnPr_{{ value.getAsistenciaId() }}"  class="btnMarcar" {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('PRESENTE', this.id)" ><i class="fa fa-check"></i></button></td>
                                                     {% endif %}
 
                                                     {% if value.getAsistenciaTipo() == 'ATRASADO' %}
-                                                        <td><button id="btnAtr_{{ value.getAsistenciaId() }}" style="background-color:#F9ED89" class="btnMarcar" onclick="marcarAsistencia('ATRASADO', this.id)"><i class="fa fa-clock-o"></i></button></td>
+                                                        <td><button id="btnAtr_{{ value.getAsistenciaId() }}" style="background-color:#F9ED89" class="btnMarcar" {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('ATRASADO', this.id)"><i class="fa fa-clock-o"></i></button></td>
                                                      {% else %}
-                                                         <td><button id="btnAtr_{{ value.getAsistenciaId() }}"  class="btnMarcar" onclick="marcarAsistencia('ATRASADO', this.id)"><i class="fa fa-clock-o"></i></button></td>
+                                                         <td><button id="btnAtr_{{ value.getAsistenciaId() }}"  class="btnMarcar" {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('ATRASADO', this.id)" ><i class="fa fa-clock-o"></i></button></td>
                                                    {% endif %}
 
                                                     {% if value.getAsistenciaTipo() == 'AUSENTE' %}
-                                                        <td><button id="btnAus_{{ value.getAsistenciaId() }}" style="background-color:#EA7178" class="btnMarcar" onclick="marcarAsistencia('AUSENTE', this.id)"><i class="fa fa-close"></i></button></td>
+                                                        <td><button id="btnAus_{{ value.getAsistenciaId() }}" style="background-color:#EA7178" class="btnMarcar" {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('AUSENTE', this.id)" {><i class="fa fa-close"></i></button></td>
                                                       {% else %}
-                                                        <td><button id="btnAus_{{ value.getAsistenciaId() }}" class="btnMarcar" onclick="marcarAsistencia('AUSENTE', this.id)"><i class="fa fa-close"></i></button></td>
+                                                        <td><button id="btnAus_{{ value.getAsistenciaId() }}" class="btnMarcar" {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('AUSENTE', this.id)" ><i class="fa fa-close"></i></button></td>
                                                     {% endif %}
 
                                                     {% if value.getAsistenciaTipo() == 'JUSTIFICADO' %}
-                                                        <td><button id="btnJust_{{ value.getAsistenciaId() }}" style="background-color:#92E5DC" class="btnMarcar" onclick="marcarAsistencia('JUSTIFICADO', this.id)"><i class="fa fa-ban"></i></button></td>
+                                                        <td><button id="btnJust_{{ value.getAsistenciaId() }}" style="background-color:#92E5DC" class="btnMarcar" {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('JUSTIFICADO', this.id)" ><i class="fa fa-ban"></i></button></td>
                                                    {% else %}
-                                                        <td><button id="btnJust_{{ value.getAsistenciaId() }}" class="btnMarcar" onclick="marcarAsistencia('JUSTIFICADO', this.id)"><i class="fa fa-ban"></i></button></td>
+                                                        <td><button id="btnJust_{{ value.getAsistenciaId() }}" class="btnMarcar"{% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('JUSTIFICADO', this.id)" ><i class="fa fa-ban"></i></button></td>
                                                     {% endif %}
                                                    
 
@@ -685,27 +748,20 @@ th.grid__cell , td.grid__cell{
                         <div class="row" style="    margin: 10px;">	
                                                                     <div class="grid-overview">
                                         <div class="grid-overview__overview-data-section -class-average">
-                                            <div class="attendance-grade-pill attendance-grade-pill--class-average -good">100&nbsp;%</div>
+                                            <div class="attendance-grade-pill attendance-grade-pill--class-average -good">{{ promedioGeneral.allPromedio |number_format(2, '.', ',') }} &nbsp;%</div>
                                             <div class="grid-overview__description">
                                                 <span class="-bold">Promedio de asistencia</span>
                                             </div>
                                         </div>
-                                        <div class="grid-overview__overview-data-section js-perfect-students">
-                                            <span class="grid-overview__students-affected">3</span>
-                                            <div class="grid-overview__description">
-                                                <span>Estudiantes con asistencia perfecta</span>
-                                                <span class="-bold js-percentage">100&nbsp;% de la clase</span>
-                                            </div>
-                                        </div>
                                         <div class="grid-overview__overview-data-section js-above-average-students">
-                                            <span class="grid-overview__students-affected">3</span>
+                                            <span class="grid-overview__students-affected">{{ promedioGeneral.countMedio }}</span>
                                             <div class="grid-overview__description">
                                                 <span>Estudiantes con asistencia promedio o superior al promedio</span>
-                                                <span class="-bold js-percentage">100&nbsp;% de la clase</span>
+                                                <span class="-bold js-percentage">40&nbsp;% de la clase</span>
                                             </div>
                                         </div>
                                         <div class="grid-overview__overview-data-section js-below-average-students">
-                                            <span class="grid-overview__students-affected">0</span>
+                                            <span class="grid-overview__students-affected">{{ promedioGeneral.countBajo }}</span>
                                             <div class="grid-overview__description">
                                                 <span>Estudiantes con asistencia inferior al promedio</span>
                                                 <span class="-bold js-percentage"></span>
@@ -738,7 +794,7 @@ th.grid__cell , td.grid__cell{
                                                  {% if value.getAsistenciaValue() == -1 %}
                                                     <td>
                                                         <div class="dropdown">
-                                                            <button class="dropdown-wrapper__button js-trigger-dropdown dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <button id="btn_{{ value.getAsistenciaId() }}" {% if boolAnterior == 1 %} disabled {% endif %} class="dropdown-wrapper__button js-trigger-dropdown dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 MARCAR
                                                             </button>
                                                             <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -755,7 +811,7 @@ th.grid__cell , td.grid__cell{
                                                     {% if value.getAsistenciaTipo() == 'PRESENTE' %}
                                                         <td>
                                                             <div class="dropdown">
-                                                                <button id="btnPr_{{ value.getAsistenciaId() }}"  style="background-color:#ABEB91;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-check"></i></button>
+                                                                <button id="btn_{{ value.getAsistenciaId() }}"  {% if boolAnterior == 1 %} disabled {% endif %}  style="background-color:#ABEB91;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-check"></i></button>
                                                                 <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                     <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
@@ -768,7 +824,7 @@ th.grid__cell , td.grid__cell{
                                                     {% elseif value.getAsistenciaTipo() == 'ATRASADO' %}
                                                         <td>
                                                             <div class="dropdown">
-                                                                <button id="btnAtr_{{ value.getAsistenciaId() }}" style="background-color:#F9ED89;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-clock-o"></i></button>
+                                                                <button id="btn_{{ value.getAsistenciaId() }}" {% if boolAnterior == 1 %} disabled {% endif %}  style="background-color:#F9ED89;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-clock-o"></i></button>
                                                                 <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                     <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
@@ -781,7 +837,7 @@ th.grid__cell , td.grid__cell{
                                                     {% elseif value.getAsistenciaTipo() == 'AUSENTE' %}
                                                         <td>
                                                              <div class="dropdown">
-                                                                <button id="btnAus_{{ value.getAsistenciaId() }}" style="background-color:#EA7178;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-close"></i></button>
+                                                                <button id="btn_{{ value.getAsistenciaId() }}" {% if boolAnterior == 1 %} disabled {% endif %}  style="background-color:#EA7178;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-close"></i></button>
                                                                 <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                     <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
@@ -794,7 +850,7 @@ th.grid__cell , td.grid__cell{
                                                     {% else %}
                                                             <td>
                                                                 <div class="dropdown">
-                                                                <button id="btnJust_{{ value.getAsistenciaId() }}" style="background-color:#92E5DC;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ban"></i></button>
+                                                                <button id="btn_{{ value.getAsistenciaId() }}" {% if boolAnterior == 1 %} disabled {% endif %}  style="background-color:#92E5DC;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ban"></i></button>
                                                                 <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                     <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
@@ -815,6 +871,28 @@ th.grid__cell , td.grid__cell{
                                </div> 
                                     
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="contener_reportes" style="display:none" >
+                <div class="panel panel-default widget-box">
+                    <div class="panel-body widget-content">
+                        <div class="row">
+                            <div class="col-sm-12" style="margin-top: 36px;">
+                             <div class="col-sm-12" >
+                                <label>Listado de Estudiantes del Curso </label>
+                                <select id="list_estudiantes" class="form-control">
+                                    <option value="-1">TODOS</option>
+                                    {% for value in estudiantes %}
+                                        <option value="{{ value.getListEstudiantesUsuario().getEstId() }}">{{ value.getListEstudiantesUsuario().getEstApellido()  }} {{ value.getListEstudiantesUsuario().getEstName()  }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button style="    margin-top: 20px;
+    /* text-align: center; */
+    margin-bottom: 20px;" type="button" class="btn btn-success"><i class="fa fa-print"></i>Imprimir</button>
+
+                                </div>
                         </div>
                     </div>
                 </div>

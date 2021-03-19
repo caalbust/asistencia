@@ -46,6 +46,7 @@ class DefaultController extends Controller
 
         /*CONSULTAS*/
         $semestreActivo = $em->getRepository('TodoBundle:Semestre')->findOneBy(array('semestreActivo' => 1));
+        $semestreAll = $em->getRepository('TodoBundle:Semestre')->findBy(array('semestreActivo' => 0));
         $cursosActivos = $em->getRepository('TodoBundle:Curso')->findBy(array('cursoSemestre' => $semestreActivo));
 		
         $fechaNow= new DateTime('now');
@@ -67,11 +68,10 @@ class DefaultController extends Controller
 
         $respuesta['cursos']=$cursosActivos;
 
-
-       
+       $session->set('allsemestre', $semestreAll);
         return $this->render('TodoBundle:Default:inicio.html.twig', $respuesta);
     }	
-	public function listado_asistenciaAction(Request $request, $action,$id_curso,$fecha)
+	public function listado_asistenciaAction(Request $request, $action,$id_curso,$fecha,$boolAnterior)
     {
         /*VARIABLES*/
         $em = $this->getDoctrine()->getManager();
@@ -142,9 +142,11 @@ class DefaultController extends Controller
         $respuesta['fecha']=$fechaNow;
         $respuesta['id_curso']=$id_curso;
         $listadoGeneral = array();
+       
+        
         foreach ($estudiantes_list as $tempEstud){
             $asistenciaGeneral = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante' => $tempEstud),array('asistenciaFecha'=>'ASC'));
-        
+            
             if( array_key_exists($tempEstud->getListEstudiantesUsuario()->getEstId(), $listadoGeneral) ){
                 array_push( $listadoGeneral[$tempEstud->getListEstudiantesUsuario()->getEstId()], $asistenciaGeneral);
             } else{
@@ -176,6 +178,9 @@ class DefaultController extends Controller
             }
         }
        // var_dump($fechaBack); var_dump($fechaNext); die;
+
+       
+      // var_dump($promedio); die;
        $respuesta['fechaBack']=$fechaBack;
        $respuesta['fechaNext']=$fechaNext;
        $respuesta['btnNextBlock']=$btnNextBlock;
@@ -184,8 +189,43 @@ class DefaultController extends Controller
       // var_dump($listadoGeneral[1][0][0]->getAsistenciaListEstudiante()->getListEstudiantesUsuario());  die;
        $respuesta['listadoPrevio']=$listadoPrevio;
        $respuesta['estudiantes']=$estudiantes_list;
+       $promedio=$this->promedioGeneral($estudiantes_list);
+       $respuesta['promedioGeneral']= $promedio;
+       $respuesta['boolAnterior']= $boolAnterior;
+     // var_dump($promedio['countMedio']); die;
         return $this->render('TodoBundle:Default:listAsistencia.html.twig', $respuesta);
     }	
+    public function promedioGeneral($temp){
+        $em = $this->getDoctrine()->getManager();
+      
+        $countMedio=0;
+        $countBajo=0;
+        $allPromedio=0;
+        foreach($temp as $studiante){
+            $obtPromedio = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante'=>$studiante));
+            $totalPromedio=0;
+            $total_clases=sizeof($obtPromedio);
+            foreach($obtPromedio as $promedio){
+                if($promedio->getAsistenciaValue() >0){
+                    $totalPromedio=$totalPromedio+$promedio->getAsistenciaValue();
+                }
+            }
+            $totalPromedio=$totalPromedio/$total_clases;
+            if($totalPromedio>=40){
+                $countMedio++;
+            }
+            if($totalPromedio<40){
+                $countBajo++;
+            }
+            $allPromedio=$allPromedio+$totalPromedio;
+
+        }
+        $allPromedio=$allPromedio/sizeof($temp);
+        $resultado = array('countMedio'=>$countMedio,'countBajo'=>$countBajo,'allPromedio'=>$allPromedio);
+        
+       return $resultado;
+    }
+   
     public function obtener_fecha($fecha_temp, $dia){
 		$resultado=false;
 		while(!$resultado){
@@ -218,17 +258,21 @@ class DefaultController extends Controller
 		$fecha_temp = date ( 'Y-m-d' , $fecha_temp );
 		return $fecha_temp;
 	}
-    public function crear_claseAction(Request $request, $semestre_id,$id_curso){
+    public function pagina_anteriores_cursoAction(Request $request,$semestre){
         $em = $this->getDoctrine()->getManager();
         $respuesta = array();
         $session = $request->getSession();
-        $estudiantes_list = $em->getRepository('TodoBundle:ListEstudiantes')->findBy(array('listEstudianteCurso' => $cursosActivos));
-         $respuesta['curso']=$cursosActivos;
-        $respuesta['estudiantes_list']=$estudiantes_list;
+        $usuarioLogin = $session->get('userData');
+        $usuario = $em->getRepository('TodoBundle:Usuario')->findOneBy(array('userId'=>$usuarioLogin));
+        
+        $cursos = $em->getRepository('TodoBundle:Curso')->findBy(array('cursoDocente'=>$usuario,'cursoSemestre' => $semestre));
+        
+        $respuesta['curso']=$cursos;
+        $respuesta['semestre']=$cursos[0]->getCursoSemestre()->getSemestreName();
 
 
        
-        return $this->render('TodoBundle:Default:listAsistencia.html.twig', $respuesta);
+        return $this->render('TodoBundle:Default:anteriores.html.twig', $respuesta);
     }
     public function ajax_asistenciaAction(Request $request)
     {
@@ -313,6 +357,18 @@ class DefaultController extends Controller
 
                 $resultado['value']=$atrasado->getEsquemaCalificacionValue();
                 $resultado['asistenciaList']=$asistenciaList;
+                break;
+            case 'MARCARGENERAL':
+                $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> $_POST['tipo']));
+                $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findOneBy(array('asistenciaId' =>  $_POST['id']));
+                $asistenciaList->setAsistenciaTipo($_POST['tipo']);
+                $asistenciaList->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
+                $em->persist($asistenciaList);
+                $em->flush();
+
+                $resultado['value']=$atrasado->getEsquemaCalificacionValue();
+                $resultado['id']=$_POST['id'];
+               
                 break;
         }
 

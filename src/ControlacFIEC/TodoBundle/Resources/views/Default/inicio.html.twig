@@ -98,7 +98,7 @@
 												<td>{{ value.getCursoMateria().getMateriasCodigo() }}</td>
 												<td>{{ value.getCursoMateria().getMateriasName() }}</td>
 												<td style="text-align: center;">
-													<a  href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':value.getCursoId(),'fecha':0})}}" {% if validaOk ==0 %} disabled {% endif %} type="button" title="Revisar Listado" class="btn btn-success"><span class="glyphicon glyphicon-check"></span></a>
+													<a  href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':value.getCursoId(),'fecha':0,'boolAnterior':0})}}" {% if validaOk ==0 %} disabled {% endif %} type="button" title="Revisar Listado" class="btn btn-success"><span class="glyphicon glyphicon-check"></span></a>
 												</td>
 											</tr>
 										{% endfor %}

@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{{ asset('bundles/util/assets/css/wg_espol.css') }}" />
     <link rel="stylesheet" href="{{ asset('bundles/util/assets/css/jquery.dataTables.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('bundles/todo/cssAsistencia.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link  rel="stylesheet" href="{{ asset('bundles/todo/js/select2-4.0.8/dist/css/select2.css') }}"  href="select2.css" rel="stylesheet"/>
+    <script src="{{ asset('bundles/todo/js/select2-4.0.8/dist/js/select2.js') }}"></script>
     <!--END GLOBAL STYLES -->
     {% block extraStyle %}{% endblock %}
 	<style>
@@ -65,6 +68,7 @@
 </head>
 <body>
 <!-- HEADER SECTION -->
+{% set id_user =  app.session.get('us_id') %}
 <div id="header">
     <div class="container">
         <!--TITULO-->
@@ -102,21 +106,36 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="menu" href="" >
-                                    MIS CURSOS ANTERIORES
-                                </a>
-                            </li>
-                            <li>
-                                <a class="menu" href="" >
-                                   REPORTES
-                                </a>
+                                <div class="dropdown show">
+                                    <a  style="TEXT-DECORATION: NONE;
+    COLOR: WHITE;
+    MARGIN-TOP: 8PX;
+    FONT-STYLE: ;
+    font-weight: bold;
+    MARGIN-LEFT: -10PX;" class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        MIS CURSOS ANTERIORES
+                                    </a>
+
+                                    <div  style="    top: 108%;
+    left: -4%;width: 245px;" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        {% set semestr =app.session.get('allsemestre') %}
+                                        {% if semestr is empty %}
+                                         <i class="fa fa-certificate"></i>NO HAY SEMESTRE ANTERIORES 
+                                        {% else %} 
+                                         {% for value in semestr %}
+                                            <a  href="{{ path('pagina_anteriores_curso',{'semestre': value.getSemestreId() }) }}" style="color:black; font-size:13px"class="dropdown-item" href="#">  <i class="fa fa-certificate"></i>  {{ value.getSemestreName() }}</a><br>
+                                        {% endfor %} 
+                                            
+                                        {% endif %}
+                                    </div>
+                                    </div>
                             </li>
                         {% endif %}
 
                         
                         <li id="cerrarSesion">
                             <a id="LinkButton1" class="salir pull-right" title="Salir" onclick="setCookie('modal','no')"href="{{ path('logout') }}" style="width: 30px;"> </a>
-                            <div class="boton"><a target="_blank" title="Manual" href="{{ path('static_file', {'archivo':'MPControlac'}) }}"><span class="glyphicon glyphicon-list-alt"></span></a></div>
+                            <!--<div class="boton"><a target="_blank" title="Manual" href="{{ path('static_file', {'archivo':'MPControlac'}) }}"><span class="glyphicon glyphicon-list-alt"></span></a></div>-->
                         </li>
                     </ul>
                 </div>

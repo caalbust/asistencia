@@ -163,7 +163,7 @@ class appDevProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBundle\Ro
             not_pagina_index:
 
             // pagina_listado_asistencia
-            if (0 === strpos($pathinfo, '/backend/listado_asistencia') && preg_match('#^/backend/listado_asistencia/(?P<action>[^/]++)/(?P<id_curso>[^/]++)/(?P<fecha>[^/]++)$#sD', $pathinfo, $matches)) {
+            if (0 === strpos($pathinfo, '/backend/listado_asistencia') && preg_match('#^/backend/listado_asistencia/(?P<action>[^/]++)/(?P<id_curso>[^/]++)/(?P<fecha>[^/]++)/(?P<boolAnterior>[^/]++)$#sD', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'pagina_listado_asistencia')), array (  '_controller' => 'ControlacFIEC\\TodoBundle\\Controller\\DefaultController::listado_asistenciaAction',));
             }
 
@@ -181,9 +181,9 @@ class appDevProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBundle\Ro
             }
             not_pagina_ajax_asistencia:
 
-            // function_crear_clase
-            if (0 === strpos($pathinfo, '/backend/crear_clase') && preg_match('#^/backend/crear_clase/(?P<semestre_id>[^/]++)/(?P<id_curso>[^/]++)$#sD', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'function_crear_clase')), array (  '_controller' => 'ControlacFIEC\\TodoBundle\\Controller\\DefaultController::crear_claseAction',));
+            // pagina_anteriores_curso
+            if (0 === strpos($pathinfo, '/backend/pagina_anteriores_curso') && preg_match('#^/backend/pagina_anteriores_curso/(?P<semestre>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'pagina_anteriores_curso')), array (  '_controller' => 'ControlacFIEC\\TodoBundle\\Controller\\DefaultController::pagina_anteriores_cursoAction',));
             }
 
             // login
