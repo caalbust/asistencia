@@ -742,7 +742,7 @@ class DefaultController extends Controller
         
 		$session->set('userData', $usuario);
         $session->set('apellido', ucfirst($usuario->getUsuarioApellido()));
-        $session->set('nombre', ucfirst($usuario->getUsuarioApellido()));
+        $session->set('nombre', ucfirst($usuario->getUsuarioName()));
 
         $resp=array();
         
