@@ -181,9 +181,17 @@ class appDevProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBundle\Ro
             }
             not_pagina_ajax_asistencia:
 
-            // pagina_anteriores_curso
-            if (0 === strpos($pathinfo, '/backend/pagina_anteriores_curso') && preg_match('#^/backend/pagina_anteriores_curso/(?P<semestre>[^/]++)$#sD', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'pagina_anteriores_curso')), array (  '_controller' => 'ControlacFIEC\\TodoBundle\\Controller\\DefaultController::pagina_anteriores_cursoAction',));
+            if (0 === strpos($pathinfo, '/backend/pagina_')) {
+                // pagina_anteriores_curso
+                if (0 === strpos($pathinfo, '/backend/pagina_anteriores_curso') && preg_match('#^/backend/pagina_anteriores_curso/(?P<semestre>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'pagina_anteriores_curso')), array (  '_controller' => 'ControlacFIEC\\TodoBundle\\Controller\\DefaultController::pagina_anteriores_cursoAction',));
+                }
+
+                // pagina_imprimir_estudiante
+                if (0 === strpos($pathinfo, '/backend/pagina_imprimir_estudiante') && preg_match('#^/backend/pagina_imprimir_estudiante/(?P<idCurso>[^/]++)/(?P<idEstudiante>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'pagina_imprimir_estudiante')), array (  '_controller' => 'ControlacFIEC\\TodoBundle\\Controller\\DefaultController::pagina_imprimir_estudianteAction',));
+                }
+
             }
 
             // login

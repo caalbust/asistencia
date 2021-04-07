@@ -59,12 +59,13 @@
 									</thead>
 									<tbody>
 										{% for value in curso %}
+										{% set fechaTemp = fechascursos[ value.getCursoCodigo() ][0] | date('Y-m-d') %}
 											<tr>
 												<td>{{ value.getCursoParalelo() }}</td>
 												<td>{{ value.getCursoMateria().getMateriasCodigo() }}</td>
 												<td>{{ value.getCursoMateria().getMateriasName() }}</td>
 												<td style="text-align: center;">
-													<a  href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':value.getCursoId(),'fecha':0,'boolAnterior':1})}}" type="button" title="Revisar Listado" class="btn btn-success"><span class="glyphicon glyphicon-check"></span></a>
+													<a  href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':value.getCursoId(),'fecha':fechaTemp,'boolAnterior':1})}}" type="button" title="Revisar Listado" class="btn btn-success"><span class="glyphicon glyphicon-check"></span></a>
 												</td>
 											</tr>
 										{% endfor %}

@@ -42,7 +42,12 @@ class ListEstudiantes
      */
     private $listEstudiantesUsuario;
 
-
+  /**
+     * @var integer
+     *
+     * @ORM\Column(name="list_estudiante_cobertura", type="integer", nullable=true)
+     */
+    private $listEstudianteCobertura;
 
     /**
      * Get the value of listEstudiantesId
@@ -112,6 +117,30 @@ class ListEstudiantes
     public function setListEstudiantesUsuario(\ControlacFIEC\TodoBundle\Entity\Estudiantes $listEstudiantesUsuario)
     {
         $this->listEstudiantesUsuario = $listEstudiantesUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of listEstudianteCobertura
+     *
+     * @return  integer
+     */ 
+    public function getListEstudianteCobertura()
+    {
+        return $this->listEstudianteCobertura;
+    }
+
+    /**
+     * Set the value of listEstudianteCobertura
+     *
+     * @param  integer  $listEstudianteCobertura
+     *
+     * @return  self
+     */ 
+    public function setListEstudianteCobertura($listEstudianteCobertura)
+    {
+        $this->listEstudianteCobertura = $listEstudianteCobertura;
 
         return $this;
     }

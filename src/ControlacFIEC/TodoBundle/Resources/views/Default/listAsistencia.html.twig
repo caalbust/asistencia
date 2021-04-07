@@ -322,6 +322,8 @@ th.grid__cell , td.grid__cell{
 				}
 			});
             $('#tabla_general').DataTable({
+                dom: 'Bftrip',
+                buttons: ['excelHtml5'],
 				"language": {
 					"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
 				}
@@ -333,6 +335,112 @@ th.grid__cell , td.grid__cell{
 			});
             $("#list_estudiantes").select2();
 		} );
+        function sendComentario(){
+            var comentario = $('#comentarioText').val();
+            var tipo = $('#tipo').val();
+            var btnId = $('#btnId').val();
+            var action = $('#actionComentario').val();
+            console.log(comentario);
+            if(action=='MARCARAsistenciaJUSTIFICADO'){
+    $.ajax({
+                    url:'{{ (path('pagina_ajax_asistencia')) }}',
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'action':action,
+                        'tipo':tipo,
+                        'id':btnId,
+                        'comentario':comentario
+                    },
+                    async: true,
+                    success: function (data)
+                    {
+                        console.log(data);
+                    switch(tipo){
+                        
+                        case 'JUSTIFICADO':
+                                $("#"+btnId).css("background-color", "#92E5DC");
+                                $("#btnAtr_"+data['id']).css("background-color", "#e0e0e0");
+                                $("#btnAus_"+data['id']).css("background-color", "#e0e0e0");
+                                $("#btnPr_"+data['id']).css("background-color", "#e0e0e0");
+                                $("#btnNoCla_"+data['id']).css("background-color", "#e0e0e0");
+                        break;
+                       
+                    }
+                     $("#modal-comentario").modal("hide");
+                    }
+                });
+            }else if(action=='MARCARALLJUSTIFICADO'){
+                 var fecha = $('#fecha').val();
+                 $.ajax({
+                    url:'{{ (path('pagina_ajax_asistencia')) }}',
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'action':'MARCARALL',
+                        'tipo':tipo,
+                        'fecha':fecha,
+                        'id_curso':btnId,
+                        'comentario':comentario
+                    },
+                    async: true,
+                    beforeSend: function()
+                    {   
+                        $("#icon-action").removeClass('fa-search').addClass('fa-circle-o-notch fa-spin');
+                    },
+                    success: function (data)
+                    {
+                        console.log(data);
+                        
+                    switch(tipo){
+                       
+                        case 'JUSTIFICADO':
+                                for (i=0; i< data['asistenciaList'].length ;i++){
+                                    $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#92E5DC");
+                                    $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                
+                                }
+                        break;
+                       
+                    }
+                        $("#icon-action").removeClass('fa-circle-o-notch fa-spin').addClass('fa-search');
+                    
+                    }
+                });
+                 $("#modal-comentario").modal("hide");
+            }else{
+                $.ajax({
+                url:'{{ (path('pagina_ajax_asistencia')) }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    'action':'MARCARGENERALJUSTIFICADO',
+                    'tipo':tipo,
+                    'id':btnId,
+                    'fecha':fecha,
+                     'comentario':comentario
+                },
+                async: true,
+                success: function (data)
+                {
+                    console.log(data);
+                     switch(tipo){
+                       case 'JUSTIFICADO':
+                            $("#btn_"+btnId).css("background-color", "#92E5DC");
+                            $("#btn_"+btnId).css("width", "54px");
+                            $("#btn_"+btnId).attr("class", "btnMarcar dropdown-toggle");
+                            $("#btn_"+btnId).html( '<i class="fa fa-ban"></i>');
+                       break;
+                   }
+                   $("#modal-comentario").modal("hide");
+                }
+            });
+            }
+           
+        }
     function actionDiv(action){
         console.log('his');
         if(action=='general'){
@@ -353,7 +461,15 @@ th.grid__cell , td.grid__cell{
         console.log(tipo);
         console.log(fecha);
         console.log(id);
-        $.ajax({
+        if(tipo=='JUSTIFICADO'){
+            $("#tipo").val(tipo);
+            $("#btnId").val(id);
+            $("#fecha").val(fecha);
+            $("#actionComentario").val('MARCARGENERALJUSTIFICADO');
+            $("#comentarioText").val('');
+            $("#modal-comentario").modal("show");
+        }else{
+            $.ajax({
                 url:'{{ (path('pagina_ajax_asistencia')) }}',
                 type: "POST",
                 dataType: "json",
@@ -385,17 +501,25 @@ th.grid__cell , td.grid__cell{
                             $("#btn_"+id).css("background-color", "#92E5DC");
                             $("#btn_"+id).css("width", "54px");
                             $("#btn_"+id).attr("class", "btnMarcar dropdown-toggle");
-                            $("#btn_"+id).html( '<i class="fa fa-check"></i>');
+                            $("#btn_"+id).html( '<i class="fa fa-ban"></i>');
                        break;
                        case 'ATRASADO':
                             $("#btn_"+id).css("background-color", "#F9ED89");
                             $("#btn_"+id).css("width", "54px");
                             $("#btn_"+id).attr("class", "btnMarcar dropdown-toggle");
-                            $("#btn_"+id).html( '<i class="fa fa-ban"></i>');
+                            $("#btn_"+id).html( '<i class="fa fa-clock-o"></i>');
+                       break;
+                       case 'NO HUBO CLASES':
+                            $("#btn_"+id).css("background-color", "#000000");
+                            $("#btn_"+id).css("width", "54px");
+                            $("#btn_"+id).attr("class", "btnMarcar dropdown-toggle");
+                            $("#btn_"+id).html( '<i class=" fa fa-calendar-times-o"></i>');
                        break;
                    }
                 }
             });
+        }
+        
 
     }
     function configAction(){
@@ -440,7 +564,15 @@ th.grid__cell , td.grid__cell{
     function marcarAsistencia(tipo, btnId){
         console.log(tipo);
         console.log(btnId);
-         $.ajax({
+        if(tipo == 'JUSTIFICADO'){
+            $("#tipo").val(tipo);
+            $("#btnId").val(btnId);
+            $("#actionComentario").val('MARCARAsistenciaJUSTIFICADO');
+             $("#comentarioText").val('');
+            $("#modal-comentario").modal("show");
+           
+        }else{
+             $.ajax({
                 url:'{{ (path('pagina_ajax_asistencia')) }}',
                 type: "POST",
                 dataType: "json",
@@ -459,29 +591,42 @@ th.grid__cell , td.grid__cell{
                             $("#btnAtr_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnAus_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnJust_"+data['id']).css("background-color", "#e0e0e0");
+                            $("#btnNoCla_"+data['id']).css("background-color", "#e0e0e0");
                        break;
                        case 'AUSENTE':
                             $("#"+btnId).css("background-color", "#EA7178");
                             $("#btnAtr_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnPr_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnJust_"+data['id']).css("background-color", "#e0e0e0");
+                            $("#btnNoCla_"+data['id']).css("background-color", "#e0e0e0");
                        break;
                        case 'JUSTIFICADO':
                             $("#"+btnId).css("background-color", "#92E5DC");
                             $("#btnAtr_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnAus_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnPr_"+data['id']).css("background-color", "#e0e0e0");
+                            $("#btnNoCla_"+data['id']).css("background-color", "#e0e0e0");
                        break;
                        case 'ATRASADO':
                             $("#"+btnId).css("background-color", "#F9ED89");
                             $("#btnPr_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnAus_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnJust_"+data['id']).css("background-color", "#e0e0e0");
+                            $("#btnNoCla_"+data['id']).css("background-color", "#e0e0e0");
+                       break;
+                        case 'NO HUBO CLASES':
+                            $("#"+btnId).css("background-color", "#000000");
+                            $("#btnPr_"+data['id']).css("background-color", "#e0e0e0");
+                            $("#btnAus_"+data['id']).css("background-color", "#e0e0e0");
+                            $("#btnJust_"+data['id']).css("background-color", "#e0e0e0");
+                             $("#btnAtr_"+data['id']).css("background-color", "#e0e0e0");
                        break;
                    }
                    
                 }
             });
+        }
+        
 
     }
     function allMarcar() {
@@ -539,65 +684,100 @@ th.grid__cell , td.grid__cell{
             console.log(tipo);
             console.log(fecha);
             console.log(id_curso);
-            
-             $.ajax({
-                url:'{{ (path('pagina_ajax_asistencia')) }}',
-                type: "POST",
-                dataType: "json",
-                data: {
-                    'action':'MARCARALL',
-                    'tipo':tipo,
-                    'fecha':fecha,
-                    'id_curso':id_curso,
-                },
-                async: true,
-                beforeSend: function()
-                {   
-                    $("#icon-action").removeClass('fa-search').addClass('fa-circle-o-notch fa-spin');
-                },
-                success: function (data)
-                {
-                    console.log(data);
+            if(tipo=='JUSTIFICADO'){
+                $("#tipo").val(tipo);
+                $("#btnId").val(id_curso);
+                $("#actionComentario").val('MARCARALLJUSTIFICADO');
+                $("#fecha").val(fecha);
+                 $("#comentarioText").val('');
+                $("#modal-comentario").modal("show");
+          
+            }else{
+                $.ajax({
+                    url:'{{ (path('pagina_ajax_asistencia')) }}',
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'action':'MARCARALL',
+                        'tipo':tipo,
+                        'fecha':fecha,
+                        'id_curso':id_curso,
+                    },
+                    async: true,
+                    beforeSend: function()
+                    {   
+                        $("#icon-action").removeClass('fa-search').addClass('fa-circle-o-notch fa-spin');
+                    },
+                    success: function (data)
+                    {
+                        console.log(data);
+                        
+                    switch(tipo){
+                        case 'PRESENTE':
+                                for (i=0; i< data['asistenciaList'].length ;i++){
+                                    $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#ABEB91");
+                                    $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                }
+                        break;
+                        case 'AUSENTE':
+                                for (i=0; i< data['asistenciaList'].length ;i++){
+                                    $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#EA7178");
+                                    $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                
+                                }
+                                
+                        break;
+                        case 'JUSTIFICADO':
+                                for (i=0; i< data['asistenciaList'].length ;i++){
+                                    $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#92E5DC");
+                                    $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                
+                                }
+                        break;
+                        case 'ATRASADO':
+                                for (i=0; i< data['asistenciaList'].length ;i++){
+                                    $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#F9ED89");
+                                    $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                
+                                }
+                        break;
+                        case 'NO HUBO CLASES':
+                                for (i=0; i< data['asistenciaList'].length ;i++){
+                                    $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#000000");
+                                    $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                }
+                        break;
+                    }
+                        $("#icon-action").removeClass('fa-circle-o-notch fa-spin').addClass('fa-search');
                     
-                   switch(tipo){
-                       case 'PRESENTE':
-                            for (i=0; i< data['asistenciaList'].length ;i++){
-                                $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#ABEB91");
-                                $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                            }
-                       break;
-                       case 'AUSENTE':
-                            for (i=0; i< data['asistenciaList'].length ;i++){
-                                $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#EA7178");
-                                $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                            }
-                            
-                       break;
-                       case 'JUSTIFICADO':
-                            for (i=0; i< data['asistenciaList'].length ;i++){
-                                $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#92E5DC");
-                                $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                            }
-                       break;
-                       case 'ATRASADO':
-                             for (i=0; i< data['asistenciaList'].length ;i++){
-                                $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#F9ED89");
-                                $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                            }
-                       break;
-                   }
-                    $("#icon-action").removeClass('fa-circle-o-notch fa-spin').addClass('fa-search');
-                   
-                }
-            });
+                    }
+                });
+            }
+            
+        }
+        function imprimirReporte(){
+            var idCurso = {{ curso.getCursoId() }};
+            var IdEstudiante= $("#list_estudiantes").val();
+            console.log(IdEstudiante);
+            var the_link = "{{path("pagina_imprimir_estudiante", {'idCurso': "ID", 'idEstudiante':"IDESTUDIANTE"})}}";
+            the_link = the_link.replace("ID",idCurso);
+            the_link = the_link.replace("IDESTUDIANTE",IdEstudiante);
+            console.log(the_link);
+            window.open(the_link);
         }
 	</script>
 {% endblock %}
@@ -628,7 +808,7 @@ th.grid__cell , td.grid__cell{
                                                 </div>
                                             </li>
                                             <li>
-                                                <button class="js-switch-to-meeting-view small right-button button active-switch" onclick="actionDiv('reunion')" data-analytics-id="course.attendance.showMeetingView.button" id="course_reunion" aria-label="Reunión, seleccionada">Reunión</button>
+                                                <button class="js-switch-to-meeting-view small right-button button active-switch" onclick="actionDiv('reunion')" data-analytics-id="course.attendance.showMeetingView.button" id="course_reunion" aria-label="Reunión, seleccionada">Asistencia</button>
                                             </li>
                                             
                                         </ul>
@@ -678,6 +858,7 @@ th.grid__cell , td.grid__cell{
                                         <a  onclick="marcarAll('ATRASADO','{{ fecha | date ('Y-m-d 00:00:00 ') }}', {{id_curso}})" ><i class="fa fa-clock-o"></i> ATRASADO</a>
                                         <a  onclick="marcarAll('AUSENTE','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})"><i class="fa fa-close"></i> AUSENTE</a>
                                         <a  onclick="marcarAll('JUSTIFICADO','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                                         <a  onclick="marcarAll('NO HUBO CLASES','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
                                     </div>
                                     </div>
                                 <table id="tabla_reunion" class="table table-striped table-bordered" style="    width: 96%;margin-left: 20px">
@@ -689,6 +870,7 @@ th.grid__cell , td.grid__cell{
                                             <th>ATRASADO</th>
                                             <th>AUSENTE</th>
                                             <th>JUSTIFICADO</th>
+                                            <th>NO HUBO CLASES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -702,7 +884,8 @@ th.grid__cell , td.grid__cell{
                                                     <td><button id="btnAtr_{{ value.getAsistenciaId() }}" class="btnMarcar"  {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('ATRASADO', this.id)"><i class="fa fa-clock-o"></i></button></td>
                                                     <td><button id="btnAus_{{ value.getAsistenciaId() }}" class="btnMarcar"  {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('AUSENTE', this.id)" ><i class="fa fa-close"></i></button></td>
                                                     <td><button id="btnJust_{{ value.getAsistenciaId() }}" class="btnMarcar " {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('JUSTIFICADO', this.id)" ><i class="fa fa-ban"></i></button></td>
-                                                    
+                                                    <td><button id="btnNoCla_{{ value.getAsistenciaId() }}" class="btnMarcar " {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('NO HUBO CLASES', this.id)" ><i class=" fa fa-calendar-times-o"></i></button></td>
+                                                   
                                                 {% else %}
                                                     {% if value.getAsistenciaTipo() == 'PRESENTE' %}
                                                         <td><button id="btnPr_{{ value.getAsistenciaId() }}"  style="background-color:#ABEB91" class="btnMarcar" {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('PRESENTE', this.id)" ><i class="fa fa-check"></i></button></td>
@@ -727,7 +910,12 @@ th.grid__cell , td.grid__cell{
                                                    {% else %}
                                                         <td><button id="btnJust_{{ value.getAsistenciaId() }}" class="btnMarcar"{% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('JUSTIFICADO', this.id)" ><i class="fa fa-ban"></i></button></td>
                                                     {% endif %}
-                                                   
+
+                                                    {% if value.getAsistenciaTipo() == 'NO HUBO CLASES' %}
+                                                        <td><button id="btnNoCla_{{ value.getAsistenciaId() }}" style="background-color:#000000" class="btnMarcar" {% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('NO HUBO CLASES', this.id)" ><i class=" fa fa-calendar-times-o"></i></button></td>
+                                                   {% else %}
+                                                        <td><button id="btnNoCla_{{ value.getAsistenciaId() }}" class="btnMarcar"{% if boolAnterior == 1 %} disabled {% endif %}  onclick="marcarAsistencia('NO HUBO CLASES', this.id)" ><i class=" fa fa-calendar-times-o"></i></button></td>
+                                                    {% endif %}
 
                                                     
                                                 {% endif %}
@@ -795,13 +983,14 @@ th.grid__cell , td.grid__cell{
                                                     <td>
                                                         <div class="dropdown">
                                                             <button id="btn_{{ value.getAsistenciaId() }}" {% if boolAnterior == 1 %} disabled {% endif %} class="dropdown-wrapper__button js-trigger-dropdown dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                MARCAR
+                                                                MARCAR 
                                                             </button>
                                                             <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                 <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
                                                                 <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
                                                                 <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
-                                                                <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                                                                <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>
+                                                                <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
                              
                                                             </div>
                                                         </div>
@@ -816,7 +1005,8 @@ th.grid__cell , td.grid__cell{
                                                                     <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
-                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>
+                                                                       <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
                                 
                                                                 </div>
                                                             </div>
@@ -829,7 +1019,8 @@ th.grid__cell , td.grid__cell{
                                                                     <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
-                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>
+                                                                       <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
                                 
                                                                 </div>
                                                             </div>
@@ -842,7 +1033,22 @@ th.grid__cell , td.grid__cell{
                                                                     <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
-                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>
+                                                                   <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
+                                
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                     {% elseif value.getAsistenciaTipo() == 'NO HUBO CLASES' %}
+                                                        <td>
+                                                             <div class="dropdown">
+                                                                <button id="btn_{{ value.getAsistenciaId() }}" {% if boolAnterior == 1 %} disabled {% endif %}  style="background-color:#000000;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class=" fa fa-calendar-times-o"></i></button>
+                                                                <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
                                 
                                                                 </div>
                                                             </div>
@@ -855,7 +1061,8 @@ th.grid__cell , td.grid__cell{
                                                                     <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
-                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>
+                                                                       <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
                                 
                                                                 </div>
                                                             </div>
@@ -883,14 +1090,12 @@ th.grid__cell , td.grid__cell{
                              <div class="col-sm-12" >
                                 <label>Listado de Estudiantes del Curso </label>
                                 <select id="list_estudiantes" class="form-control">
-                                    <option value="-1">TODOS</option>
+                                   <!-- <option value="-1">TODOS</option>-->
                                     {% for value in estudiantes %}
                                         <option value="{{ value.getListEstudiantesUsuario().getEstId() }}">{{ value.getListEstudiantesUsuario().getEstApellido()  }} {{ value.getListEstudiantesUsuario().getEstName()  }}</option>
                                     {% endfor %}
                                 </select>
-                                <button style="    margin-top: 20px;
-    /* text-align: center; */
-    margin-bottom: 20px;" type="button" class="btn btn-success"><i class="fa fa-print"></i>Imprimir</button>
+                                <button style="margin-top: 20px;margin-bottom: 20px;" type="button" onclick="imprimirReporte();" class="btn btn-success"><i class="fa fa-print"></i>Imprimir</button>
 
                                 </div>
                         </div>
@@ -952,5 +1157,32 @@ th.grid__cell , td.grid__cell{
             </div>
         </div>
     </div>
+<div class="modal" tabindex="-1" role="dialog" id="modal-comentario">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Justifique su Asistencia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--Material textarea-->
+        <div class="md-form">
+        <input type="hidden" id="tipo"/>
+        <input type="hidden" id="btnId"/>
+         <input type="hidden" id="fecha"/>
+          <input type="hidden" id="actionComentario"/>
+        <textarea id="comentarioText" class="md-textarea form-control" rows="3"></textarea>
+        <label for="form7">Respuesta...</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="sendComentario();">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 

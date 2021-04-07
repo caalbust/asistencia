@@ -74,13 +74,14 @@
 	</script>
 {% endblock %}
 {% block contenido %}
-
+{{ dump(validaOk)}}
 	<div id="tabla_resultados">
 		<div class="oculto" id="sec_tablas">	
 			<div class="panel panel-default widget-box">
 					<div class="panel-body widget-content">
 						<div class="row">
 							<div class="col-sm-12" style="margin-top: 36px;">
+							{{ dump(validaOk)}}
 								<table id="tabla_cursos" class="table table-striped table-bordered" style="    width: 96%;
     margin-left: 20px">
 									<thead>
@@ -92,13 +93,20 @@
 										</tr>
 									</thead>
 									<tbody>
+									
 										{% for value in cursos %}
 											<tr>
-												<td>{{ value.getCursoParalelo() }}</td>
+												<td>{{value.getCursoParalelo() }}</td>
 												<td>{{ value.getCursoMateria().getMateriasCodigo() }}</td>
 												<td>{{ value.getCursoMateria().getMateriasName() }}</td>
 												<td style="text-align: center;">
-													<a  href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':value.getCursoId(),'fecha':0,'boolAnterior':0})}}" {% if validaOk ==0 %} disabled {% endif %} type="button" title="Revisar Listado" class="btn btn-success"><span class="glyphicon glyphicon-check"></span></a>
+												
+												{% if validaOk[value.getCursoCodigo()][0] ==0 %}
+													<div style=" width: 312px; font-size: 9px;color: #8a6d3b;background-color: #fcf8e3; border-color: #faebcc; padding: 5px; margin-bottom: 4px; border: 1px solid #ead8b7; border-radius: 4px;">
+															<strong>Nota!</strong> El día de hoy no tiene clase desea crear una nueva ? <a  href="{{ path('pagina_listado_asistencia', {'action':'crear','id_curso':value.getCursoId(),'fecha':0,'boolAnterior':0})}}"  style="    font-size: 9px;">Crear Clase</a>.
+													</div>
+												{% endif %}
+												<a  href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':value.getCursoId(),'fecha':0,'boolAnterior':0})}}" {% if validaOk[value.getCursoCodigo()][0] ==0 %} disabled {% endif %} type="button" title="Revisar Listado" class="btn btn-success"><span class="glyphicon glyphicon-check"></span></a>
 												</td>
 											</tr>
 										{% endfor %}

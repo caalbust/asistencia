@@ -9,6 +9,11 @@
       <generator strategy="SEQUENCE"/>
       <sequence-generator sequence-name="list_estudiantes_list_estudiantes_id_seq" allocation-size="1" initial-value="1"/>
     </id>
+    <field name="listEstudianteCobertura" type="integer" column="list_estudiante_cobertura" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
     <many-to-one field="listEstudianteCurso" target-entity="Curso" fetch="LAZY">
       <join-columns>
         <join-column name="list_estudiante_curso" referenced-column-name="curso_id"/>

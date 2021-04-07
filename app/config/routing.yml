@@ -27,6 +27,9 @@ pagina_ajax_asistencia:
 pagina_anteriores_curso:
     pattern: /backend/pagina_anteriores_curso/{semestre}
     defaults: { _controller: TodoBundle:Default:pagina_anteriores_curso }
+pagina_imprimir_estudiante:
+    pattern: /backend/pagina_imprimir_estudiante/{idCurso}/{idEstudiante}
+    defaults: { _controller: TodoBundle:Default:pagina_imprimir_estudiante }
 # RUTAS DE LOGIN Y LOGOUT
 login:
     path: /backend/login

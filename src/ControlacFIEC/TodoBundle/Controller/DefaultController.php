@@ -26,7 +26,7 @@ use PHPExcel_Style_Fill;
 use phpCAS;
 
 use Zend\Stdlib\DateTime;
-
+date_default_timezone_set('America/Guayaquil');
 class DefaultController extends Controller
 {
     /*********************************/
@@ -47,22 +47,39 @@ class DefaultController extends Controller
         /*CONSULTAS*/
         $semestreActivo = $em->getRepository('TodoBundle:Semestre')->findOneBy(array('semestreActivo' => 1));
         $semestreAll = $em->getRepository('TodoBundle:Semestre')->findBy(array('semestreActivo' => 0));
-        $cursosActivos = $em->getRepository('TodoBundle:Curso')->findBy(array('cursoSemestre' => $semestreActivo));
-		
+        $usuarioLogin = $session->get('userData');
+        
+        $usuario = $em->getRepository('TodoBundle:Usuario')->findOneBy(array('userId'=>$usuarioLogin));
+        
+        $cursosActivos = $em->getRepository('TodoBundle:Curso')->findBy(array('cursoSemestre' => $semestreActivo,'cursoDocente'=>$usuario), array('cursoCodigo'=>'ASC'));
+		//var_dump($cursosActivos);die;
         $fechaNow= new DateTime('now');
         $fechaNow=date_format($fechaNow, 'Y-m-d 00:00:00');
         $fechaNow= new DateTime($fechaNow);
 
-        //var_dump($fechaNow);
-        
-        
-        $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' => $fechaNow));
-       
-        if(empty($asistenciaList)){
-           $respuesta['validaOk']=0;
-        }else{
-            $respuesta['validaOk']=1;
+        //var_dump($fechaNow);die;
+        $arrayNuevaFecha=array();
+      
+        $NuevaFecha=1; 
+        foreach ($cursosActivos as $temp){
+            $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' => $fechaNow,'asistenciaCurso'=>$temp));
+           if($temp->getCursoCargarClase()==1){
+                if(empty($asistenciaList)){
+                    $NuevaFecha=0; 
+                } else{
+                    $NuevaFecha=1; 
+                } 
+            }else{
+                $NuevaFecha=1;
+            } 
+            if( array_key_exists($temp->getCursoCodigo(), $arrayNuevaFecha) ){
+                array_push( $arrayNuevaFecha[$temp->getCursoCodigo()], $NuevaFecha);
+            } else{
+                $arrayNuevaFecha[$temp->getCursoCodigo()] = array($NuevaFecha);
+            }
         }
+      // var_dump($arrayNuevaFecha); die;
+        $respuesta['validaOk']=$arrayNuevaFecha;
        // var_dump($respuesta['validaOk']);
         //var_dump($asistenciaList);die;
 
@@ -87,10 +104,27 @@ class DefaultController extends Controller
         
         $cursosActivos = $em->getRepository('TodoBundle:Curso')->findOneBy(array('cursoId' => $id_curso));
 		$estudiantes_list = $em->getRepository('TodoBundle:ListEstudiantes')->findBy(array('listEstudianteCurso' => $cursosActivos));
-		
+		//var_dump($estudiantes_list); die;
+        if($action == 'crear'){
+            $fechaNow= new DateTime('now');
+            $fechaNow=date_format($fechaNow, 'Y-m-d 00:00:00');
+            $fechaString=$fechaNow;
+            $fechaNow= new DateTime($fechaNow);
+            for($j=0; $j<sizeof($estudiantes_list);$j++){
+                $AsistenciaCursoClase = new AsistenciaCursoClase();
+                $AsistenciaCursoClase->setAsistenciaFecha($fechaNow);
+                $AsistenciaCursoClase->setAsistenciaValue(-1);
+                $AsistenciaCursoClase->setAsistenciaListEstudiante($estudiantes_list[$j]);
+                $AsistenciaCursoClase->setAsistenciaCurso($cursosActivos);
+                $em->persist($AsistenciaCursoClase);
+
+                $em->flush();
+            }
+            return new RedirectResponse($this->generateUrl('pagina_listado_asistencia', array('action' => 'index','id_curso'=>$id_curso,'fecha'=>$fechaString,'boolAnterior'=>0)));
+        }
 
         /**CARGA DE CLASE POR MATERIA */
-        if($cursosActivos->getCursoCargarClase()!=1){
+        if($cursosActivos->getCursoCargarClase()==0){
             $horarios=$em->getRepository('TodoBundle:HorarioClase')->findBy(array('horarioClaseCurso' => $cursosActivos));
             $semestreActivo=$em->getRepository('TodoBundle:Semestre')->findOneBy(array('semestreActivo' => 1));
             $fecha_Inicio=$semestreActivo->getSemestreFechaInicio()->format('Y-m-d');
@@ -139,6 +173,7 @@ class DefaultController extends Controller
         
         $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' => $fechaNow,'asistenciaListEstudiante'=>$estudiantes_list));
         $respuesta['asistenciaList']=$asistenciaList;
+      //  var_dump($asistenciaList);die;
         $respuesta['fecha']=$fechaNow;
         $respuesta['id_curso']=$id_curso;
         $listadoGeneral = array();
@@ -147,10 +182,10 @@ class DefaultController extends Controller
         foreach ($estudiantes_list as $tempEstud){
             $asistenciaGeneral = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante' => $tempEstud),array('asistenciaFecha'=>'ASC'));
             
-            if( array_key_exists($tempEstud->getListEstudiantesUsuario()->getEstId(), $listadoGeneral) ){
-                array_push( $listadoGeneral[$tempEstud->getListEstudiantesUsuario()->getEstId()], $asistenciaGeneral);
+            if( array_key_exists($tempEstud->getListEstudiantesId(), $listadoGeneral) ){
+                array_push( $listadoGeneral[$tempEstud->getListEstudiantesId()], $asistenciaGeneral);
             } else{
-                $listadoGeneral[$tempEstud->getListEstudiantesUsuario()->getEstId()] = array($asistenciaGeneral);
+                $listadoGeneral[$tempEstud->getListEstudiantesId()] = array($asistenciaGeneral);
             }
         }
         //var_dump($listadoGeneral); die;
@@ -195,6 +230,233 @@ class DefaultController extends Controller
      // var_dump($promedio['countMedio']); die;
         return $this->render('TodoBundle:Default:listAsistencia.html.twig', $respuesta);
     }	
+
+    public function pagina_imprimir_estudianteAction(Request $request, $idCurso,$idEstudiante)
+    {
+		/*VARIABLES*/
+        $em = $this->getDoctrine()->getManager();
+        $session = $request->getSession();
+		$Clases_Syllabus = array();
+		$iterator=1;
+		/*END - VARIABLES*/
+		
+		/*CONSULTAS*/	 
+        $cursosActivos = $em->getRepository('TodoBundle:Curso')->findOneBy(array('cursoId' => $idCurso));
+		
+        if($idEstudiante!=-1){
+        $estudiantes_list = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesUsuario' => $idEstudiante));
+	    $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante'=>$estudiantes_list,'asistenciaCurso'=>$idCurso),array('asistenciaFecha'=>'ASC'));
+        $letraFin='E';
+        }else{
+            $estudiantes_list = $em->getRepository('TodoBundle:ListEstudiantes')->findBy(array('listEstudianteCurso' => $cursosActivos),array());
+           // $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante'=>$estudiantes_list,'asistenciaCurso'=>$idCurso),array('asistenciaListEstudiante'=>'ASC','asistenciaFecha'=>'ASC'));
+            $listadoGeneral = array();
+            $listadoPrevio = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante' => $estudiantes_list[0]),array('asistenciaFecha'=>'ASC'));
+           
+        
+            foreach ($listadoPrevio as $tempEstud){
+                $asistenciaGeneral = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' => $tempEstud->getAsistenciaFecha()),array('asistenciaListEstudiante'=>'ASC'));
+                
+                if( array_key_exists($tempEstud->getAsistenciaId(), $listadoGeneral) ){
+                    array_push( $listadoGeneral[$tempEstud->getAsistenciaId()], $asistenciaGeneral);
+                } else{
+                    $listadoGeneral[$tempEstud->getAsistenciaId()] = array($asistenciaGeneral);
+                }
+            }
+            //var_dump($listadoPrevio); die;
+            $lengthFecha=sizeof($listadoPrevio);
+            $lengthEstudiante=sizeof($estudiantes_list);
+            $abecedario = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AQ','AR');
+            $letraFin= $abecedario[$lengthEstudiante-1];
+           
+        }
+		
+		/*CONFIGURACION DE EXCEL*/
+        $reporte = $cursosActivos->getCursoMateria()->getMateriasName();
+        $phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
+        $phpExcelObject->getActiveSheet()->setTitle($reporte);
+        $phpExcelObject->setActiveSheetIndex(0);
+        $style = array('alignment' => array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER));
+        $phpExcelObject->getActiveSheet()->getDefaultStyle()->applyFromArray($style);
+        // CELDAS
+        for ($col = 'A'; $col != 'H'; $col++) {
+            if ($col == 'B') {
+                $phpExcelObject->getActiveSheet()->getColumnDimension($col)->setAutosize(false);
+                $phpExcelObject->getActiveSheet()->getColumnDimension($col)->setWidth(20);
+            }else if($col == 'E'){
+                $phpExcelObject->getActiveSheet()->getColumnDimension($col)->setAutosize(false);
+                $phpExcelObject->getActiveSheet()->getColumnDimension($col)->setWidth(50);
+            } else {
+                $phpExcelObject->getActiveSheet()->getColumnDimension($col)->setAutosize(true);
+            }
+        }
+       
+        $phpExcelObject->setActiveSheetIndex(0)
+            ->setCellValue('A'.$iterator, 'PROFESOR');
+            $iterator++;
+        $phpExcelObject->setActiveSheetIndex(0)	
+                ->setCellValue('A'.$iterator, 'MATERIA');
+            $iterator++;	
+            $phpExcelObject->setActiveSheetIndex(0)	
+                ->setCellValue('A'.$iterator, 'PARALELO');
+            $iterator++;	
+            $phpExcelObject->setActiveSheetIndex(0)	
+                ->setCellValue('A'.$iterator, 'FECHA/DESCARGA');
+            $iterator++;	
+            if($idEstudiante!=-1){	
+                $phpExcelObject->setActiveSheetIndex(0)
+                    ->setCellValue('A'.$iterator, '% ASISTENCIA');	
+            }
+            for ($i = 1; $i <= $iterator; $i++) {
+                $celda = 'A' . $i . ':' . 'B' . $i;
+                $phpExcelObject->setActiveSheetIndex(0)->mergeCells($celda);
+                $phpExcelObject->getActiveSheet()->getStyle($celda)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                $c = 'A' . $i;
+                $phpExcelObject->getActiveSheet()->getStyle($c)->getFont()->setBold(true);
+                $phpExcelObject->getActiveSheet()->getStyle($c)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+                $phpExcelObject->getActiveSheet()->getStyle($c)->getFill()->getStartColor()->setARGB('F2F5A9');
+            }
+           // CARGA DE DATOS (PROFESOR)
+         
+            for ($i = 1; $i <= $iterator; $i++) {
+                $celda = 'C' . $i . ':' . $letraFin . $i;
+                $phpExcelObject->setActiveSheetIndex(0)->mergeCells($celda);
+                $phpExcelObject->getActiveSheet()->getStyle($celda)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+            }
+            $cobertura=0;
+            foreach($asistenciaList as $temp){
+                $value=$temp->getAsistenciaValue();
+                if($value==-1){
+                    $value=0;
+                }
+                $cobertura=$cobertura+$value;
+            }
+            $coberturaC=$cobertura/sizeof($asistenciaList);
+            $iterator=1;
+            $complete_name=$cursosActivos->getCursoDocente()->getUsuarioName().' '.$cursosActivos->getCursoDocente()->getUsuarioApellido();
+            $phpExcelObject->setActiveSheetIndex(0)
+                ->setCellValue('C'.$iterator, $complete_name);
+           
+            $datetime= new DateTime('now');
+            $datetime=date_format($datetime, 'Y-m-d 00:00:00');
+            //$datetime= new DateTime($datetime);
+            $iterator++;
+            $phpExcelObject->setActiveSheetIndex(0)
+                ->setCellValue('C'.$iterator, $reporte);
+            $iterator++;    
+            $phpExcelObject->setActiveSheetIndex(0)
+                ->setCellValue('C'.$iterator, $cursosActivos->getCursoParalelo());
+            $iterator++;	
+            $phpExcelObject->setActiveSheetIndex(0)
+                ->setCellValue('C'.$iterator, $datetime);
+            if($idEstudiante!=-1){
+                $iterator++;	
+                $phpExcelObject->setActiveSheetIndex(0)
+                    ->setCellValue('C'.$iterator, $coberturaC . ' %');
+            }
+            $iterator++;		
+            	
+            //CELDA DETALLE DE CLASES
+            $phpExcelObject->setActiveSheetIndex(0)->mergeCells('A'.$iterator.':E'.$iterator);
+            $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':E'.$iterator)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+            $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator)->getFont()->setBold(true);
+            $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+            $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator)->getFill()->getStartColor()->setARGB('F2F5A9');
+    
+            $phpExcelObject->setActiveSheetIndex(0)
+                ->setCellValue('A'.$iterator, 'DETALLE POR CLASES');
+            $iterator++;	
+           
+            if($idEstudiante!=-1){
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':E'.$iterator)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':E'.$iterator)->getFill()->getStartColor()->setARGB('F2F5A9');
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':E'.$iterator)->getFont()->setBold(true);
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':E'.$iterator)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                $phpExcelObject->setActiveSheetIndex(0)
+                    ->setCellValue('A'.$iterator, '#')
+                    ->setCellValue('B'.$iterator, 'FECHA')
+                    ->setCellValue('C'.$iterator, 'VALOR')
+                    ->setCellValue('D'.$iterator, 'TIPO')
+                    ->setCellValue('E'.$iterator, 'COMENTARIOS');
+                //CARGA DE DATOS
+                $j = 1;
+                $i = $iterator+1;
+                foreach($asistenciaList as $temp){
+                    $phpExcelObject->getActiveSheet()->getStyle('A' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                    $phpExcelObject->getActiveSheet()->getStyle('B' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                    $phpExcelObject->getActiveSheet()->getStyle('C' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                    $phpExcelObject->getActiveSheet()->getStyle('D' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                    $phpExcelObject->getActiveSheet()->getStyle('E' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                    // Miscellaneous glyphs, UTF-8
+                    $value=$temp->getAsistenciaValue();
+                    if($value==-1){
+                        $value='NO HAY VALOR';
+                    }
+                    $tipo=$temp->getAsistenciaTipo();
+                    
+                    $phpExcelObject->setActiveSheetIndex(0)
+                    ->setCellValue('A' . $i, $j)
+                    ->setCellValue('B' . $i,  date_format($temp->getAsistenciaFecha(), "Y-m-d"))
+                    ->setCellValue('C' . $i, $value)
+                    ->setCellValue('D' . $i, $tipo)
+                    ->setCellValue('E' . $i, implode("\r\n", $temp->getAsistenciaComentario()));
+
+                    $phpExcelObject->getActiveSheet()->getStyle('B' . $i)->getAlignment()->setWrapText(true);
+                    $phpExcelObject->getActiveSheet()->getStyle('A' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                    $phpExcelObject->getActiveSheet()->getStyle('B' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                    $phpExcelObject->getActiveSheet()->getStyle('C' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                    $phpExcelObject->getActiveSheet()->getStyle('D' . $i)->getAlignment()->setWrapText(true);
+                    $phpExcelObject->getActiveSheet()->getStyle('D' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                    $phpExcelObject->getActiveSheet()->getStyle('E' . $i)->getAlignment()->setWrapText(true);
+                    $phpExcelObject->getActiveSheet()->getStyle('E' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+                    $j++;
+                    $i++;
+                }
+
+            }else{
+                $abecedario = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AQ','AR');
+                $letraFin= $abecedario[$lengthEstudiante-1];
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':'.$letraFin.$iterator)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':'.$letraFin.$iterator)->getFill()->getStartColor()->setARGB('F2F5A9');
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':'.$letraFin.$iterator)->getFont()->setBold(true);
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':'.$letraFin.$iterator)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                $phpExcelObject->setActiveSheetIndex(0)
+                    ->setCellValue('A'.$iterator, 'FECHA');
+                $k=1;
+                foreach($estudiantes_list as $tempListEst){
+                    $letra=$abecedario[$k].$iterator;
+                    $phpExcelObject->setActiveSheetIndex(0)
+                    ->setCellValue($letra, $tempListEst->getListEstudiantesUsuario()->getEstApellido());
+                    $k++;
+                }
+                //CARGA DE DATOS
+                $j = 1;
+                $i = $iterator+1;
+               /* foreach($listadoPrevio as $listTemp){
+                    foreach($listadoGeneral[$listTemp->getAsistenciaId()][0] as $value){
+                        $phpExcelObject->setActiveSheetIndex(0)
+                        ->setCellValue($letra, $tempListEst->getListEstudiantesUsuario()->getEstApellido());
+                    }
+                }*/
+                
+            }
+            
+
+        $writer = $this->get('phpexcel')->createWriter($phpExcelObject, 'Excel5');
+        $response = $this->get('phpexcel')->createStreamedResponse($writer);
+        $dispositionHeader = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'Reporte de Asistencia[' . $datetime . '].xls'
+        );
+        $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
+        $response->headers->set('Pragma', 'public');
+        $response->headers->set('Cache-Control', 'maxage=1');
+        $response->headers->set('Content-Disposition', $dispositionHeader);
+
+        return $response;
+
+    }
     public function promedioGeneral($temp){
         $em = $this->getDoctrine()->getManager();
       
@@ -266,8 +528,22 @@ class DefaultController extends Controller
         $usuario = $em->getRepository('TodoBundle:Usuario')->findOneBy(array('userId'=>$usuarioLogin));
         
         $cursos = $em->getRepository('TodoBundle:Curso')->findBy(array('cursoDocente'=>$usuario,'cursoSemestre' => $semestre));
-        
+         
+        $arrayNuevaFecha=array();
+      
+        $NuevaFecha=1; 
+        foreach ($cursos as $temp){
+            $fecha = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaCurso'=>$temp),array('asistenciaFecha'=>'ASC'));
+      
+            if( array_key_exists($temp->getCursoCodigo(), $arrayNuevaFecha) ){
+                array_push( $arrayNuevaFecha[$temp->getCursoCodigo()], $fecha[0]->getAsistenciaFecha());
+            } else{
+                $arrayNuevaFecha[$temp->getCursoCodigo()] = array($fecha[0]->getAsistenciaFecha());
+            }
+        }
+        //var_dump($arrayNuevaFecha); die;
         $respuesta['curso']=$cursos;
+        $respuesta['fechascursos']=$arrayNuevaFecha;
         $respuesta['semestre']=$cursos[0]->getCursoSemestre()->getSemestreName();
 
 
@@ -320,6 +596,19 @@ class DefaultController extends Controller
                 $resultado['value']=$atrasado->getEsquemaCalificacionValue();
                 $resultado['id']=$id[1];
                 break;
+            case 'MARCARAsistenciaJUSTIFICADO':
+                    $id= explode('_',$_POST['id']);
+                    $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> $_POST['tipo']));
+                    $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findOneBy(array('asistenciaId' => $id[1]));
+                    $asistenciaList->setAsistenciaTipo($_POST['tipo']);
+                    $asistenciaList->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
+                    $asistenciaList->setAsistenciaComentario($_POST['comentario']);
+                    $em->persist($asistenciaList);
+                    $em->flush();
+    
+                    $resultado['value']=$atrasado->getEsquemaCalificacionValue();
+                    $resultado['id']=$id[1];
+                    break;
             case 'next':
 
                 $fechaNow= $_POST['fecha'] ;
@@ -358,6 +647,25 @@ class DefaultController extends Controller
                 $resultado['value']=$atrasado->getEsquemaCalificacionValue();
                 $resultado['asistenciaList']=$asistenciaList;
                 break;
+            case 'MARCARALLJUSTIFICADO':
+                    $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> $_POST['tipo']));
+                    
+                    $fechaNow= $_POST['fecha'];
+                    $fechaNow= new \DateTime($fechaNow);
+    
+                    $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' => $fechaNow,'asistenciaCurso'=>$_POST['id_curso']));
+                    foreach($asistenciaList as $temp){
+                        $temp->setAsistenciaTipo($_POST['tipo']);
+                        $temp->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
+                        $temp->setAsistenciaComentario($_POST['comentario']);
+                        $em->persist($temp);
+                        $em->flush();
+                    }
+                    
+    
+                    $resultado['value']=$atrasado->getEsquemaCalificacionValue();
+                    $resultado['asistenciaList']=$asistenciaList;
+                    break;
             case 'MARCARGENERAL':
                 $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> $_POST['tipo']));
                 $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findOneBy(array('asistenciaId' =>  $_POST['id']));
@@ -370,6 +678,19 @@ class DefaultController extends Controller
                 $resultado['id']=$_POST['id'];
                
                 break;
+            case 'MARCARGENERALJUSTIFICADO':
+                    $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> $_POST['tipo']));
+                    $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findOneBy(array('asistenciaId' =>  $_POST['id']));
+                    $asistenciaList->setAsistenciaTipo($_POST['tipo']);
+                    $asistenciaList->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
+                    $asistenciaList->setAsistenciaComentario($_POST['comentario']);
+                    $em->persist($asistenciaList);
+                    $em->flush();
+    
+                    $resultado['value']=$atrasado->getEsquemaCalificacionValue();
+                    $resultado['id']=$_POST['id'];
+                   
+                    break;
         }
 
       

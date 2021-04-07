@@ -326,8 +326,6 @@ class appDevProjectContainer extends Container
             'doctrine.orm.default_query_cache' => 'doctrine_cache.providers.doctrine.orm.default_query_cache',
             'doctrine.orm.default_result_cache' => 'doctrine_cache.providers.doctrine.orm.default_result_cache',
             'doctrine.orm.entity_manager' => 'doctrine.orm.default_entity_manager',
-            'knp\\snappy\\image' => 'knp_snappy.image',
-            'knp\\snappy\\pdf' => 'knp_snappy.pdf',
             'mailer' => 'swiftmailer.mailer.default',
             'sensio.distribution.webconfigurator' => 'sensio_distribution.webconfigurator',
             'session.storage' => 'session.storage.native',
@@ -806,7 +804,7 @@ class appDevProjectContainer extends Container
         $a = new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this);
         $a->addEventListener(array(0 => 'loadClassMetadata'), $this->get('doctrine.orm.default_listeners.attach_entity_listeners'));
 
-        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_pgsql', 'host' => 'localhost', 'port' => 5433, 'dbname' => 'asistencia', 'user' => 'postgres', 'password' => 'admin', 'charset' => 'UTF8', 'driverOptions' => array(), 'defaultTableOptions' => array()), new \Doctrine\DBAL\Configuration(), $a, array());
+        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_pgsql', 'host' => 'localhost', 'port' => 5432, 'dbname' => 'asistencia', 'user' => 'postgres', 'password' => 'admin', 'charset' => 'UTF8', 'driverOptions' => array(), 'defaultTableOptions' => array()), new \Doctrine\DBAL\Configuration(), $a, array());
     }
 
     /*
@@ -881,10 +879,9 @@ class appDevProjectContainer extends Container
 
         $b = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
         $b->addDriver($a, 'ControlacFIEC\\TodoBundle\\Entity');
-        $b->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => ($this->targetDirs[3].'\\src\\ControlacFIEC\\UtilBundle\\Entity'))), 'ControlacFIEC\\UtilBundle\\Entity');
 
         $c = new \Doctrine\ORM\Configuration();
-        $c->setEntityNamespaces(array('TodoBundle' => 'ControlacFIEC\\TodoBundle\\Entity', 'UtilBundle' => 'ControlacFIEC\\UtilBundle\\Entity'));
+        $c->setEntityNamespaces(array('TodoBundle' => 'ControlacFIEC\\TodoBundle\\Entity'));
         $c->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_metadata_cache'));
         $c->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_query_cache'));
         $c->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_result_cache'));
@@ -1045,7 +1042,7 @@ class appDevProjectContainer extends Container
     {
         $this->services['doctrine_cache.providers.doctrine.orm.default_metadata_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
 
-        $instance->setNamespace('sf_orm_default_5f94cdc483a9961955a021b03988d18c781ae6adfb1e4751aa983fe204d7d83c');
+        $instance->setNamespace('sf_orm_default_3371322fb0f3e2151f1c5623a22c69827c360c12d977cfb85c0a8fc16a798525');
 
         return $instance;
     }
@@ -1059,7 +1056,7 @@ class appDevProjectContainer extends Container
     {
         $this->services['doctrine_cache.providers.doctrine.orm.default_query_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
 
-        $instance->setNamespace('sf_orm_default_5f94cdc483a9961955a021b03988d18c781ae6adfb1e4751aa983fe204d7d83c');
+        $instance->setNamespace('sf_orm_default_3371322fb0f3e2151f1c5623a22c69827c360c12d977cfb85c0a8fc16a798525');
 
         return $instance;
     }
@@ -1073,7 +1070,7 @@ class appDevProjectContainer extends Container
     {
         $this->services['doctrine_cache.providers.doctrine.orm.default_result_cache'] = $instance = new \Doctrine\Common\Cache\ArrayCache();
 
-        $instance->setNamespace('sf_orm_default_5f94cdc483a9961955a021b03988d18c781ae6adfb1e4751aa983fe204d7d83c');
+        $instance->setNamespace('sf_orm_default_3371322fb0f3e2151f1c5623a22c69827c360c12d977cfb85c0a8fc16a798525');
 
         return $instance;
     }
@@ -1667,33 +1664,21 @@ class appDevProjectContainer extends Container
     /*
      * Gets the public 'knp_snappy.image' shared service.
      *
-     * @return \Knp\Snappy\Image
+     * @return \Knp\Bundle\SnappyBundle\Snappy\LoggableGenerator
      */
     protected function getKnpSnappy_ImageService()
     {
-        $this->services['knp_snappy.image'] = $instance = new \Knp\Snappy\Image('wkhtmltoimage', array(), array());
-
-        if ($this->has('monolog.logger.snappy')) {
-            $instance->setLogger($this->get('monolog.logger.snappy', ContainerInterface::NULL_ON_INVALID_REFERENCE));
-        }
-
-        return $instance;
+        return $this->services['knp_snappy.image'] = new \Knp\Bundle\SnappyBundle\Snappy\LoggableGenerator(new \Knp\Snappy\Image('wkhtmltoimage', array(), array()), $this->get('monolog.logger.snappy', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /*
      * Gets the public 'knp_snappy.pdf' shared service.
      *
-     * @return \Knp\Snappy\Pdf
+     * @return \Knp\Bundle\SnappyBundle\Snappy\LoggableGenerator
      */
     protected function getKnpSnappy_PdfService()
     {
-        $this->services['knp_snappy.pdf'] = $instance = new \Knp\Snappy\Pdf('/usr/local/bin/wkhtmltopdf', array(), array());
-
-        if ($this->has('monolog.logger.snappy')) {
-            $instance->setLogger($this->get('monolog.logger.snappy', ContainerInterface::NULL_ON_INVALID_REFERENCE));
-        }
-
-        return $instance;
+        return $this->services['knp_snappy.pdf'] = new \Knp\Bundle\SnappyBundle\Snappy\LoggableGenerator(new \Knp\Snappy\Pdf('/usr/local/bin/wkhtmltopdf', array(), array()), $this->get('monolog.logger.snappy', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /*
@@ -2169,7 +2154,7 @@ class appDevProjectContainer extends Container
         $a = $this->get('security.token_storage');
         $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
-        return $this->services['security.firewall.map.context.login_check_firewall'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('security.user.provider.concrete.in_memory')), 'login_check_firewall', $b, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '6054fe2771cb59.18493990', $b, $this->get('security.authentication.manager')), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'login_check_firewall', NULL, NULL, NULL, $b, false), NULL);
+        return $this->services['security.firewall.map.context.login_check_firewall'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('security.user.provider.concrete.in_memory')), 'login_check_firewall', $b, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '606dcc6fa89908.42027860', $b, $this->get('security.authentication.manager')), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'login_check_firewall', NULL, NULL, NULL, $b, false), NULL);
     }
 
     /*
@@ -2182,7 +2167,7 @@ class appDevProjectContainer extends Container
         $a = $this->get('security.token_storage');
         $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
-        return $this->services['security.firewall.map.context.login_firewall'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('security.user.provider.concrete.in_memory')), 'login_firewall', $b, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '6054fe2771cb59.18493990', $b, $this->get('security.authentication.manager')), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'login_firewall', NULL, NULL, NULL, $b, false), NULL);
+        return $this->services['security.firewall.map.context.login_firewall'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('security.user.provider.concrete.in_memory')), 'login_firewall', $b, $this->get('event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)), 2 => new \Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener($a, '606dcc6fa89908.42027860', $b, $this->get('security.authentication.manager')), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'login_firewall', NULL, NULL, NULL, $b, false), NULL);
     }
 
     /*
@@ -3286,7 +3271,7 @@ class appDevProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('6054fe2771cb59.18493990'), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('6054fe2771cb59.18493990'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.in_memory'), new \Symfony\Component\Security\Core\User\UserChecker(), 'secured_area', $this->get('security.encoder_factory'), true), 3 => $this->get('security.authentication.provider.cas.l3_firewall')), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('606dcc6fa89908.42027860'), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider('606dcc6fa89908.42027860'), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.in_memory'), new \Symfony\Component\Security\Core\User\UserChecker(), 'secured_area', $this->get('security.encoder_factory'), true), 3 => $this->get('security.authentication.provider.cas.l3_firewall')), true);
 
         $instance->setEventDispatcher($this->get('event_dispatcher'));
 
@@ -3532,7 +3517,7 @@ class appDevProjectContainer extends Container
                 ),
                 'KnpSnappyBundle' => array(
                     'parent' => NULL,
-                    'path' => 'C:/wamp64/www/asistenciaFIECCAS/vendor/knplabs/knp-snappy-bundle',
+                    'path' => 'C:/wamp64/www/asistencia/vendor/xeurun/knp-snappy-bundle/Knp/Bundle/SnappyBundle',
                     'namespace' => 'Knp\\Bundle\\SnappyBundle',
                 ),
                 'BeSimpleSoapBundle' => array(
@@ -3575,7 +3560,7 @@ class appDevProjectContainer extends Container
             'kernel.container_class' => 'appDevProjectContainer',
             'database_driver' => 'pdo_pgsql',
             'database_host' => 'localhost',
-            'database_port' => 5433,
+            'database_port' => 5432,
             'database_name' => 'asistencia',
             'database_user' => 'postgres',
             'database_password' => 'admin',
@@ -3996,8 +3981,8 @@ class appDevProjectContainer extends Container
             'assetic.variables' => array(
 
             ),
-            'assetic.java.bin' => 'C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath\\java.EXE',
-            'assetic.node.bin' => 'C:\\Program Files\\nodejs\\\\node.EXE',
+            'assetic.java.bin' => '/usr/bin/java',
+            'assetic.node.bin' => '/usr/bin/node',
             'assetic.ruby.bin' => '/usr/bin/ruby',
             'assetic.sass.bin' => '/usr/bin/sass',
             'assetic.reactjsx.bin' => '/usr/bin/jsx',
@@ -4131,6 +4116,8 @@ class appDevProjectContainer extends Container
             'sensio_framework_extra.converter.doctrine.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DoctrineParamConverter',
             'sensio_framework_extra.converter.datetime.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DateTimeParamConverter',
             'sensio_framework_extra.view.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\TemplateListener',
+            'knp_snappy.pdf.internal_generator.class' => 'Knp\\Snappy\\Pdf',
+            'knp_snappy.pdf.class' => 'Knp\\Bundle\\SnappyBundle\\Snappy\\LoggableGenerator',
             'knp_snappy.pdf.binary' => '/usr/local/bin/wkhtmltopdf',
             'knp_snappy.pdf.options' => array(
 
@@ -4138,6 +4125,8 @@ class appDevProjectContainer extends Container
             'knp_snappy.pdf.env' => array(
 
             ),
+            'knp_snappy.image.internal_generator.class' => 'Knp\\Snappy\\Image',
+            'knp_snappy.image.class' => 'Knp\\Bundle\\SnappyBundle\\Snappy\\LoggableGenerator',
             'knp_snappy.image.binary' => 'wkhtmltoimage',
             'knp_snappy.image.options' => array(
 

@@ -64,10 +64,10 @@ class ListEstudiantes extends \ControlacFIEC\TodoBundle\Entity\ListEstudiantes i
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudiantesId', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudianteCurso', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudiantesUsuario'];
+            return ['__isInitialized__', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudiantesId', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudianteCurso', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudiantesUsuario', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudianteCobertura'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudiantesId', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudianteCurso', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudiantesUsuario'];
+        return ['__isInitialized__', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudiantesId', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudianteCurso', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudiantesUsuario', '' . "\0" . 'ControlacFIEC\\TodoBundle\\Entity\\ListEstudiantes' . "\0" . 'listEstudianteCobertura'];
     }
 
     /**
@@ -241,6 +241,28 @@ class ListEstudiantes extends \ControlacFIEC\TodoBundle\Entity\ListEstudiantes i
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setListEstudiantesUsuario', [$listEstudiantesUsuario]);
 
         return parent::setListEstudiantesUsuario($listEstudiantesUsuario);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getListEstudianteCobertura()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getListEstudianteCobertura', []);
+
+        return parent::getListEstudianteCobertura();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setListEstudianteCobertura($listEstudianteCobertura)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setListEstudianteCobertura', [$listEstudianteCobertura]);
+
+        return parent::setListEstudianteCobertura($listEstudianteCobertura);
     }
 
 }
