@@ -1,2 +1,2 @@
-f14f54,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/listado_asistencia/index/2/2021-04-07%2000:00:00/0,1617824032,,200
-172f7a,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/pagina_imprimir_estudiante/2/6,1617824056,,200
+577592,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/listado_asistencia/crear/3/0/0,1617825708,,302
+0ad0c9,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/listado_asistencia/index/3/2021-04-07%2000:00:00/0,1617825709,,200

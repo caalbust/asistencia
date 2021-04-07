@@ -116,6 +116,7 @@ class DefaultController extends Controller
                 $AsistenciaCursoClase->setAsistenciaValue(-1);
                 $AsistenciaCursoClase->setAsistenciaListEstudiante($estudiantes_list[$j]);
                 $AsistenciaCursoClase->setAsistenciaCurso($cursosActivos);
+                $AsistenciaCursoClase->setAsistenciaComentario('RECUPERADA');
                 $em->persist($AsistenciaCursoClase);
 
                 $em->flush();
