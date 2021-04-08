@@ -483,12 +483,20 @@ th.grid__cell , td.grid__cell{
                 success: function (data)
                 {
                     console.log(data);
+                    var lengthClases = {{ sizeClases }};
+                    console.log(lengthClases);
+                        var cobertura= data['total']/lengthClases;
+                        console.log(cobertura);
+                        cobertura = cobertura.toFixed(2)
+                         $("#cobert_"+data['estudiantexCurso']['listEstudiantesId']).html(cobertura);
                      switch(tipo){
                        case 'PRESENTE':
                             $("#btn_"+id).css("background-color", "#ABEB91");
                             $("#btn_"+id).css("width", "54px");
                             $("#btn_"+id).attr("class", "btnMarcar dropdown-toggle");
                             $("#btn_"+id).html( '<i class="fa fa-check"></i>');
+                            
+                          
                            
                        break;
                        case 'AUSENTE':
@@ -585,6 +593,12 @@ th.grid__cell , td.grid__cell{
                 success: function (data)
                 {
                     console.log(data);
+                    var lengthClases = {{ sizeClases }};
+                     console.log(lengthClases);
+                        var cobertura= data['total']/lengthClases;
+                        console.log(cobertura);
+                        cobertura = cobertura.toFixed(2)
+                         $("#cobert_"+data['estudiantexCurso']['listEstudiantesId']).html(cobertura);
                    switch(tipo){
                        case 'PRESENTE':
                             $("#"+btnId).css("background-color", "#ABEB91");
@@ -592,6 +606,14 @@ th.grid__cell , td.grid__cell{
                             $("#btnAus_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnJust_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnNoCla_"+data['id']).css("background-color", "#e0e0e0");
+                       
+                       //tabla general
+                            $("#btn_"+data['id']).css("background-color", "#ABEB91");
+                            $("#btn_"+data['id']).css("width", "54px");
+                            $("#btn_"+data['id']).attr("class", "btnMarcar dropdown-toggle");
+                            $("#btn_"+data['id']).html( '<i class="fa fa-check"></i>');
+                            
+                           
                        break;
                        case 'AUSENTE':
                             $("#"+btnId).css("background-color", "#EA7178");
@@ -599,6 +621,11 @@ th.grid__cell , td.grid__cell{
                             $("#btnPr_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnJust_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnNoCla_"+data['id']).css("background-color", "#e0e0e0");
+                       //tabla general
+                            $("#btn_"+data['id']).css("background-color", "#EA7178");
+                            $("#btn_"+data['id']).css("width", "54px");
+                            $("#btn_"+data['id']).attr("class", "btnMarcar dropdown-toggle");
+                            $("#btn_"+data['id']).html( '<i class="fa fa-close"></i>');
                        break;
                        case 'JUSTIFICADO':
                             $("#"+btnId).css("background-color", "#92E5DC");
@@ -606,6 +633,12 @@ th.grid__cell , td.grid__cell{
                             $("#btnAus_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnPr_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnNoCla_"+data['id']).css("background-color", "#e0e0e0");
+                      
+                             //tabla general
+                              $("#btn_"+data['id']).css("background-color", "#92E5DC");
+                            $("#btn_"+data['id']).css("width", "54px");
+                            $("#btn_"+data['id']).attr("class", "btnMarcar dropdown-toggle");
+                            $("#btn_"+data['id']).html( '<i class="fa fa-ban"></i>');
                        break;
                        case 'ATRASADO':
                             $("#"+btnId).css("background-color", "#F9ED89");
@@ -613,8 +646,22 @@ th.grid__cell , td.grid__cell{
                             $("#btnAus_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnJust_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnNoCla_"+data['id']).css("background-color", "#e0e0e0");
+                       
+                            //tabla general
+
+                             $("#btn_"+data['id']).css("background-color", "#F9ED89");
+                            $("#btn_"+data['id']).css("width", "54px");
+                            $("#btn_"+data['id']).attr("class", "btnMarcar dropdown-toggle");
+                            $("#btn_"+data['id']).html( '<i class="fa fa-clock-o"></i>');
                        break;
                         case 'NO HUBO CLASES':
+
+                            //tabla general
+                             $("#btn_"+data['id']).css("background-color", "#000000");
+                            $("#btn_"+data['id']).css("width", "54px");
+                            $("#btn_"+data['id']).attr("class", "btnMarcar dropdown-toggle");
+                            $("#btn_"+data['id']).html( '<i class=" fa fa-calendar-times-o"></i>');
+
                             $("#"+btnId).css("background-color", "#000000");
                             $("#btnPr_"+data['id']).css("background-color", "#e0e0e0");
                             $("#btnAus_"+data['id']).css("background-color", "#e0e0e0");
@@ -711,7 +758,12 @@ th.grid__cell , td.grid__cell{
                     success: function (data)
                     {
                         console.log(data);
-                        
+                        var lengthClases = {{ sizeClases }};
+                        console.log(lengthClases);
+                        var cobertura= data['total']/lengthClases;
+                        console.log(cobertura);
+                        cobertura = cobertura.toFixed(2)
+                         $("#cobert_"+data['estudiantexCurso']['listEstudiantesId']).html(cobertura);
                     switch(tipo){
                         case 'PRESENTE':
                                 for (i=0; i< data['asistenciaList'].length ;i++){
@@ -977,7 +1029,10 @@ th.grid__cell , td.grid__cell{
                                     <tbody>
                                        {% for valor in estudiantes_list %}
                                         <tr>
-                                            <td class="grid__cell -header -semi-bold">{{ valor.getListEstudiantesUsuario().getEstApellido() }} {{ valor.getListEstudiantesUsuario().getEstName() }}</td>
+                                            <td class="grid__cell -header -semi-bold">{{ valor.getListEstudiantesUsuario().getEstApellido() }} {{ valor.getListEstudiantesUsuario().getEstName() }}
+                                                {% set cobertura = valor.getListEstudianteCobertura() / sizeClases   %}
+                                                <div id="cobert_{{ valor.getListEstudiantesId()  }}" class="attendance-grade-pill attendance-grade-pill--class-average -good">{{ cobertura | number_format(2, '.', ',') }}  &nbsp;%</div>
+                                            </td>
                                             {% for value in listadoGeneral[valor.getListEstudiantesId()][0]%}
                                                  {% if value.getAsistenciaValue() == -1 %}
                                                     <td>

@@ -228,6 +228,7 @@ class DefaultController extends Controller
        $promedio=$this->promedioGeneral($estudiantes_list);
        $respuesta['promedioGeneral']= $promedio;
        $respuesta['boolAnterior']= $boolAnterior;
+       $respuesta['sizeClases']= $length;
      // var_dump($promedio['countMedio']); die;
         return $this->render('TodoBundle:Default:listAsistencia.html.twig', $respuesta);
     }	
@@ -589,26 +590,72 @@ class DefaultController extends Controller
                 $id= explode('_',$_POST['id']);
                 $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> $_POST['tipo']));
                 $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findOneBy(array('asistenciaId' => $id[1]));
-                $asistenciaList->setAsistenciaTipo($_POST['tipo']);
+               
+                $total=0;
+                 
+                if(intval($asistenciaList->getAsistenciaValue())==-1){
+                    $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $asistenciaList->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$asistenciaList->getAsistenciaCurso()));
+                    $total= intval($estudiantexCurso->getListEstudianteCobertura()) + intval($atrasado->getEsquemaCalificacionValue());
+                           
+                    $estudiantexCurso->setListEstudianteCobertura($total);
+                    $em->persist($estudiantexCurso);  
+                    $var='si';
+                }else{
+                    $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $asistenciaList->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$asistenciaList->getAsistenciaCurso()));
+                    
+                    
+                    $total= intval($estudiantexCurso->getListEstudianteCobertura()) - intval($asistenciaList->getAsistenciaValue());
+                    $total= intval($total) + intval($atrasado->getEsquemaCalificacionValue());
+                        
+                    $estudiantexCurso->setListEstudianteCobertura($total);
+                    $em->persist($estudiantexCurso);  
+                    $var='no';
+                }
+                 $asistenciaList->setAsistenciaTipo($_POST['tipo']);
                 $asistenciaList->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
                 $em->persist($asistenciaList);
+                      
                 $em->flush();
-
+                $resultado['estudiantexCurso']=$estudiantexCurso;
                 $resultado['value']=$atrasado->getEsquemaCalificacionValue();
                 $resultado['id']=$id[1];
+                $resultado['total']=$total;
+                $resultado['var']=$var;
                 break;
             case 'MARCARAsistenciaJUSTIFICADO':
                     $id= explode('_',$_POST['id']);
                     $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> $_POST['tipo']));
                     $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findOneBy(array('asistenciaId' => $id[1]));
+                   
+                    $total=0;
+                    if(intval($asistenciaList->getAsistenciaValue())==-1){
+                        $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $asistenciaList->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$asistenciaList->getAsistenciaCurso()));
+                        $total=intval($estudiantexCurso->getListEstudianteCobertura())+intval($atrasado->getEsquemaCalificacionValue());
+                               
+                        $estudiantexCurso->setListEstudianteCobertura($total);
+                        $em->persist($estudiantexCurso);  
+                        $var='si';
+                    }else{
+                        $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $asistenciaList->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$asistenciaList->getAsistenciaCurso()));
+                        
+                        
+                        $total=intval($estudiantexCurso->getListEstudianteCobertura())-intval($asistenciaList->getAsistenciaValue());
+                        $total=$total + intval($atrasado->getEsquemaCalificacionValue());
+                            
+                        $estudiantexCurso->setListEstudianteCobertura($total);
+                        $em->persist($estudiantexCurso);  
+                        $var='no';
+                    }
                     $asistenciaList->setAsistenciaTipo($_POST['tipo']);
                     $asistenciaList->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
                     $asistenciaList->setAsistenciaComentario($_POST['comentario']);
                     $em->persist($asistenciaList);
+
                     $em->flush();
-    
+                    $resultado['estudiantexCurso']=$estudiantexCurso;
                     $resultado['value']=$atrasado->getEsquemaCalificacionValue();
                     $resultado['id']=$id[1];
+                    $resultado['total']=$total;
                     break;
             case 'next':
 
@@ -635,18 +682,44 @@ class DefaultController extends Controller
                 
                 $fechaNow= $_POST['fecha'];
                 $fechaNow= new \DateTime($fechaNow);
-
+                
                 $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' => $fechaNow,'asistenciaCurso'=>$_POST['id_curso']));
+                
+               // $CantidadFechas = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante' => $asistenciaList[0]->getAsistenciaListEstudiante(),'asistenciaCurso'=>$_POST['id_curso']));
+               // $totalDias= sizeof($CantidadFechas);
+               
                 foreach($asistenciaList as $temp){
+
+                    $total=0;
+                    if(intval($temp->getAsistenciaValue())==-1){
+                        $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $temp->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$temp->getAsistenciaCurso()));
+                        $total= intval($estudiantexCurso->getListEstudianteCobertura()) + intval($atrasado->getEsquemaCalificacionValue());
+                               
+                        $estudiantexCurso->setListEstudianteCobertura($total);
+                        $em->persist($estudiantexCurso);  
+                        $var='si';
+                    }else{
+                        $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $temp->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$temp->getAsistenciaCurso()));
+                        
+                        
+                        $total= intval($estudiantexCurso->getListEstudianteCobertura()) - intval($temp->getAsistenciaValue());
+                        $total= intval($total) + intval($atrasado->getEsquemaCalificacionValue());
+                            
+                        $estudiantexCurso->setListEstudianteCobertura($total);
+                        $em->persist($estudiantexCurso);  
+                        $var='no';
+                    }
                     $temp->setAsistenciaTipo($_POST['tipo']);
                     $temp->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
                     $em->persist($temp);
                     $em->flush();
                 }
                 
-
+                $resultado['estudiantexCurso']=$estudiantexCurso;
                 $resultado['value']=$atrasado->getEsquemaCalificacionValue();
                 $resultado['asistenciaList']=$asistenciaList;
+                $resultado['total']=$total;
+                $resultado['var']=$var;
                 break;
             case 'MARCARALLJUSTIFICADO':
                     $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> $_POST['tipo']));
@@ -655,42 +728,111 @@ class DefaultController extends Controller
                     $fechaNow= new \DateTime($fechaNow);
     
                     $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' => $fechaNow,'asistenciaCurso'=>$_POST['id_curso']));
+                  
                     foreach($asistenciaList as $temp){
+                        
+                        $total=0;
+                        if(intval($temp->getAsistenciaValue())==-1){
+                            $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $temp->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$temp->getAsistenciaCurso()));
+                            $total= intval($estudiantexCurso->getListEstudianteCobertura()) + intval($atrasado->getEsquemaCalificacionValue());
+                                   
+                            $estudiantexCurso->setListEstudianteCobertura($total);
+                            $em->persist($estudiantexCurso);  
+                            $var='si';
+                        }else{
+                            $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $temp->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$temp->getAsistenciaCurso()));
+                            
+                            
+                            $total= intval($estudiantexCurso->getListEstudianteCobertura()) - intval($temp->getAsistenciaValue());
+                            $total= intval($total) + intval($atrasado->getEsquemaCalificacionValue());
+                                
+                            $estudiantexCurso->setListEstudianteCobertura($total);
+                            $em->persist($estudiantexCurso);  
+                            $var='no';
+                        }
                         $temp->setAsistenciaTipo($_POST['tipo']);
                         $temp->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
                         $temp->setAsistenciaComentario($_POST['comentario']);
                         $em->persist($temp);
+
                         $em->flush();
                     }
                     
-    
+                    $resultado['estudiantexCurso']=$estudiantexCurso;
                     $resultado['value']=$atrasado->getEsquemaCalificacionValue();
                     $resultado['asistenciaList']=$asistenciaList;
+                    $resultado['total']=$total;
+                    $resultado['var']=$var;
                     break;
             case 'MARCARGENERAL':
                 $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> $_POST['tipo']));
                 $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findOneBy(array('asistenciaId' =>  $_POST['id']));
+                  $total=0;
+                if(intval($asistenciaList->getAsistenciaValue())==-1){
+                    $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $asistenciaList->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$asistenciaList->getAsistenciaCurso()));
+                    $total= intval($estudiantexCurso->getListEstudianteCobertura()) + intval($atrasado->getEsquemaCalificacionValue());
+                           
+                    $estudiantexCurso->setListEstudianteCobertura($total);
+                    $em->persist($estudiantexCurso);  
+                    $var='si';
+                }else{
+                    $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $asistenciaList->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$asistenciaList->getAsistenciaCurso()));
+                    
+                    
+                    $total= intval($estudiantexCurso->getListEstudianteCobertura()) - intval($asistenciaList->getAsistenciaValue());
+                    $total= intval($total) + intval($atrasado->getEsquemaCalificacionValue());
+                        
+                    $estudiantexCurso->setListEstudianteCobertura($total);
+                    $em->persist($estudiantexCurso);  
+                    $var='no';
+                }
                 $asistenciaList->setAsistenciaTipo($_POST['tipo']);
                 $asistenciaList->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
                 $em->persist($asistenciaList);
+             
                 $em->flush();
-
+                $resultado['estudiantexCurso']=$estudiantexCurso;
                 $resultado['value']=$atrasado->getEsquemaCalificacionValue();
                 $resultado['id']=$_POST['id'];
+                $resultado['total']=$total;
+                    $resultado['var']=$var;
                
                 break;
             case 'MARCARGENERALJUSTIFICADO':
                     $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> $_POST['tipo']));
                     $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findOneBy(array('asistenciaId' =>  $_POST['id']));
+                  
+                    $total=0;
+                    if($asistenciaList->getAsistenciaValue()==-1){
+                        $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $asistenciaList->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$asistenciaList->getAsistenciaCurso()));
+                        $total=intval($estudiantexCurso->getListEstudianteCobertura())+intval($atrasado->getEsquemaCalificacionValue());
+                               
+                        $estudiantexCurso->setListEstudianteCobertura($total);
+                        $em->persist($estudiantexCurso);  
+                        $var='si';
+                    }else{
+                        $estudiantexCurso = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $asistenciaList->getAsistenciaListEstudiante(),'listEstudianteCurso'=>$asistenciaList->getAsistenciaCurso()));
+                        
+                        
+                        $total=intval($estudiantexCurso->getListEstudianteCobertura())-intval($asistenciaList->getAsistenciaValue());
+                        $total=$total + intval($atrasado->getEsquemaCalificacionValue());
+                            
+                        $estudiantexCurso->setListEstudianteCobertura($total);
+                        $em->persist($estudiantexCurso);  
+                        $var='no';
+                    }
+
                     $asistenciaList->setAsistenciaTipo($_POST['tipo']);
                     $asistenciaList->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
                     $asistenciaList->setAsistenciaComentario($_POST['comentario']);
                     $em->persist($asistenciaList);
+
                     $em->flush();
-    
+                    $resultado['estudiantexCurso']=$estudiantexCurso;
                     $resultado['value']=$atrasado->getEsquemaCalificacionValue();
                     $resultado['id']=$_POST['id'];
-                   
+                    $resultado['total']=$total;
+                    $resultado['var']=$var;
                     break;
         }
 

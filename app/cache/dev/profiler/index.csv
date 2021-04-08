@@ -1,9 +1,3 @@
-96c197,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/pagina_imprimir_estudiante/3/21,1617901545,,200
-fd0a58,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/inicio/index/,1617901625,,200
-f61ba5,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/listado_asistencia/index/2/0/0,1617901629,,200
-549f41,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/pagina_imprimir_estudiante/2/9,1617901640,,200
-5d02bc,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/pagina_imprimir_estudiante/2/11,1617901655,,200
-f138b2,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/pagina_anteriores_curso/1,1617901668,,200
-c6b8c6,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/listado_asistencia/index/1/2020-09-23/1,1617901672,,200
-15fcd1,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/pagina_imprimir_estudiante/1/3,1617901680,,200
-cd633e,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/pagina_imprimir_estudiante/1/3,1617901872,,200
+00dc9a,127.0.0.1,GET,http://localhost:7070/asistencia/web/app_dev.php/backend/listado_asistencia/index/3/2021-04-08%2000:00:00/0,1617911438,,200
+1b65e0,127.0.0.1,POST,http://localhost:7070/asistencia/web/app_dev.php/backend/ajax_asistencia/,1617911445,,200
+20fd05,127.0.0.1,POST,http://localhost:7070/asistencia/web/app_dev.php/backend/ajax_asistencia/,1617911460,,200
