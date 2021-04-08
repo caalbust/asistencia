@@ -245,7 +245,7 @@ class DefaultController extends Controller
         $cursosActivos = $em->getRepository('TodoBundle:Curso')->findOneBy(array('cursoId' => $idCurso));
 		
         if($idEstudiante!=-1){
-        $estudiantes_list = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesUsuario' => $idEstudiante));
+        $estudiantes_list = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $idEstudiante));
 	    $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante'=>$estudiantes_list,'asistenciaCurso'=>$idCurso),array('asistenciaFecha'=>'ASC'));
         $letraFin='E';
         }else{
