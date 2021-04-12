@@ -248,7 +248,7 @@ class DefaultController extends Controller
         if($idEstudiante!=-1){
         $estudiantes_list = $em->getRepository('TodoBundle:ListEstudiantes')->findOneBy(array('listEstudiantesId' => $idEstudiante));
 	    $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante'=>$estudiantes_list,'asistenciaCurso'=>$idCurso),array('asistenciaFecha'=>'ASC'));
-        $letraFin='E';
+        $letraFin='D';
         }else{
             $estudiantes_list = $em->getRepository('TodoBundle:ListEstudiantes')->findBy(array('listEstudianteCurso' => $cursosActivos),array());
            // $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante'=>$estudiantes_list,'asistenciaCurso'=>$idCurso),array('asistenciaListEstudiante'=>'ASC','asistenciaFecha'=>'ASC'));
@@ -256,7 +256,7 @@ class DefaultController extends Controller
             $listadoPrevio = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante' => $estudiantes_list[0]),array('asistenciaFecha'=>'ASC'));
            
         
-            foreach ($listadoPrevio as $tempEstud){
+           /* foreach ($listadoPrevio as $tempEstud){
                 $asistenciaGeneral = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' => $tempEstud->getAsistenciaFecha()),array('asistenciaListEstudiante'=>'ASC'));
                 
                 if( array_key_exists($tempEstud->getAsistenciaId(), $listadoGeneral) ){
@@ -269,7 +269,8 @@ class DefaultController extends Controller
             $lengthFecha=sizeof($listadoPrevio);
             $lengthEstudiante=sizeof($estudiantes_list);
             $abecedario = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AQ','AR');
-            $letraFin= $abecedario[$lengthEstudiante-1];
+            $letraFin= $abecedario[$lengthEstudiante-1];*/
+            $letraFin='D';
            
         }
 		
@@ -285,7 +286,7 @@ class DefaultController extends Controller
             if ($col == 'B') {
                 $phpExcelObject->getActiveSheet()->getColumnDimension($col)->setAutosize(false);
                 $phpExcelObject->getActiveSheet()->getColumnDimension($col)->setWidth(20);
-            }else if($col == 'E'){
+            }else if($col == 'D'){
                 $phpExcelObject->getActiveSheet()->getColumnDimension($col)->setAutosize(false);
                 $phpExcelObject->getActiveSheet()->getColumnDimension($col)->setWidth(50);
             } else {
@@ -325,15 +326,20 @@ class DefaultController extends Controller
                 $phpExcelObject->setActiveSheetIndex(0)->mergeCells($celda);
                 $phpExcelObject->getActiveSheet()->getStyle($celda)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
             }
-            $cobertura=0;
-            foreach($asistenciaList as $temp){
-                $value=$temp->getAsistenciaValue();
-                if($value==-1){
-                    $value=0;
+            if($idEstudiante!=-1){
+                $cobertura=0;
+                foreach($asistenciaList as $temp){
+                    $value=$temp->getAsistenciaValue();
+                    if($value==-1){
+                        $value=0;
+                    }
+                    $cobertura=$cobertura+$value;
                 }
-                $cobertura=$cobertura+$value;
+                //$coberturaC=$cobertura;
+                $coberturaC=$cobertura/sizeof($asistenciaList);
+                $coberturaC=number_format($coberturaC, 2, '.', '');
             }
-            $coberturaC=$cobertura/sizeof($asistenciaList);
+           
             $iterator=1;
             $complete_name=$cursosActivos->getCursoDocente()->getUsuarioName().' '.$cursosActivos->getCursoDocente()->getUsuarioApellido();
             $phpExcelObject->setActiveSheetIndex(0)
@@ -355,31 +361,33 @@ class DefaultController extends Controller
                 $iterator++;	
                 $phpExcelObject->setActiveSheetIndex(0)
                     ->setCellValue('C'.$iterator, $coberturaC . ' %');
+            }else{
+                $iterator++;
             }
-            $iterator++;		
-            	
+            		
+            $iterator++;
             //CELDA DETALLE DE CLASES
-            $phpExcelObject->setActiveSheetIndex(0)->mergeCells('A'.$iterator.':E'.$iterator);
-            $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':E'.$iterator)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+            $phpExcelObject->setActiveSheetIndex(0)->mergeCells('A'.$iterator.':D'.$iterator);
+            $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':D'.$iterator)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
             $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator)->getFont()->setBold(true);
             $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
             $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator)->getFill()->getStartColor()->setARGB('F2F5A9');
     
             $phpExcelObject->setActiveSheetIndex(0)
-                ->setCellValue('A'.$iterator, 'DETALLE POR CLASES');
+                ->setCellValue('A'.$iterator, 'DETALLE');
             $iterator++;	
            
             if($idEstudiante!=-1){
-                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':E'.$iterator)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
-                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':E'.$iterator)->getFill()->getStartColor()->setARGB('F2F5A9');
-                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':E'.$iterator)->getFont()->setBold(true);
-                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':E'.$iterator)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':D'.$iterator)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':D'.$iterator)->getFill()->getStartColor()->setARGB('F2F5A9');
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':D'.$iterator)->getFont()->setBold(true);
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':D'.$iterator)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
                 $phpExcelObject->setActiveSheetIndex(0)
                     ->setCellValue('A'.$iterator, '#')
                     ->setCellValue('B'.$iterator, 'FECHA')
                     ->setCellValue('C'.$iterator, 'VALOR')
-                    ->setCellValue('D'.$iterator, 'TIPO')
-                    ->setCellValue('E'.$iterator, 'COMENTARIOS');
+                    ->setCellValue('D'.$iterator, 'TIPO');
+                 //   ->setCellValue('E'.$iterator, 'COMENTARIOS');
                 //CARGA DE DATOS
                 $j = 1;
                 $i = $iterator+1;
@@ -388,7 +396,7 @@ class DefaultController extends Controller
                     $phpExcelObject->getActiveSheet()->getStyle('B' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
                     $phpExcelObject->getActiveSheet()->getStyle('C' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
                     $phpExcelObject->getActiveSheet()->getStyle('D' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-                    $phpExcelObject->getActiveSheet()->getStyle('E' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                //    $phpExcelObject->getActiveSheet()->getStyle('E' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
                     // Miscellaneous glyphs, UTF-8
                     $value=$temp->getAsistenciaValue();
                     if($value==-1){
@@ -400,8 +408,8 @@ class DefaultController extends Controller
                     ->setCellValue('A' . $i, $j)
                     ->setCellValue('B' . $i,  date_format($temp->getAsistenciaFecha(), "Y-m-d"))
                     ->setCellValue('C' . $i, $value)
-                    ->setCellValue('D' . $i, $tipo)
-                    ->setCellValue('E' . $i, implode("\r\n", $temp->getAsistenciaComentario()));
+                    ->setCellValue('D' . $i, $tipo);
+                  //  ->setCellValue('E' . $i, implode("\r\n", $temp->getAsistenciaComentario()));
 
                     $phpExcelObject->getActiveSheet()->getStyle('B' . $i)->getAlignment()->setWrapText(true);
                     $phpExcelObject->getActiveSheet()->getStyle('A' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
@@ -409,39 +417,63 @@ class DefaultController extends Controller
                     $phpExcelObject->getActiveSheet()->getStyle('C' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
                     $phpExcelObject->getActiveSheet()->getStyle('D' . $i)->getAlignment()->setWrapText(true);
                     $phpExcelObject->getActiveSheet()->getStyle('D' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-                    $phpExcelObject->getActiveSheet()->getStyle('E' . $i)->getAlignment()->setWrapText(true);
-                    $phpExcelObject->getActiveSheet()->getStyle('E' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                  //  $phpExcelObject->getActiveSheet()->getStyle('E' . $i)->getAlignment()->setWrapText(true);
+                   // $phpExcelObject->getActiveSheet()->getStyle('E' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
                     $j++;
                     $i++;
                 }
 
             }else{
-                $abecedario = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AQ','AR');
-                $letraFin= $abecedario[$lengthEstudiante-1];
-                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':'.$letraFin.$iterator)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
-                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':'.$letraFin.$iterator)->getFill()->getStartColor()->setARGB('F2F5A9');
-                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':'.$letraFin.$iterator)->getFont()->setBold(true);
-                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':'.$letraFin.$iterator)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+               // $abecedario = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AQ','AR');
+                //$letraFin= $abecedario[$lengthEstudiante-1];
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':D'.$iterator)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':D'.$iterator)->getFill()->getStartColor()->setARGB('F2F5A9');
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':D'.$iterator)->getFont()->setBold(true);
+                $phpExcelObject->getActiveSheet()->getStyle('A'.$iterator.':D'.$iterator)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
                 $phpExcelObject->setActiveSheetIndex(0)
-                    ->setCellValue('A'.$iterator, 'FECHA');
-                $k=1;
-                foreach($estudiantes_list as $tempListEst){
-                    $letra=$abecedario[$k].$iterator;
-                    $phpExcelObject->setActiveSheetIndex(0)
-                    ->setCellValue($letra, $tempListEst->getListEstudiantesUsuario()->getEstApellido());
-                    $k++;
-                }
+                    ->setCellValue('A'.$iterator, '#')
+                    ->setCellValue('B'.$iterator, 'ESTUDIANTE')
+                    ->setCellValue('C'.$iterator, 'COBERTURA')
+                    ->setCellValue('D'.$iterator, 'AP/RP');
+                 //   ->setCellValue('E'.$iterator, 'COMENTARIOS');
                 //CARGA DE DATOS
                 $j = 1;
                 $i = $iterator+1;
-               /* foreach($listadoPrevio as $listTemp){
-                    foreach($listadoGeneral[$listTemp->getAsistenciaId()][0] as $value){
-                        $phpExcelObject->setActiveSheetIndex(0)
-                        ->setCellValue($letra, $tempListEst->getListEstudiantesUsuario()->getEstApellido());
+                foreach($estudiantes_list as $temp){
+                    $phpExcelObject->getActiveSheet()->getStyle('A' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                    $phpExcelObject->getActiveSheet()->getStyle('B' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                    $phpExcelObject->getActiveSheet()->getStyle('C' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                    $phpExcelObject->getActiveSheet()->getStyle('D' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                //    $phpExcelObject->getActiveSheet()->getStyle('E' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+                    // Miscellaneous glyphs, UTF-8
+                    $value=$temp->getListEstudianteCobertura();
+                    $coberturaC=$value/sizeof($listadoPrevio);
+                    $coberturaC=number_format($coberturaC, 2, '.', '');
+                    if($coberturaC>40){
+                        $tempApRp= 'APROBADO';
+                    }else{
+                        $tempApRp= 'REAPROBADO';
                     }
-                }*/
-                
+                    $phpExcelObject->setActiveSheetIndex(0)
+                    ->setCellValue('A' . $i, $j)
+                    ->setCellValue('B' . $i,  $temp->getListEstudiantesUsuario()->getEstApellido() .' '.$temp->getListEstudiantesUsuario()->getEstName())
+                    ->setCellValue('C' . $i, $coberturaC)
+                    ->setCellValue('D' . $i, $tempApRp);
+                  //  ->setCellValue('E' . $i, implode("\r\n", $temp->getAsistenciaComentario()));
+
+                    $phpExcelObject->getActiveSheet()->getStyle('B' . $i)->getAlignment()->setWrapText(true);
+                    $phpExcelObject->getActiveSheet()->getStyle('A' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                    $phpExcelObject->getActiveSheet()->getStyle('B' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                    $phpExcelObject->getActiveSheet()->getStyle('C' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                    $phpExcelObject->getActiveSheet()->getStyle('D' . $i)->getAlignment()->setWrapText(true);
+                    $phpExcelObject->getActiveSheet()->getStyle('D' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+                  //  $phpExcelObject->getActiveSheet()->getStyle('E' . $i)->getAlignment()->setWrapText(true);
+                   // $phpExcelObject->getActiveSheet()->getStyle('E' . $i)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+                    $j++;
+                    $i++;
+                }
             }
             
 

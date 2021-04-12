@@ -276,6 +276,7 @@ th.grid__cell.-header.-semi-bold ,td.grid__cell.-header.-semi-bold{
     position: -webkit-sticky;
     left: 0rem;
     z-index: 20;
+    font-size:12px;
 }
 th.grid__cell , td.grid__cell{
        width: 0px;
@@ -447,14 +448,17 @@ th.grid__cell , td.grid__cell{
             $("#contener_general").css("display", "block");
             $("#contener_reunion").css("display", "none");
              $("#contener_reportes").css("display", "none");
+              $("#titulo_asistencia").css("display", "block");
         }else if(action=='reunion'){
             $("#contener_general").css("display", "none");
              $("#contener_reportes").css("display", "none");
             $("#contener_reunion").css("display", "block");
+               $("#titulo_asistencia").css("display", "block");
         }else{
             $("#contener_general").css("display", "none");
             $("#contener_reunion").css("display", "none");
              $("#contener_reportes").css("display", "block");
+             $("#titulo_asistencia").css("display", "none");
         }
     }
     function marcarGeneral(tipo,fecha,id){
@@ -840,7 +844,7 @@ th.grid__cell , td.grid__cell{
                     <div class="row" style="    margin: 10px;">	
                         <div class="col-sm-4">
                             <span class="panel-header-large__sub-title">{{ curso.getCursoMateria().getMateriasCodigo() }}-{{ curso.getCursoMateria().getMateriasName() }}</span>
-                            <h3>ASISTENCIA </h3>
+                            <h3 id="titulo_asistencia">ASISTENCIA </h3>
                              
                                                    
                         </div>
@@ -850,17 +854,20 @@ th.grid__cell , td.grid__cell{
                                 <div class="panel-header-large__actions-wrapper" style="margin-left: -67px;">
                                     <div class="grid-view-switcher">
                                         <ul class="button-group" style="width: 300px;">
-                                            <li>
+                                            <li>  <button class="js-switch-to-meeting-view small right-button button active-switch" onclick="actionDiv('reunion')" data-analytics-id="course.attendance.showMeetingView.button" id="course_reunion" aria-label="Reunión, seleccionada">Asistencia</button>
+                                             
+                                                    </li>
+                                            <li style="margin-right: 2px;">
                                                 <button class="js-switch-to-meeting-view small right-button button active-switch" onclick="actionDiv('reportes')" data-analytics-id="course.attendance.showMeetingView.button" id="course_reunion" aria-label="Reunión, seleccionada">Reportes</button>
+                                        
                                             </li>
-                                            <li style="margin-left: 2px;">
+                                            <li>
                                                 <div>
-                                                    <button class="js-switch-to-overall-view small left-button button " onclick="actionDiv('general')" data-analytics-id="course.attendance.showOverallView.button"  id="course_general" aria-label="General">General</button>
+                                                    <!--js-switch-to-overall-view small left-button button-->
+                                                    <button class="js-switch-to-meeting-view small right-button button active-switch" onclick="actionDiv('general')" data-analytics-id="course.attendance.showOverallView.button"  id="course_general" aria-label="General">Resumen</button>
                                                     <span class="ftue-callout hidden"></span>
                                                 </div>
-                                            </li>
-                                            <li>
-                                                <button class="js-switch-to-meeting-view small right-button button active-switch" onclick="actionDiv('reunion')" data-analytics-id="course.attendance.showMeetingView.button" id="course_reunion" aria-label="Reunión, seleccionada">Asistencia</button>
+                                                
                                             </li>
                                             
                                         </ul>
@@ -922,7 +929,7 @@ th.grid__cell , td.grid__cell{
                                             <th>ATRASADO</th>
                                             <th>AUSENTE</th>
                                             <!--<th>JUSTIFICADO</th>-->
-                                            <th>NO HUBO CLASES</th>
+                                            <th>SIN ACTIVIDAD</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1029,7 +1036,7 @@ th.grid__cell , td.grid__cell{
                                     <tbody>
                                        {% for valor in estudiantes_list %}
                                         <tr>
-                                            <td class="grid__cell -header -semi-bold">{{ valor.getListEstudiantesUsuario().getEstApellido() }} {{ valor.getListEstudiantesUsuario().getEstName() }}
+                                            <td class="grid__cell -header -semi-bold">{{ valor.getListEstudiantesUsuario().getEstApellido() }} {{ valor.getListEstudiantesUsuario().getEstName() }}</br>
                                                 {% set cobertura = valor.getListEstudianteCobertura() / sizeClases   %}
                                                 <div id="cobert_{{ valor.getListEstudiantesId()  }}" class="attendance-grade-pill attendance-grade-pill--class-average -good">{{ cobertura | number_format(2, '.', ',') }}  &nbsp;%</div>
                                             </td>
@@ -1045,7 +1052,7 @@ th.grid__cell , td.grid__cell{
                                                                 <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
                                                                 <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
                                                                 <!--<a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>-->
-                                                                <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
+                                                                <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> SIN ACTIVIDAD</a>
                              
                                                             </div>
                                                         </div>
@@ -1061,7 +1068,7 @@ th.grid__cell , td.grid__cell{
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
                                                                     <!--<a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>-->
-                                                                       <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
+                                                                       <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> SIN ACTIVIDAD</a>
                                 
                                                                 </div>
                                                             </div>
@@ -1075,7 +1082,7 @@ th.grid__cell , td.grid__cell{
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
                                                                     <!--<a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>-->
-                                                                       <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
+                                                                       <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> SIN ACTIVIDAD</a>
                                 
                                                                 </div>
                                                             </div>
@@ -1089,7 +1096,7 @@ th.grid__cell , td.grid__cell{
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
                                                                     <!--<a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>-->
-                                                                   <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
+                                                                   <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> SIN ACTIVIDAD</a>
                                 
                                                                 </div>
                                                             </div>
@@ -1103,7 +1110,7 @@ th.grid__cell , td.grid__cell{
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
                                                                    <!-- <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>-->
-                                                                    <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
+                                                                    <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> SIN ACTIVIDAD</a>
                                 
                                                                 </div>
                                                             </div>
@@ -1117,7 +1124,7 @@ th.grid__cell , td.grid__cell{
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('AUSENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-close"></i> AUSENTE</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('JUSTIFICADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-ban"></i> JUSTIFICADO</a><br>
-                                                                       <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
+                                                                       <a class="dropdown-item" onclick="marcarGeneral('NO HUBO CLASES','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class=" fa fa-calendar-times-o"></i> SIN ACTIVIDAD</a>
                                 
                                                                 </div>
                                                             </div>
@@ -1145,7 +1152,7 @@ th.grid__cell , td.grid__cell{
                              <div class="col-sm-12" >
                                 <label>Listado de Estudiantes del Curso </label>
                                 <select id="list_estudiantes" class="form-control">
-                                   <!-- <option value="-1">TODOS</option>-->
+                                    <option value="-1">TODOS</option>
                                     {% for value in estudiantes %}
                                         <option value="{{ value.getListEstudiantesId() }}">{{ value.getListEstudiantesUsuario().getEstApellido()  }} {{ value.getListEstudiantesUsuario().getEstName()  }}</option>
                                     {% endfor %}

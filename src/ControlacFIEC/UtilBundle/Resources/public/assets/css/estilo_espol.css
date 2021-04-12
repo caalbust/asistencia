@@ -254,7 +254,7 @@ input[type=text], input[type=password], textarea, select, .input-append.custom-i
 }
 table.dataTable tr th.header, table.dataTable thead tr td, table.dataTable thead tr th {
     background: #001c43;
-    border: none;
+    border-bottom: solid;
     color: #fff;
     font-size: 13px;
     padding: 4px 5px;
@@ -281,7 +281,7 @@ table.dataTable {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     padding: 0 !important;
-    border: none !important;
+    border-bottom: solid !important;
 }
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     background-color: #001C43;

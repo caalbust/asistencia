@@ -312,6 +312,7 @@ th.grid__cell.-header.-semi-bold ,td.grid__cell.-header.-semi-bold{
     position: -webkit-sticky;
     left: 0rem;
     z-index: 20;
+    font-size:12px;
 }
 th.grid__cell , td.grid__cell{
        width: 0px;
@@ -346,19 +347,19 @@ th.grid__cell , td.grid__cell{
 ";
     }
 
-    // line 311
+    // line 312
     public function block_extraScripts($context, array $blocks = array())
     {
-        // line 312
+        // line 313
         echo "\t<script src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/util/assets/plugins/dataTables/jquery.dataTables.js"), "html", null, true);
         echo "\"></script>
 \t<script src=\"";
-        // line 313
+        // line 314
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/util/assets/plugins/dataTables/dataTables.bootstrap.js"), "html", null, true);
         echo "\"></script>
 \t<script src=\"";
-        // line 314
+        // line 315
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("bundles/todo/jsAsistencia.js"), "html", null, true);
         echo "\"></script>
     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js\" defer></script>
@@ -393,7 +394,7 @@ th.grid__cell , td.grid__cell{
             if(action=='MARCARAsistenciaJUSTIFICADO'){
     \$.ajax({
                     url:'";
-        // line 346
+        // line 347
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_ajax_asistencia");
         echo "',
                     type: \"POST\",
@@ -426,7 +427,7 @@ th.grid__cell , td.grid__cell{
                  var fecha = \$('#fecha').val();
                  \$.ajax({
                     url:'";
-        // line 376
+        // line 377
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_ajax_asistencia");
         echo "',
                     type: \"POST\",
@@ -469,7 +470,7 @@ th.grid__cell , td.grid__cell{
             }else{
                 \$.ajax({
                 url:'";
-        // line 416
+        // line 417
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_ajax_asistencia");
         echo "',
                 type: \"POST\",
@@ -505,14 +506,17 @@ th.grid__cell , td.grid__cell{
             \$(\"#contener_general\").css(\"display\", \"block\");
             \$(\"#contener_reunion\").css(\"display\", \"none\");
              \$(\"#contener_reportes\").css(\"display\", \"none\");
+              \$(\"#titulo_asistencia\").css(\"display\", \"block\");
         }else if(action=='reunion'){
             \$(\"#contener_general\").css(\"display\", \"none\");
              \$(\"#contener_reportes\").css(\"display\", \"none\");
             \$(\"#contener_reunion\").css(\"display\", \"block\");
+               \$(\"#titulo_asistencia\").css(\"display\", \"block\");
         }else{
             \$(\"#contener_general\").css(\"display\", \"none\");
             \$(\"#contener_reunion\").css(\"display\", \"none\");
              \$(\"#contener_reportes\").css(\"display\", \"block\");
+             \$(\"#titulo_asistencia\").css(\"display\", \"none\");
         }
     }
     function marcarGeneral(tipo,fecha,id){
@@ -529,7 +533,7 @@ th.grid__cell , td.grid__cell{
         }else{
             \$.ajax({
                 url:'";
-        // line 473
+        // line 477
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_ajax_asistencia");
         echo "',
                 type: \"POST\",
@@ -545,7 +549,7 @@ th.grid__cell , td.grid__cell{
                 {
                     console.log(data);
                     var lengthClases = ";
-        // line 486
+        // line 490
         echo twig_escape_filter($this->env, ($context["sizeClases"] ?? null), "html", null, true);
         echo ";
                     console.log(lengthClases);
@@ -597,7 +601,7 @@ th.grid__cell , td.grid__cell{
     function configAction(){
          \$.ajax({
                 url:'";
-        // line 535
+        // line 539
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_ajax_asistencia");
         echo "',
                 type: \"POST\",
@@ -624,7 +628,7 @@ th.grid__cell , td.grid__cell{
             console.log(form_data);
              \$.ajax({
                 url:'";
-        // line 559
+        // line 563
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_ajax_asistencia");
         echo "',
                 type: \"POST\",
@@ -652,7 +656,7 @@ th.grid__cell , td.grid__cell{
         }else{
              \$.ajax({
                 url:'";
-        // line 584
+        // line 588
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_ajax_asistencia");
         echo "',
                 type: \"POST\",
@@ -667,7 +671,7 @@ th.grid__cell , td.grid__cell{
                 {
                     console.log(data);
                     var lengthClases = ";
-        // line 596
+        // line 600
         echo twig_escape_filter($this->env, ($context["sizeClases"] ?? null), "html", null, true);
         echo ";
                      console.log(lengthClases);
@@ -761,7 +765,7 @@ th.grid__cell , td.grid__cell{
         console.log(fecha);
          \$.ajax({
                 url:'";
-        // line 687
+        // line 691
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_ajax_asistencia");
         echo "',
                 type: \"POST\",
@@ -781,7 +785,7 @@ th.grid__cell , td.grid__cell{
         console.log(fecha);
         \$.ajax({
                 url:'";
-        // line 704
+        // line 708
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_ajax_asistencia");
         echo "',
                 type: \"POST\",
@@ -824,7 +828,7 @@ th.grid__cell , td.grid__cell{
             }else{
                 \$.ajax({
                     url:'";
-        // line 744
+        // line 748
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_ajax_asistencia");
         echo "',
                     type: \"POST\",
@@ -844,7 +848,7 @@ th.grid__cell , td.grid__cell{
                     {
                         console.log(data);
                         var lengthClases = ";
-        // line 761
+        // line 765
         echo twig_escape_filter($this->env, ($context["sizeClases"] ?? null), "html", null, true);
         echo ";
                         console.log(lengthClases);
@@ -911,13 +915,13 @@ th.grid__cell , td.grid__cell{
         }
         function imprimirReporte(){
             var idCurso = ";
-        // line 825
+        // line 829
         echo twig_escape_filter($this->env, $this->getAttribute(($context["curso"] ?? null), "getCursoId", array(), "method"), "html", null, true);
         echo ";
             var IdEstudiante= \$(\"#list_estudiantes\").val();
             console.log(IdEstudiante);
             var the_link = \"";
-        // line 828
+        // line 832
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_imprimir_estudiante", array("idCurso" => "ID", "idEstudiante" => "IDESTUDIANTE")), "html", null, true);
         echo "\";
             the_link = the_link.replace(\"ID\",idCurso);
@@ -929,22 +933,22 @@ th.grid__cell , td.grid__cell{
 ";
     }
 
-    // line 836
+    // line 840
     public function block_contenido($context, array $blocks = array())
     {
-        // line 837
+        // line 841
         echo "\t\t<div class=\"oculto\">
             <div class=\"panel panel-default widget-box\">
                 <div class=\"panel-body widget-content\">
                     <div class=\"row\" style=\"    margin: 10px;\">\t
                         <div class=\"col-sm-4\">
                             <span class=\"panel-header-large__sub-title\">";
-        // line 842
+        // line 846
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute(($context["curso"] ?? null), "getCursoMateria", array(), "method"), "getMateriasCodigo", array(), "method"), "html", null, true);
         echo "-";
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute(($context["curso"] ?? null), "getCursoMateria", array(), "method"), "getMateriasName", array(), "method"), "html", null, true);
         echo "</span>
-                            <h3>ASISTENCIA </h3>
+                            <h3 id=\"titulo_asistencia\">ASISTENCIA </h3>
                              
                                                    
                         </div>
@@ -954,32 +958,35 @@ th.grid__cell , td.grid__cell{
                                 <div class=\"panel-header-large__actions-wrapper\" style=\"margin-left: -67px;\">
                                     <div class=\"grid-view-switcher\">
                                         <ul class=\"button-group\" style=\"width: 300px;\">
-                                            <li>
+                                            <li>  <button class=\"js-switch-to-meeting-view small right-button button active-switch\" onclick=\"actionDiv('reunion')\" data-analytics-id=\"course.attendance.showMeetingView.button\" id=\"course_reunion\" aria-label=\"Reunión, seleccionada\">Asistencia</button>
+                                             
+                                                    </li>
+                                            <li style=\"margin-right: 2px;\">
                                                 <button class=\"js-switch-to-meeting-view small right-button button active-switch\" onclick=\"actionDiv('reportes')\" data-analytics-id=\"course.attendance.showMeetingView.button\" id=\"course_reunion\" aria-label=\"Reunión, seleccionada\">Reportes</button>
+                                        
                                             </li>
-                                            <li style=\"margin-left: 2px;\">
+                                            <li>
                                                 <div>
-                                                    <button class=\"js-switch-to-overall-view small left-button button \" onclick=\"actionDiv('general')\" data-analytics-id=\"course.attendance.showOverallView.button\"  id=\"course_general\" aria-label=\"General\">General</button>
+                                                    <!--js-switch-to-overall-view small left-button button-->
+                                                    <button class=\"js-switch-to-meeting-view small right-button button active-switch\" onclick=\"actionDiv('general')\" data-analytics-id=\"course.attendance.showOverallView.button\"  id=\"course_general\" aria-label=\"General\">Resumen</button>
                                                     <span class=\"ftue-callout hidden\"></span>
                                                 </div>
-                                            </li>
-                                            <li>
-                                                <button class=\"js-switch-to-meeting-view small right-button button active-switch\" onclick=\"actionDiv('reunion')\" data-analytics-id=\"course.attendance.showMeetingView.button\" id=\"course_reunion\" aria-label=\"Reunión, seleccionada\">Asistencia</button>
+                                                
                                             </li>
                                             
                                         </ul>
                                     </div>
                                     <div>
                                         ";
-        // line 869
+        // line 876
         if ((($context["boolAnterior"] ?? null) == 0)) {
-            // line 870
+            // line 877
             echo "                                            <button class=\"button settings-button clear js-open-settings\" title=\"Ajustes\" onclick=\"configAction()\" data-analytics-id=\"course.attendance.settings.link\" aria-label=\"Ajustes\" href=\"#\">
                                                 <span class=\"glyphicon glyphicon-cog\"></span>
                                             </button>
                                         ";
         }
-        // line 873
+        // line 880
         echo "    
                                     </div>
                                 </div>    
@@ -993,11 +1000,11 @@ th.grid__cell , td.grid__cell{
                         <div class=\"row\" style=\"    margin: 10px;\">\t
                             <div class=\"col-sm-4\">
                             ";
-        // line 885
+        // line 892
         if (($context["btnBackBlock"] ?? null)) {
             echo " 
                                 <a type=\"button\" ";
-            // line 886
+            // line 893
             if (($context["btnBackBlock"] ?? null)) {
                 echo " disable ";
             }
@@ -1006,27 +1013,27 @@ th.grid__cell , td.grid__cell{
             echo "\" class=\"btn btn-secondary\"><span class=\"glyphicon glyphicon-arrow-left\" style=\"margin-top: 3px;font-size: 46px;\"></span></a>
                             ";
         }
-        // line 887
+        // line 894
         echo "   
                             </div>
                             <div class=\"col-sm-4\" style=\"text-align: center;font-size: 24px;margin-top: 20px;\">
                                 <div>";
-        // line 890
+        // line 897
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, ($context["fecha"] ?? null), "Y-m-d"), "html", null, true);
         echo "</div>
                             </div>
                             <div class=\"col-sm-4\" style=\"text-align: right;\">
                                 ";
-        // line 893
+        // line 900
         if (($context["btnNextBlock"] ?? null)) {
             echo "  
                                     <a type=\"button\"  href=\"";
-            // line 894
+            // line 901
             echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("pagina_listado_asistencia", array("action" => "index", "id_curso" => ($context["id_curso"] ?? null), "fecha" => twig_date_format_filter($this->env, ($context["fechaNext"] ?? null), "Y-m-d 00:00:00"), "boolAnterior" => ($context["boolAnterior"] ?? null))), "html", null, true);
             echo "\" class=\"btn btn-secondary\"><span class=\"glyphicon glyphicon-arrow-right\" style=\"margin-top: 3px;font-size: 46px;\"></span></a>
                                 ";
         }
-        // line 896
+        // line 903
         echo "                            </div>
                             
                             
@@ -1039,38 +1046,38 @@ th.grid__cell , td.grid__cell{
                             <div class=\"col-sm-12\" style=\"margin-top: 36px;\">
                                 <div class=\"dropdown\"  >
                                     <button onclick=\"allMarcar()\" ";
-        // line 907
+        // line 914
         if ((($context["boolAnterior"] ?? null) == 1)) {
             echo " disabled ";
         }
         echo "  style =\"margin-left:20px;\" class=\"dropbtn\"><i id=\"icon-action\" class=\"fa fa-users\"></i>Tomar a Todos la Asistencia</button>
                                     <div id=\"myDropdown\" class=\"dropdown-content\">
                                         <a  onclick=\"marcarAll('PRESENTE','";
-        // line 909
+        // line 916
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, ($context["fecha"] ?? null), "Y-m-d 00:00:00 "), "html", null, true);
         echo "', ";
         echo twig_escape_filter($this->env, ($context["id_curso"] ?? null), "html", null, true);
         echo ")\" ><i class=\"fa fa-check\"></i> PRESENTE</a>
                                         <a  onclick=\"marcarAll('ATRASADO','";
-        // line 910
+        // line 917
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, ($context["fecha"] ?? null), "Y-m-d 00:00:00 "), "html", null, true);
         echo "', ";
         echo twig_escape_filter($this->env, ($context["id_curso"] ?? null), "html", null, true);
         echo ")\" ><i class=\"fa fa-clock-o\"></i> ATRASADO</a>
                                         <a  onclick=\"marcarAll('AUSENTE','";
-        // line 911
+        // line 918
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, ($context["fecha"] ?? null), "Y-m-d 00:00:00 "), "html", null, true);
         echo "', ";
         echo twig_escape_filter($this->env, ($context["id_curso"] ?? null), "html", null, true);
         echo ")\"><i class=\"fa fa-close\"></i> AUSENTE</a>
                                         <!--<a  onclick=\"marcarAll('JUSTIFICADO','";
-        // line 912
+        // line 919
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, ($context["fecha"] ?? null), "Y-m-d 00:00:00 "), "html", null, true);
         echo "', ";
         echo twig_escape_filter($this->env, ($context["id_curso"] ?? null), "html", null, true);
         echo ")\" ><i class=\"fa fa-ban\"></i> JUSTIFICADO</a>-->
                                          <a  onclick=\"marcarAll('NO HUBO CLASES','";
-        // line 913
+        // line 920
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, ($context["fecha"] ?? null), "Y-m-d 00:00:00 "), "html", null, true);
         echo "', ";
         echo twig_escape_filter($this->env, ($context["id_curso"] ?? null), "html", null, true);
@@ -1086,34 +1093,34 @@ th.grid__cell , td.grid__cell{
                                             <th>ATRASADO</th>
                                             <th>AUSENTE</th>
                                             <!--<th>JUSTIFICADO</th>-->
-                                            <th>NO HUBO CLASES</th>
+                                            <th>SIN ACTIVIDAD</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                      ";
-        // line 929
+        // line 936
         $context["i"] = 1;
-        // line 930
+        // line 937
         echo "                                       ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["asistenciaList"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["value"]) {
-            // line 931
+            // line 938
             echo "                                            <tr>
                                                 <td>";
-            // line 932
+            // line 939
             echo twig_escape_filter($this->env, ($context["i"] ?? null), "html", null, true);
             echo "</td>
                                                 <td>";
-            // line 933
+            // line 940
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($context["value"], "getAsistenciaListEstudiante", array(), "method"), "getListEstudiantesUsuario", array(), "method"), "getEstApellido", array(), "method"), "html", null, true);
             echo " ";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($context["value"], "getAsistenciaListEstudiante", array(), "method"), "getListEstudiantesUsuario", array(), "method"), "getEstName", array(), "method"), "html", null, true);
             echo " </td>
                                                 ";
-            // line 934
+            // line 941
             if (($this->getAttribute($context["value"], "getAsistenciaValue", array(), "method") ==  -1)) {
-                // line 935
+                // line 942
                 echo "                                                    <td><button id=\"btnPr_";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                 echo "\" class=\"btnMarcar\"  ";
@@ -1122,7 +1129,7 @@ th.grid__cell , td.grid__cell{
                 }
                 echo "  onclick=\"marcarAsistencia('PRESENTE', this.id)\"><i class=\"fa fa-check\"></i></button></td>
                                                     <td><button id=\"btnAtr_";
-                // line 936
+                // line 943
                 echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                 echo "\" class=\"btnMarcar\"  ";
                 if ((($context["boolAnterior"] ?? null) == 1)) {
@@ -1130,7 +1137,7 @@ th.grid__cell , td.grid__cell{
                 }
                 echo "  onclick=\"marcarAsistencia('ATRASADO', this.id)\"><i class=\"fa fa-clock-o\"></i></button></td>
                                                     <td><button id=\"btnAus_";
-                // line 937
+                // line 944
                 echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                 echo "\" class=\"btnMarcar\"  ";
                 if ((($context["boolAnterior"] ?? null) == 1)) {
@@ -1138,7 +1145,7 @@ th.grid__cell , td.grid__cell{
                 }
                 echo "  onclick=\"marcarAsistencia('AUSENTE', this.id)\" ><i class=\"fa fa-close\"></i></button></td>
                                                    <!-- <td><button id=\"btnJust_";
-                // line 938
+                // line 945
                 echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                 echo "\" class=\"btnMarcar \" ";
                 if ((($context["boolAnterior"] ?? null) == 1)) {
@@ -1146,7 +1153,7 @@ th.grid__cell , td.grid__cell{
                 }
                 echo "  onclick=\"marcarAsistencia('JUSTIFICADO', this.id)\" ><i class=\"fa fa-ban\"></i></button></td>-->
                                                     <td><button id=\"btnNoCla_";
-                // line 939
+                // line 946
                 echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                 echo "\" class=\"btnMarcar \" ";
                 if ((($context["boolAnterior"] ?? null) == 1)) {
@@ -1156,10 +1163,10 @@ th.grid__cell , td.grid__cell{
                                                    
                                                 ";
             } else {
-                // line 942
+                // line 949
                 echo "                                                    ";
                 if (($this->getAttribute($context["value"], "getAsistenciaTipo", array(), "method") == "PRESENTE")) {
-                    // line 943
+                    // line 950
                     echo "                                                        <td><button id=\"btnPr_";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo "\"  style=\"background-color:#ABEB91\" class=\"btnMarcar\" ";
@@ -1169,7 +1176,7 @@ th.grid__cell , td.grid__cell{
                     echo "  onclick=\"marcarAsistencia('PRESENTE', this.id)\" ><i class=\"fa fa-check\"></i></button></td>
                                                     ";
                 } else {
-                    // line 945
+                    // line 952
                     echo "                                                            <td><button id=\"btnPr_";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo "\"  class=\"btnMarcar\" ";
@@ -1179,12 +1186,12 @@ th.grid__cell , td.grid__cell{
                     echo "  onclick=\"marcarAsistencia('PRESENTE', this.id)\" ><i class=\"fa fa-check\"></i></button></td>
                                                     ";
                 }
-                // line 947
+                // line 954
                 echo "
                                                     ";
-                // line 948
+                // line 955
                 if (($this->getAttribute($context["value"], "getAsistenciaTipo", array(), "method") == "ATRASADO")) {
-                    // line 949
+                    // line 956
                     echo "                                                        <td><button id=\"btnAtr_";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo "\" style=\"background-color:#F9ED89\" class=\"btnMarcar\" ";
@@ -1194,7 +1201,7 @@ th.grid__cell , td.grid__cell{
                     echo "  onclick=\"marcarAsistencia('ATRASADO', this.id)\"><i class=\"fa fa-clock-o\"></i></button></td>
                                                      ";
                 } else {
-                    // line 951
+                    // line 958
                     echo "                                                         <td><button id=\"btnAtr_";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo "\"  class=\"btnMarcar\" ";
@@ -1204,12 +1211,12 @@ th.grid__cell , td.grid__cell{
                     echo "  onclick=\"marcarAsistencia('ATRASADO', this.id)\" ><i class=\"fa fa-clock-o\"></i></button></td>
                                                    ";
                 }
-                // line 953
+                // line 960
                 echo "
                                                     ";
-                // line 954
+                // line 961
                 if (($this->getAttribute($context["value"], "getAsistenciaTipo", array(), "method") == "AUSENTE")) {
-                    // line 955
+                    // line 962
                     echo "                                                        <td><button id=\"btnAus_";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo "\" style=\"background-color:#EA7178\" class=\"btnMarcar\" ";
@@ -1219,7 +1226,7 @@ th.grid__cell , td.grid__cell{
                     echo "  onclick=\"marcarAsistencia('AUSENTE', this.id)\" {><i class=\"fa fa-close\"></i></button></td>
                                                       ";
                 } else {
-                    // line 957
+                    // line 964
                     echo "                                                        <td><button id=\"btnAus_";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo "\" class=\"btnMarcar\" ";
@@ -1229,10 +1236,10 @@ th.grid__cell , td.grid__cell{
                     echo "  onclick=\"marcarAsistencia('AUSENTE', this.id)\" ><i class=\"fa fa-close\"></i></button></td>
                                                     ";
                 }
-                // line 959
+                // line 966
                 echo "<!--
                                                     ";
-                // line 961
+                // line 968
                 echo "                                                    <!--    <td><button id=\"btnJust_";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                 echo "\" style=\"background-color:#92E5DC\" class=\"btnMarcar\" ";
@@ -1241,7 +1248,7 @@ th.grid__cell , td.grid__cell{
                 }
                 echo "  onclick=\"marcarAsistencia('JUSTIFICADO', this.id)\" ><i class=\"fa fa-ban\"></i></button></td>
                                                    ";
-                // line 963
+                // line 970
                 echo "                                                        <!--<td><button id=\"btnJust_";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                 echo "\" class=\"btnMarcar\"";
@@ -1250,13 +1257,13 @@ th.grid__cell , td.grid__cell{
                 }
                 echo "  onclick=\"marcarAsistencia('JUSTIFICADO', this.id)\" ><i class=\"fa fa-ban\"></i></button></td>
                                                     ";
-                // line 964
+                // line 971
                 echo "-->
 
                                                     ";
-                // line 966
+                // line 973
                 if (($this->getAttribute($context["value"], "getAsistenciaTipo", array(), "method") == "NO HUBO CLASES")) {
-                    // line 967
+                    // line 974
                     echo "                                                        <td><button id=\"btnNoCla_";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo "\" style=\"background-color:#000000\" class=\"btnMarcar\" ";
@@ -1266,7 +1273,7 @@ th.grid__cell , td.grid__cell{
                     echo "  onclick=\"marcarAsistencia('NO HUBO CLASES', this.id)\" ><i class=\" fa fa-calendar-times-o\"></i></button></td>
                                                    ";
                 } else {
-                    // line 969
+                    // line 976
                     echo "                                                        <td><button id=\"btnNoCla_";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo "\" class=\"btnMarcar\"";
@@ -1276,17 +1283,17 @@ th.grid__cell , td.grid__cell{
                     echo "  onclick=\"marcarAsistencia('NO HUBO CLASES', this.id)\" ><i class=\" fa fa-calendar-times-o\"></i></button></td>
                                                     ";
                 }
-                // line 971
+                // line 978
                 echo "
                                                     
                                                 ";
             }
-            // line 974
+            // line 981
             echo "                                            </tr>
                                              ";
-            // line 975
+            // line 982
             $context["i"] = (($context["i"] ?? null) + 1);
-            // line 976
+            // line 983
             echo "                                       ";
         }
         $_parent = $context['_parent'];
@@ -1308,7 +1315,7 @@ th.grid__cell , td.grid__cell{
                                                                     <div class=\"grid-overview\">
                                         <div class=\"grid-overview__overview-data-section -class-average\">
                                             <div class=\"attendance-grade-pill attendance-grade-pill--class-average -good\">";
-        // line 991
+        // line 998
         echo twig_escape_filter($this->env, twig_number_format_filter($this->env, $this->getAttribute(($context["promedioGeneral"] ?? null), "allPromedio", array()), 2, ".", ","), "html", null, true);
         echo " &nbsp;%</div>
                                             <div class=\"grid-overview__description\">
@@ -1317,7 +1324,7 @@ th.grid__cell , td.grid__cell{
                                         </div>
                                         <div class=\"grid-overview__overview-data-section js-above-average-students\">
                                             <span class=\"grid-overview__students-affected\">";
-        // line 997
+        // line 1004
         echo twig_escape_filter($this->env, $this->getAttribute(($context["promedioGeneral"] ?? null), "countMedio", array()), "html", null, true);
         echo "</span>
                                             <div class=\"grid-overview__description\">
@@ -1327,7 +1334,7 @@ th.grid__cell , td.grid__cell{
                                         </div>
                                         <div class=\"grid-overview__overview-data-section js-below-average-students\">
                                             <span class=\"grid-overview__students-affected\">";
-        // line 1004
+        // line 1011
         echo twig_escape_filter($this->env, $this->getAttribute(($context["promedioGeneral"] ?? null), "countBajo", array()), "html", null, true);
         echo "</span>
                                             <div class=\"grid-overview__description\">
@@ -1350,11 +1357,11 @@ th.grid__cell , td.grid__cell{
                                         <tr>
                                             <th class=\"grid__cell -header -semi-bold\" >ESTUDIANTE</th>
                                             ";
-        // line 1024
+        // line 1031
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["listadoPrevio"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["valor"]) {
-            // line 1025
+            // line 1032
             echo "                                                <th>";
             echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["valor"], "getAsistenciaFecha", array(), "method"), "Y-m-d"), "html", null, true);
             echo "</th>
@@ -1363,27 +1370,27 @@ th.grid__cell , td.grid__cell{
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['valor'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 1027
+        // line 1034
         echo "                                        </tr>
                                     </thead>
                                     <tbody>
                                        ";
-        // line 1030
+        // line 1037
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["estudiantes_list"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["valor"]) {
-            // line 1031
+            // line 1038
             echo "                                        <tr>
                                             <td class=\"grid__cell -header -semi-bold\">";
-            // line 1032
+            // line 1039
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["valor"], "getListEstudiantesUsuario", array(), "method"), "getEstApellido", array(), "method"), "html", null, true);
             echo " ";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["valor"], "getListEstudiantesUsuario", array(), "method"), "getEstName", array(), "method"), "html", null, true);
-            echo "
+            echo "</br>
                                                 ";
-            // line 1033
+            // line 1040
             $context["cobertura"] = ($this->getAttribute($context["valor"], "getListEstudianteCobertura", array(), "method") / ($context["sizeClases"] ?? null));
-            // line 1034
+            // line 1041
             echo "                                                <div id=\"cobert_";
             echo twig_escape_filter($this->env, $this->getAttribute($context["valor"], "getListEstudiantesId", array(), "method"), "html", null, true);
             echo "\" class=\"attendance-grade-pill attendance-grade-pill--class-average -good\">";
@@ -1391,18 +1398,18 @@ th.grid__cell , td.grid__cell{
             echo "  &nbsp;%</div>
                                             </td>
                                             ";
-            // line 1036
+            // line 1043
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute(($context["listadoGeneral"] ?? null), $this->getAttribute($context["valor"], "getListEstudiantesId", array(), "method"), array(), "array"), 0, array(), "array"));
             foreach ($context['_seq'] as $context["_key"] => $context["value"]) {
-                // line 1037
+                // line 1044
                 echo "                                                 ";
                 if (($this->getAttribute($context["value"], "getAsistenciaValue", array(), "method") ==  -1)) {
-                    // line 1038
+                    // line 1045
                     echo "                                                    <td>
                                                         <div class=\"dropdown\">
                                                             <button id=\"btn_";
-                    // line 1040
+                    // line 1047
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo "\" ";
                     if ((($context["boolAnterior"] ?? null) == 1)) {
@@ -1413,35 +1420,35 @@ th.grid__cell , td.grid__cell{
                                                             </button>
                                                             <div style =\"padding-left: 17px;cursor:pointer\"  class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
                                                                 <a class=\"dropdown-item\" onclick=\"marcarGeneral('PRESENTE','";
-                    // line 1044
+                    // line 1051
                     echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                     echo "', ";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo ")\"><i class=\"fa fa-check\"></i> PRESENTE</a><br>
                                                                 <a class=\"dropdown-item\" onclick=\"marcarGeneral('ATRASADO','";
-                    // line 1045
+                    // line 1052
                     echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                     echo "', ";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo ")\"><i class=\"fa fa-clock-o\"></i> ATRASADO</a><br>
                                                                 <a class=\"dropdown-item\" onclick=\"marcarGeneral('AUSENTE','";
-                    // line 1046
+                    // line 1053
                     echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                     echo "', ";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo ")\"><i class=\"fa fa-close\"></i> AUSENTE</a><br>
                                                                 <!--<a class=\"dropdown-item\" onclick=\"marcarGeneral('JUSTIFICADO','";
-                    // line 1047
+                    // line 1054
                     echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                     echo "', ";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                     echo ")\"><i class=\"fa fa-ban\"></i> JUSTIFICADO</a><br>-->
                                                                 <a class=\"dropdown-item\" onclick=\"marcarGeneral('NO HUBO CLASES','";
-                    // line 1048
+                    // line 1055
                     echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                     echo "', ";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
-                    echo ")\"><i class=\" fa fa-calendar-times-o\"></i> NO HUBO CLASES</a>
+                    echo ")\"><i class=\" fa fa-calendar-times-o\"></i> SIN ACTIVIDAD</a>
                              
                                                             </div>
                                                         </div>
@@ -1449,14 +1456,14 @@ th.grid__cell , td.grid__cell{
                                                     </td>
                                                 ";
                 } else {
-                    // line 1055
+                    // line 1062
                     echo "                                                    ";
                     if (($this->getAttribute($context["value"], "getAsistenciaTipo", array(), "method") == "PRESENTE")) {
-                        // line 1056
+                        // line 1063
                         echo "                                                        <td>
                                                             <div class=\"dropdown\">
                                                                 <button id=\"btn_";
-                        // line 1058
+                        // line 1065
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo "\"  ";
                         if ((($context["boolAnterior"] ?? null) == 1)) {
@@ -1465,47 +1472,47 @@ th.grid__cell , td.grid__cell{
                         echo "  style=\"background-color:#ABEB91;width: 54px;\" class=\"btnMarcar dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class=\"fa fa-check\"></i></button>
                                                                 <div style =\"padding-left: 17px;cursor:pointer\"  class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('PRESENTE','";
-                        // line 1060
+                        // line 1067
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-check\"></i> PRESENTE</a><br>
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('ATRASADO','";
-                        // line 1061
+                        // line 1068
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-clock-o\"></i> ATRASADO</a><br>
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('AUSENTE','";
-                        // line 1062
+                        // line 1069
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-close\"></i> AUSENTE</a><br>
                                                                     <!--<a class=\"dropdown-item\" onclick=\"marcarGeneral('JUSTIFICADO','";
-                        // line 1063
+                        // line 1070
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-ban\"></i> JUSTIFICADO</a><br>-->
                                                                        <a class=\"dropdown-item\" onclick=\"marcarGeneral('NO HUBO CLASES','";
-                        // line 1064
+                        // line 1071
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
-                        echo ")\"><i class=\" fa fa-calendar-times-o\"></i> NO HUBO CLASES</a>
+                        echo ")\"><i class=\" fa fa-calendar-times-o\"></i> SIN ACTIVIDAD</a>
                                 
                                                                 </div>
                                                             </div>
                                                         </td>
                                                     ";
-                    } elseif (($this->getAttribute(                    // line 1069
+                    } elseif (($this->getAttribute(                    // line 1076
 $context["value"], "getAsistenciaTipo", array(), "method") == "ATRASADO")) {
-                        // line 1070
+                        // line 1077
                         echo "                                                        <td>
                                                             <div class=\"dropdown\">
                                                                 <button id=\"btn_";
-                        // line 1072
+                        // line 1079
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo "\" ";
                         if ((($context["boolAnterior"] ?? null) == 1)) {
@@ -1514,47 +1521,47 @@ $context["value"], "getAsistenciaTipo", array(), "method") == "ATRASADO")) {
                         echo "  style=\"background-color:#F9ED89;width: 54px;\" class=\"btnMarcar dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class=\"fa fa-clock-o\"></i></button>
                                                                 <div style =\"padding-left: 17px;cursor:pointer\"  class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('PRESENTE','";
-                        // line 1074
+                        // line 1081
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-check\"></i> PRESENTE</a><br>
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('ATRASADO','";
-                        // line 1075
+                        // line 1082
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-clock-o\"></i> ATRASADO</a><br>
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('AUSENTE','";
-                        // line 1076
+                        // line 1083
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-close\"></i> AUSENTE</a><br>
                                                                     <!--<a class=\"dropdown-item\" onclick=\"marcarGeneral('JUSTIFICADO','";
-                        // line 1077
+                        // line 1084
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-ban\"></i> JUSTIFICADO</a><br>-->
                                                                        <a class=\"dropdown-item\" onclick=\"marcarGeneral('NO HUBO CLASES','";
-                        // line 1078
+                        // line 1085
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
-                        echo ")\"><i class=\" fa fa-calendar-times-o\"></i> NO HUBO CLASES</a>
+                        echo ")\"><i class=\" fa fa-calendar-times-o\"></i> SIN ACTIVIDAD</a>
                                 
                                                                 </div>
                                                             </div>
                                                         </td>
                                                     ";
-                    } elseif (($this->getAttribute(                    // line 1083
+                    } elseif (($this->getAttribute(                    // line 1090
 $context["value"], "getAsistenciaTipo", array(), "method") == "AUSENTE")) {
-                        // line 1084
+                        // line 1091
                         echo "                                                        <td>
                                                              <div class=\"dropdown\">
                                                                 <button id=\"btn_";
-                        // line 1086
+                        // line 1093
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo "\" ";
                         if ((($context["boolAnterior"] ?? null) == 1)) {
@@ -1563,47 +1570,47 @@ $context["value"], "getAsistenciaTipo", array(), "method") == "AUSENTE")) {
                         echo "  style=\"background-color:#EA7178;width: 54px;\" class=\"btnMarcar dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class=\"fa fa-close\"></i></button>
                                                                 <div style =\"padding-left: 17px;cursor:pointer\"  class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('PRESENTE','";
-                        // line 1088
+                        // line 1095
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-check\"></i> PRESENTE</a><br>
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('ATRASADO','";
-                        // line 1089
+                        // line 1096
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-clock-o\"></i> ATRASADO</a><br>
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('AUSENTE','";
-                        // line 1090
+                        // line 1097
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-close\"></i> AUSENTE</a><br>
                                                                     <!--<a class=\"dropdown-item\" onclick=\"marcarGeneral('JUSTIFICADO','";
-                        // line 1091
+                        // line 1098
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-ban\"></i> JUSTIFICADO</a><br>-->
                                                                    <a class=\"dropdown-item\" onclick=\"marcarGeneral('NO HUBO CLASES','";
-                        // line 1092
+                        // line 1099
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
-                        echo ")\"><i class=\" fa fa-calendar-times-o\"></i> NO HUBO CLASES</a>
+                        echo ")\"><i class=\" fa fa-calendar-times-o\"></i> SIN ACTIVIDAD</a>
                                 
                                                                 </div>
                                                             </div>
                                                         </td>
                                                      ";
-                    } elseif (($this->getAttribute(                    // line 1097
+                    } elseif (($this->getAttribute(                    // line 1104
 $context["value"], "getAsistenciaTipo", array(), "method") == "NO HUBO CLASES")) {
-                        // line 1098
+                        // line 1105
                         echo "                                                        <td>
                                                              <div class=\"dropdown\">
                                                                 <button id=\"btn_";
-                        // line 1100
+                        // line 1107
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo "\" ";
                         if ((($context["boolAnterior"] ?? null) == 1)) {
@@ -1612,46 +1619,46 @@ $context["value"], "getAsistenciaTipo", array(), "method") == "NO HUBO CLASES"))
                         echo "  style=\"background-color:#000000;width: 54px;\" class=\"btnMarcar dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class=\" fa fa-calendar-times-o\"></i></button>
                                                                 <div style =\"padding-left: 17px;cursor:pointer\"  class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('PRESENTE','";
-                        // line 1102
+                        // line 1109
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-check\"></i> PRESENTE</a><br>
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('ATRASADO','";
-                        // line 1103
+                        // line 1110
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-clock-o\"></i> ATRASADO</a><br>
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('AUSENTE','";
-                        // line 1104
+                        // line 1111
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-close\"></i> AUSENTE</a><br>
                                                                    <!-- <a class=\"dropdown-item\" onclick=\"marcarGeneral('JUSTIFICADO','";
-                        // line 1105
+                        // line 1112
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-ban\"></i> JUSTIFICADO</a><br>-->
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('NO HUBO CLASES','";
-                        // line 1106
+                        // line 1113
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
-                        echo ")\"><i class=\" fa fa-calendar-times-o\"></i> NO HUBO CLASES</a>
+                        echo ")\"><i class=\" fa fa-calendar-times-o\"></i> SIN ACTIVIDAD</a>
                                 
                                                                 </div>
                                                             </div>
                                                         </td>
                                                     ";
                     } else {
-                        // line 1112
+                        // line 1119
                         echo "                                                            <td>
                                                                 <div class=\"dropdown\">
                                                                 <button id=\"btn_";
-                        // line 1114
+                        // line 1121
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo "\" ";
                         if ((($context["boolAnterior"] ?? null) == 1)) {
@@ -1660,46 +1667,46 @@ $context["value"], "getAsistenciaTipo", array(), "method") == "NO HUBO CLASES"))
                         echo "  style=\"background-color:#92E5DC;width: 54px;\" class=\"btnMarcar dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class=\"fa fa-ban\"></i></button>
                                                                 <div style =\"padding-left: 17px;cursor:pointer\"  class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('PRESENTE','";
-                        // line 1116
+                        // line 1123
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-check\"></i> PRESENTE</a><br>
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('ATRASADO','";
-                        // line 1117
+                        // line 1124
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-clock-o\"></i> ATRASADO</a><br>
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('AUSENTE','";
-                        // line 1118
+                        // line 1125
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-close\"></i> AUSENTE</a><br>
                                                                     <a class=\"dropdown-item\" onclick=\"marcarGeneral('JUSTIFICADO','";
-                        // line 1119
+                        // line 1126
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
                         echo ")\"><i class=\"fa fa-ban\"></i> JUSTIFICADO</a><br>
                                                                        <a class=\"dropdown-item\" onclick=\"marcarGeneral('NO HUBO CLASES','";
-                        // line 1120
+                        // line 1127
                         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaFecha", array(), "method"), "Y-m-d 00:00:00 "), "html", null, true);
                         echo "', ";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getAsistenciaId", array(), "method"), "html", null, true);
-                        echo ")\"><i class=\" fa fa-calendar-times-o\"></i> NO HUBO CLASES</a>
+                        echo ")\"><i class=\" fa fa-calendar-times-o\"></i> SIN ACTIVIDAD</a>
                                 
                                                                 </div>
                                                             </div>
                                                             </td>
                                                     ";
                     }
-                    // line 1125
+                    // line 1132
                     echo "   
                                                 ";
                 }
-                // line 1126
+                // line 1133
                 echo "    
                                             
                                             ";
@@ -1707,14 +1714,14 @@ $context["value"], "getAsistenciaTipo", array(), "method") == "NO HUBO CLASES"))
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 1129
+            // line 1136
             echo "                                            </tr>
                                         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['valor'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 1131
+        // line 1138
         echo "                                    </tbody>
                                 </table>
                                </div> 
@@ -1732,13 +1739,13 @@ $context["value"], "getAsistenciaTipo", array(), "method") == "NO HUBO CLASES"))
                              <div class=\"col-sm-12\" >
                                 <label>Listado de Estudiantes del Curso </label>
                                 <select id=\"list_estudiantes\" class=\"form-control\">
-                                   <!-- <option value=\"-1\">TODOS</option>-->
+                                    <option value=\"-1\">TODOS</option>
                                     ";
-        // line 1149
+        // line 1156
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["estudiantes"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["value"]) {
-            // line 1150
+            // line 1157
             echo "                                        <option value=\"";
             echo twig_escape_filter($this->env, $this->getAttribute($context["value"], "getListEstudiantesId", array(), "method"), "html", null, true);
             echo "\">";
@@ -1751,7 +1758,7 @@ $context["value"], "getAsistenciaTipo", array(), "method") == "NO HUBO CLASES"))
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 1152
+        // line 1159
         echo "                                </select>
                                 <button style=\"margin-top: 20px;margin-bottom: 20px;\" type=\"button\" onclick=\"imprimirReporte();\" class=\"btn btn-success\"><i class=\"fa fa-print\"></i>Imprimir</button>
 
@@ -1857,7 +1864,7 @@ $context["value"], "getAsistenciaTipo", array(), "method") == "NO HUBO CLASES"))
 
     public function getDebugInfo()
     {
-        return array (  1755 => 1152,  1742 => 1150,  1738 => 1149,  1718 => 1131,  1711 => 1129,  1703 => 1126,  1699 => 1125,  1688 => 1120,  1682 => 1119,  1676 => 1118,  1670 => 1117,  1664 => 1116,  1655 => 1114,  1651 => 1112,  1640 => 1106,  1634 => 1105,  1628 => 1104,  1622 => 1103,  1616 => 1102,  1607 => 1100,  1603 => 1098,  1601 => 1097,  1591 => 1092,  1585 => 1091,  1579 => 1090,  1573 => 1089,  1567 => 1088,  1558 => 1086,  1554 => 1084,  1552 => 1083,  1542 => 1078,  1536 => 1077,  1530 => 1076,  1524 => 1075,  1518 => 1074,  1509 => 1072,  1505 => 1070,  1503 => 1069,  1493 => 1064,  1487 => 1063,  1481 => 1062,  1475 => 1061,  1469 => 1060,  1460 => 1058,  1456 => 1056,  1453 => 1055,  1441 => 1048,  1435 => 1047,  1429 => 1046,  1423 => 1045,  1417 => 1044,  1406 => 1040,  1402 => 1038,  1399 => 1037,  1395 => 1036,  1387 => 1034,  1385 => 1033,  1379 => 1032,  1376 => 1031,  1372 => 1030,  1367 => 1027,  1358 => 1025,  1354 => 1024,  1331 => 1004,  1321 => 997,  1312 => 991,  1290 => 976,  1288 => 975,  1285 => 974,  1280 => 971,  1270 => 969,  1260 => 967,  1258 => 966,  1254 => 964,  1245 => 963,  1236 => 961,  1233 => 959,  1223 => 957,  1213 => 955,  1211 => 954,  1208 => 953,  1198 => 951,  1188 => 949,  1186 => 948,  1183 => 947,  1173 => 945,  1163 => 943,  1160 => 942,  1150 => 939,  1142 => 938,  1134 => 937,  1126 => 936,  1117 => 935,  1115 => 934,  1109 => 933,  1105 => 932,  1102 => 931,  1097 => 930,  1095 => 929,  1074 => 913,  1068 => 912,  1062 => 911,  1056 => 910,  1050 => 909,  1043 => 907,  1030 => 896,  1025 => 894,  1021 => 893,  1015 => 890,  1010 => 887,  1001 => 886,  997 => 885,  983 => 873,  977 => 870,  975 => 869,  943 => 842,  936 => 837,  933 => 836,  921 => 828,  915 => 825,  848 => 761,  828 => 744,  785 => 704,  765 => 687,  671 => 596,  656 => 584,  628 => 559,  601 => 535,  549 => 486,  533 => 473,  473 => 416,  430 => 376,  397 => 346,  362 => 314,  358 => 313,  353 => 312,  350 => 311,  42 => 6,  39 => 5,  34 => 3,  31 => 2,  11 => 1,);
+        return array (  1762 => 1159,  1749 => 1157,  1745 => 1156,  1725 => 1138,  1718 => 1136,  1710 => 1133,  1706 => 1132,  1695 => 1127,  1689 => 1126,  1683 => 1125,  1677 => 1124,  1671 => 1123,  1662 => 1121,  1658 => 1119,  1647 => 1113,  1641 => 1112,  1635 => 1111,  1629 => 1110,  1623 => 1109,  1614 => 1107,  1610 => 1105,  1608 => 1104,  1598 => 1099,  1592 => 1098,  1586 => 1097,  1580 => 1096,  1574 => 1095,  1565 => 1093,  1561 => 1091,  1559 => 1090,  1549 => 1085,  1543 => 1084,  1537 => 1083,  1531 => 1082,  1525 => 1081,  1516 => 1079,  1512 => 1077,  1510 => 1076,  1500 => 1071,  1494 => 1070,  1488 => 1069,  1482 => 1068,  1476 => 1067,  1467 => 1065,  1463 => 1063,  1460 => 1062,  1448 => 1055,  1442 => 1054,  1436 => 1053,  1430 => 1052,  1424 => 1051,  1413 => 1047,  1409 => 1045,  1406 => 1044,  1402 => 1043,  1394 => 1041,  1392 => 1040,  1386 => 1039,  1383 => 1038,  1379 => 1037,  1374 => 1034,  1365 => 1032,  1361 => 1031,  1338 => 1011,  1328 => 1004,  1319 => 998,  1297 => 983,  1295 => 982,  1292 => 981,  1287 => 978,  1277 => 976,  1267 => 974,  1265 => 973,  1261 => 971,  1252 => 970,  1243 => 968,  1240 => 966,  1230 => 964,  1220 => 962,  1218 => 961,  1215 => 960,  1205 => 958,  1195 => 956,  1193 => 955,  1190 => 954,  1180 => 952,  1170 => 950,  1167 => 949,  1157 => 946,  1149 => 945,  1141 => 944,  1133 => 943,  1124 => 942,  1122 => 941,  1116 => 940,  1112 => 939,  1109 => 938,  1104 => 937,  1102 => 936,  1081 => 920,  1075 => 919,  1069 => 918,  1063 => 917,  1057 => 916,  1050 => 914,  1037 => 903,  1032 => 901,  1028 => 900,  1022 => 897,  1017 => 894,  1008 => 893,  1004 => 892,  990 => 880,  984 => 877,  982 => 876,  947 => 846,  940 => 841,  937 => 840,  925 => 832,  919 => 829,  852 => 765,  832 => 748,  789 => 708,  769 => 691,  675 => 600,  660 => 588,  632 => 563,  605 => 539,  553 => 490,  537 => 477,  474 => 417,  431 => 377,  398 => 347,  363 => 315,  359 => 314,  354 => 313,  351 => 312,  42 => 6,  39 => 5,  34 => 3,  31 => 2,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
