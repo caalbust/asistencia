@@ -767,61 +767,104 @@ th.grid__cell , td.grid__cell{
                         var cobertura= data['total']/lengthClases;
                         console.log(cobertura);
                         cobertura = cobertura.toFixed(2)
-                         $("#cobert_"+data['estudiantexCurso']['listEstudiantesId']).html(cobertura);
-                    switch(tipo){
-                        case 'PRESENTE':
-                                for (i=0; i< data['asistenciaList'].length ;i++){
-                                    $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#ABEB91");
-                                    $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                            
-                                }
-                        break;
-                        case 'AUSENTE':
-                                for (i=0; i< data['asistenciaList'].length ;i++){
-                                    $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#EA7178");
-                                    $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                        $("#cobert_"+data['estudiantexCurso']['listEstudiantesId']).html(cobertura);
+                       /*
+                        switch(tipo){
+                            case 'PRESENTE':
+                                    for (i=0; i< data['asistenciaList'].length ;i++){
+                                        console.log(data['asistenciaList'][i]['asistenciaId']);
+                                        $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#ABEB91");
+                                        $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
                                 
-                                }
-                                
-                        break;
-                        case 'JUSTIFICADO':
-                                for (i=0; i< data['asistenciaList'].length ;i++){
-                                    $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#92E5DC");
-                                    $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                
-                                }
-                        break;
-                        case 'ATRASADO':
-                                for (i=0; i< data['asistenciaList'].length ;i++){
-                                    $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#F9ED89");
-                                    $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                
-                                }
-                        break;
-                        case 'NO HUBO CLASES':
-                                for (i=0; i< data['asistenciaList'].length ;i++){
-                                    $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#000000");
-                                    $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                    $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
-                                }
-                        break;
-                    }
+                                    }
+                            break;
+                            case 'AUSENTE':
+                                    for (i=0; i< data['asistenciaList'].length ;i++){
+                                        console.log(data['asistenciaList'][i]['asistenciaId']);
+                                        $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#EA7178");
+                                        $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    
+                                    }
+                                    
+                            break;
+                            case 'JUSTIFICADO':
+                                    for (i=0; i< data['asistenciaList'].length ;i++){
+                                        console.log(data['asistenciaList'][i]['asistenciaId']);
+                                        $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#92E5DC");
+                                        $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    
+                                    }
+                            break;
+                            case 'ATRASADO':
+                                    for (i=0; i< data['asistenciaList'].length ;i++){
+                                        console.log(data['asistenciaList'][i]['asistenciaId']);
+                                        $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#F9ED89");
+                                        $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    
+                                    }
+                            break;
+                            case 'NO HUBO CLASES':
+                                    for (i=0; i< data['asistenciaList'].length ;i++){
+                                        console.log(data['asistenciaList'][i]['asistenciaId']);
+                                        $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#000000");
+                                        $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                        $("#btnPr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    }
+                            break;
+                        }*/
+                        var table = $("#tabla_reunion").DataTable();
+                        table.clear();
+                        for (i=0; i< data['asistenciaList'].length ;i++){
+                            var indice= i+1;
+                            var btnPre='<button id="btnPr_'+data['asistenciaList'][i]['asistenciaId']+'"  class="btnMarcar"  onclick="marcarAsistencia("PRESENTE", this.id)" ><i class="fa fa-check"></i></button>';
+                            var btnAtr='<button id="btnAtr_'+data['asistenciaList'][i]['asistenciaId']+'"  class="btnMarcar"   onclick="marcarAsistencia("ATRASADO", this.id)" ><i class="fa fa-clock-o"></i></button>';
+                            var btnAus='<button id="btnAus_'+data['asistenciaList'][i]['asistenciaId']+'" class="btnMarcar"  onclick="marcarAsistencia("AUSENTE", this.id)" ><i class="fa fa-close"></i></button>';
+                            var btnJust='<button id="btnJust_'+data['asistenciaList'][i]['asistenciaId']+'" class="btnMarcar" onclick="marcarAsistencia("JUSTIFICADO", this.id)" ><i class="fa fa-ban"></i></button>';
+                            var btnNoCla='<button id="btnNoCla_'+data['asistenciaList'][i]['asistenciaId']+'" class="btnMarcar" onclick="marcarAsistencia("NO HUBO CLASES", this.id)" ><i class=" fa fa-calendar-times-o"></i></button>';
+                            switch(tipo){
+                                case 'PRESENTE':
+                                    btnPre='<button id="btnPr_'+data['asistenciaList'][i]['asistenciaId']+'"  style="background-color:#ABEB91" class="btnMarcar"  onclick="marcarAsistencia("PRESENTE", this.id)" ><i class="fa fa-check"></i></button>';
+                                break;
+                                case 'AUSENTE':
+                                   btnAus='<button id="btnAus_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#EA7178" class="btnMarcar"  onclick="marcarAsistencia("AUSENTE", this.id)" ><i class="fa fa-close"></i></button>';
+                                  
+                                break;
+                                case 'JUSTIFICADO':
+                                    btnJust='<button id="btnJust_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#92E5DC" class="btnMarcar"  onclick="marcarAsistencia("JUSTIFICADO", this.id)" ><i class="fa fa-ban"></i></button>';
+                                 
+                                break;
+                                case 'ATRASADO':
+                                     btnAtr='<button id="btnAtr_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#F9ED89" class="btnMarcar"   onclick="marcarAsistencia("ATRASADO", this.id)"><i class="fa fa-clock-o"></i></button>';
+                               
+                                break;
+                                case 'NO HUBO CLASES':
+                                     btnNoCla='<button id="btnNoCla_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#000000" class="btnMarcar"  onclick="marcarAsistencia("NO HUBO CLASES", this.id)" ><i class=" fa fa-calendar-times-o"></i></button>';
+                               
+                                break;
+                            }
+                            var estudiante = data['asistenciaList'][i]['asistenciaListEstudiante']['listEstudiantesUsuario']['estApellido']+' '+data['asistenciaList'][i]['asistenciaListEstudiante']['listEstudiantesUsuario']['estName'];
+                        table.row.add([indice,estudiante,btnPre,btnAtr,btnAus,btnNoCla]).node().id='asist_'+i;
+                        
+                        
+                      }
+                      table.draw();
                         $("#icon-action").removeClass('fa-circle-o-notch fa-spin').addClass('fa-search');
-                    
+                        
+                        
                     }
                 });
             }
