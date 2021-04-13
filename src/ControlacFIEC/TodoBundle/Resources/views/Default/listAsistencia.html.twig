@@ -775,6 +775,8 @@ th.grid__cell , td.grid__cell{
                                     $("#btnJust_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
                                     $("#btnAus_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
                                     $("#btnAtr_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                                    $("#btnNoCla_"+data['asistenciaList'][i]['asistenciaId']).css("background-color", "#e0e0e0");
+                            
                                 }
                         break;
                         case 'AUSENTE':
@@ -917,7 +919,7 @@ th.grid__cell , td.grid__cell{
                                         <a  onclick="marcarAll('ATRASADO','{{ fecha | date ('Y-m-d 00:00:00 ') }}', {{id_curso}})" ><i class="fa fa-clock-o"></i> ATRASADO</a>
                                         <a  onclick="marcarAll('AUSENTE','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})"><i class="fa fa-close"></i> AUSENTE</a>
                                         <!--<a  onclick="marcarAll('JUSTIFICADO','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class="fa fa-ban"></i> JUSTIFICADO</a>-->
-                                         <a  onclick="marcarAll('NO HUBO CLASES','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class=" fa fa-calendar-times-o"></i> NO HUBO CLASES</a>
+                                         <a  onclick="marcarAll('NO HUBO CLASES','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class=" fa fa-calendar-times-o"></i> SIN ACTIVIDAD</a>
                                     </div>
                                     </div>
                                 <table id="tabla_reunion" class="table table-striped table-bordered" style="    width: 96%;margin-left: 20px">
