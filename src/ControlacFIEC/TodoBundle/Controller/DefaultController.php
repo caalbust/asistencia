@@ -103,6 +103,7 @@ class DefaultController extends Controller
         /*CONSULTAS*/
         
         $cursosActivos = $em->getRepository('TodoBundle:Curso')->findOneBy(array('cursoId' => $id_curso));
+        $semestre = $em->getRepository('TodoBundle:Semestre')->findOneBy(array('semestreActivo' => 1));
 		$estudiantes_list = $em->getRepository('TodoBundle:ListEstudiantes')->findBy(array('listEstudianteCurso' => $cursosActivos));
 		//var_dump($estudiantes_list); die;
         if($action == 'crear'){
@@ -229,6 +230,17 @@ class DefaultController extends Controller
        $respuesta['promedioGeneral']= $promedio;
        $respuesta['boolAnterior']= $boolAnterior;
        $respuesta['sizeClases']= $length;
+       $respuesta['semestre']= $semestre;
+       $recuperar=0;
+       if($asistenciaList[0]->getAsistenciaTipo=='RECUPERADA'){
+           $fechaBefore=explode("/",$asistenciaList[0]->getAsistenciaComentario());
+           $fechaBefore=explode("=>",$fechaBefore);
+           $recuperar=1;
+           $respuesta['fechaRecuperar']=$fechaBefore[1];
+       }
+
+       $respuesta['recuperar']=$recuperar;
+      
      // var_dump($promedio['countMedio']); die;
         return $this->render('TodoBundle:Default:listAsistencia.html.twig', $respuesta);
     }	
@@ -876,24 +888,24 @@ class DefaultController extends Controller
                     foreach($asistenciaListBefore as $temp){
                         $temp->setAsistenciaTipo("PRESENTE");
                         $temp->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
-                        $temp->setAsistenciaComentario("RECUPERADO:".$_POST['fecha']);
+                        $temp->setAsistenciaComentario("RECUPERADO=>".$_POST['fechaNow']." / COMENTARIO=>".$_POST['comentario']);
                         $em->persist($temp);
                         $em->flush();
                     }
-                    $fecha=  $_POST['fecha'];
+                    $fecha=  $_POST['fechaNow'];
                     $fecha= new \DateTime($fecha);
 
                     $asistenciaListNow = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' =>  $fecha,'asistenciaCurso'=>$_POST['id']));
                     foreach($asistenciaListNow as $temp){
                         $temp->setAsistenciaTipo("RECUPERADA");
-                        $temp->setAsistenciaComentario("FECHA:".$_POST['fechaBefore']);
+                        $temp->setAsistenciaComentario("FECHA QUE DICTO=>".$_POST['fechaBefore']." / COMENTARIO DEL DÍA=>".$_POST['comentario']);
                         $em->persist($temp);
                         $em->flush();
                     }
                     
                     $resultado['id']=$_POST['id'];
-                    $resultado['total']=$total;
-                    $resultado['var']=$var;
+                    $resultado['fecha']=$asistenciaListNow;
+                    $resultado['fechaBefore']=$asistenciaListBefore;
                     break;
         }
 

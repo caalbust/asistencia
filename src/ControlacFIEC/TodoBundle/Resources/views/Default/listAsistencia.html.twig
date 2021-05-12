@@ -4,7 +4,7 @@
 {% endblock %}
 {% block extraStyle %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
 <style>
  .grid-overview {
     background-color: #f8f8f8;
@@ -307,15 +307,86 @@ th.grid__cell , td.grid__cell{
     border-radius: 2px;
     line-height: 1;
 }
+.ui-datepicker{width:17em;padding:.2em .2em 0;background:#fff url(/images/jqueryui/datepicker.gif?1316124395) left top repeat-x;-moz-box-shadow:0 5px 10px rgba(0,0,0,0.8);-webkit-box-shadow:0 5px 10px rgba(0,0,0,0.8);box-shadow:0 5px 10px rgba(0,0,0,0.8);line-height:1em}
+.ui-datepicker .ui-datepicker-header{position:relative;padding:2px 0 6px 0;background:transparent;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;border:0 none}
+.ui-datepicker .ui-datepicker-prev,.ui-datepicker .ui-datepicker-next{position:absolute;top:6px;height:16px;border:0 none;cursor:pointer}
+.ui-datepicker .ui-datepicker-prev{left:2px}
+.ui-datepicker .ui-datepicker-next{right:2px}
+.ui-datepicker .ui-datepicker-header .ui-state-hover{background:transparent;border:0 none}
+/*.ui-datepicker .ui-datepicker-prev span{background-position:0 -32px!important}
+.ui-datepicker .ui-datepicker-next span{background-position:-16px -32px!important}
+.ui-datepicker .ui-datepicker-prev-hover span{background-position:0 -48px!important}
+.ui-datepicker .ui-datepicker-next-hover span{background-position:-16px -48px!important}*/
+.ui-datepicker .ui-datepicker-prev span,.ui-datepicker .ui-datepicker-next span{display:block;}
+.ui-datepicker .ui-datepicker-title{margin:0 2.3em;line-height:1.8em;text-align:center;font-size:12px;color:#000;text-shadow:0 1px 0 rgba(255,255,255,0.8)}
+.ui-datepicker .ui-datepicker-title select{font-size:1em;margin:1px 0}
+.ui-datepicker select.ui-datepicker-month-year{width:100%}
+.ui-datepicker select.ui-datepicker-month,.ui-datepicker select.ui-datepicker-year{width:49%}
+.ui-datepicker table{width:100%;font-size:10px;border-collapse:collapse;margin:0 0 .4em}
+.ui-datepicker th{padding:.7em .3em;text-align:center;font-weight:bold;border:0}
+.ui-datepicker td{border:0;padding:1px}
+.ui-datepicker td span,.ui-datepicker td a{display:block;padding:3px 3px 3px;text-align:right;text-decoration:none}
+.ui-datepicker .ui-datepicker-buttonpane{background-image:none;margin:.7em 0 0 0;padding:0 .2em;border-left:0;border-right:0;border-bottom:0}
+.ui-datepicker .ui-datepicker-buttonpane button{float:right;margin:.5em .2em .4em;cursor:pointer;padding:.2em .6em .3em .6em;width:auto;overflow:visible}
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current{float:left}
+.ui-datepicker .ui-datepicker-calendar a{background:transparent;border:0 none;text-align:center}
+.ui-datepicker .ui-datepicker-calendar .ui-state-active{border:1px solid;padding:3px 2px 1px}
+.ui-datepicker .ui-datepicker-calendar a.ui-state-hover{color:#1c4257}
+.ui-datepicker .ui-datepicker-current-day .ui-state-default{background:url(/images/jqueryui/button_bg.png?1316124395) 0 -33px repeat-x;color:#1c4257;text-shadow:0 1px 0 rgba(255,255,255,0.8);font-weight:bold;border:1px solid #7399ae}
+.ui-datepicker.ui-datepicker-multi{width:auto}
+.ui-datepicker-multi .ui-datepicker-group{float:left}
+.ui-datepicker-multi .ui-datepicker-group table{width:95%;margin:0 auto .4em}
+.ui-datepicker-multi-2 .ui-datepicker-group{width:50%}
+.ui-datepicker-multi-3 .ui-datepicker-group{width:33.3%}
+.ui-datepicker-multi-4 .ui-datepicker-group{width:25%}
+.ui-datepicker-multi .ui-datepicker-group-last .ui-datepicker-header{border-left-width:0}
+.ui-datepicker-multi .ui-datepicker-group-middle .ui-datepicker-header{border-left-width:0}
+.ui-datepicker-multi .ui-datepicker-buttonpane{clear:left}
+.ui-datepicker-row-break{clear:both;width:100%}
+.ui-datepicker-rtl{direction:rtl}
+.ui-datepicker-rtl .ui-datepicker-prev{right:2px;left:auto}
+.ui-datepicker-rtl .ui-datepicker-next{left:2px;right:auto}
+.ui-datepicker-rtl .ui-datepicker-prev:hover{right:1px;left:auto}
+.ui-datepicker-rtl .ui-datepicker-next:hover{left:1px;right:auto}
+.ui-datepicker-rtl .ui-datepicker-buttonpane{clear:right}
+.ui-datepicker-rtl .ui-datepicker-buttonpane button{float:left}
+.ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current{float:right}
+.ui-datepicker-rtl .ui-datepicker-group{float:right}
+.ui-datepicker-rtl .ui-datepicker-group-last .ui-datepicker-header{border-right-width:0;border-left-width:1px}
+.ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header{border-right-width:0;border-left-width:1px}
+.ui-datepicker-cover{display:none;display:block;position:absolute;z-index:-1;filter:mask();top:-4px;left:-4px;width:200px;height:200px}
+.datepicker-time{padding:0 0 4px;text-align:center}
+.datepicker-time input{border:1px solid #aaa;padding:1px 2px}
+.datepicker-time select{border:1px solid #aaa}
+.datepicker-time button.button{font-weight:normal}
+#ui-datepicker-div{z-index:9999}
+
+.ui-icon,.ui-icon{margin:-1px 8px 0 0!important}
+
 </style>
 {% endblock %}
 {% block extraScripts %}
+  <script src="{{ asset('bundles/todo/js/jquery-ui-1.9.2.custom.js') }}"></script>
+   <script src="{{ asset('bundles/util/js/jquery.jeditable.js') }}"></script>
+    <script src="{{ asset('bundles/util/js/jquery.jeditable.datepicker.js') }}"></script>
 	<script src="{{ asset('bundles/util/assets/plugins/dataTables/jquery.dataTables.js') }}"></script>
 	<script src="{{ asset('bundles/util/assets/plugins/dataTables/dataTables.bootstrap.js') }}"></script>
 	<script src="{{ asset('bundles/todo/jsAsistencia.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
 
 	<script>
+    	var diasLibres = [];
+       
+        {% for clase in listadoPrevio %}
+            {% if clase.getAsistenciaValue == "-1"  %}
+                diasLibres.push('{{ clase.getAsistenciaFecha | date("Y-m-d")}}')
+			{% endif %}
+        {% endfor %}
+
+		{% if semestre is defined %}
+			var inicioSemestre = new Date("{{ semestre.getSemestreFechaInicio()| date('Y-m-d') }}");
+			var finSemestre = new Date("{{ semestre.getSemestreFechaFin()| date('Y-m-d') }}");
+		{% endif %}
 		$(document).ready(function() {
 			$('#tabla_reunion').DataTable({
 				"language": {
@@ -335,19 +406,60 @@ th.grid__cell , td.grid__cell{
 				}
 			});
             $("#list_estudiantes").select2();
+            $("#fecha_recuperar_before").datepicker({
+                dateFormat: 'yy-mm-dd',
+                beforeShowDay: habilitarDiasDisponibles,
+                maxDate: finSemestre,
+                minDate: inicioSemestre
+
+                //beforeShowDay: habilitarDias
+            });
+			
 		} );
+
+        function habilitarDiasDisponibles(date){
+            var sdate = $.datepicker.formatDate( 'yy-mm-dd', date)
+            if($.inArray(sdate, diasLibres) != -1) {
+				//console.log(sdate);
+                return [true];
+            }
+            if(date.getDay() == 0){
+                return [false];
+            }
+            return [false];            
+        }
+
          function sendComentarioRECUPERAR(){
-                var comentario = $('#comentarioText_recuperar').val();
-                var tipo = $('#tipo_recuperar').val();
-                var btnId = $('#btnId_recuperar').val();
-                 var fechaNow = $('#fecha_recuperar').val();
-                 var fechaBefore = $('#fecha_recuperar_before').val();
-                  console.log(fechaNow);
-                  console.log(fechaBefore);
-              
+            var comentario = $('#comentarioText_recuperar').val();
+            var tipo = $('#tipo_recuperar').val();
+            var btnId = $('#btnId_recuperar').val();
+            var fechaNow = $('#fecha_recuperar').val();
+            var fechaBefore = $('#fecha_recuperar_before').val()+' 00:00:00';
+            console.log(fechaNow);
+            console.log(fechaBefore);
+              $.ajax({
+                    url:'{{ (path('pagina_ajax_asistencia')) }}',
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        'action':'RECUPERAR_CLASE',
+                        'tipo':tipo,
+                        'id':btnId,
+                        'fechaNow':fechaNow,
+                        'fechaBefore':fechaBefore,
+                        'comentario':comentario
+                    },
+                    async: true,
+                    success: function (data)
+                    {
+                        console.log(data);
+                       location.reload();
+                    }
+              });
 
             
          }
+         
         function sendComentario(){
             var action = $('#actionComentario').val();
             console.log(comentario);
@@ -968,19 +1080,22 @@ th.grid__cell , td.grid__cell{
                             <div class="col-sm-4" style="text-align: center;font-size: 24px;margin-top: 20px;">
                                 <div>{{ fecha | date('Y-m-d') }}</div>
                             </div>
-                            <div class="col-sm-4" style="text-align: right;">
+                            <!--div class="col-sm-4" style="text-align: right;">
                                 {% if btnNextBlock %}  
                                     <a type="button"  href="{{ path('pagina_listado_asistencia', {'action':'index','id_curso':id_curso,'fecha':fechaNext | date('Y-m-d 00:00:00') ,'boolAnterior':boolAnterior})}}" class="btn btn-secondary"><span class="glyphicon glyphicon-arrow-right" style="margin-top: 3px;font-size: 46px;"></span></a>
                                 {% endif %}
-                            </div>
-                            
-                            
+                            </div-->
+                               {% if recuperar==0 %}
+                               <input type="hidden" id="fechaBeforeClass" />
+                                        <button  style="margin: 20px;" class="btn-success" onclick="marcarAll('RECUPERAR','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class="fa fa-history"></i> RECUPERACIÓN DE CLASES</button>
+                                    {% endif %}    
                         </div>
                     </div>
                 </div>
                 <div class="panel panel-default widget-box">
                     <div class="panel-body widget-content">
                         <div class="row">
+                        
                             <div class="col-sm-12" style="margin-top: 36px;">
                                 <div class="dropdown"  >
                                     <button onclick="allMarcar()" {% if boolAnterior == 1 %} disabled {% endif %}  style ="margin-left:20px;" class="dropbtn"><i id="icon-action" class="fa fa-users"></i>Tomar a Todos la Asistencia</button>
@@ -990,10 +1105,11 @@ th.grid__cell , td.grid__cell{
                                         <a  onclick="marcarAll('AUSENTE','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})"><i class="fa fa-close"></i> AUSENTE</a>
                                         <!--<a  onclick="marcarAll('JUSTIFICADO','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class="fa fa-ban"></i> JUSTIFICADO</a>-->
                                          <a  onclick="marcarAll('NO HUBO CLASES','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class=" fa fa-calendar-times-o"></i> SIN ACTIVIDAD</a>
-                                         <a  onclick="marcarAll('RECUPERAR','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class="fa fa-history"></i> RECUPERAR CLASES</a>
+                                        
                                     </div>
                                     </div>
-                                
+                                  
+                           
                                 <table id="tabla_reunion" class="table table-striped table-bordered" style="    width: 96%;margin-left: 20px">
                                     <thead>
                                         <tr>
@@ -1135,8 +1251,10 @@ th.grid__cell , td.grid__cell{
                                                 {% else %}
                                                     {% if value.getAsistenciaTipo() == 'PRESENTE' %}
                                                         <td>
-                                                            <div class="dropdown">
+                                                           
+                                                            <div class="dropdown" title="{{ value.getAsistenciaComentario }}" >
                                                                 <button id="btn_{{ value.getAsistenciaId() }}"  {% if boolAnterior == 1 %} disabled {% endif %}  style="background-color:#ABEB91;width: 54px;" class="btnMarcar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-check"></i></button>
+                                                                
                                                                 <div style ="padding-left: 17px;cursor:pointer"  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                                     <a class="dropdown-item" onclick="marcarGeneral('PRESENTE','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ')}}', {{value.getAsistenciaId()}})"><i class="fa fa-check"></i> PRESENTE</a><br>
                                                                     <a class="dropdown-item" onclick="marcarGeneral('ATRASADO','{{ value.getAsistenciaFecha() | date ('Y-m-d 00:00:00 ') }}', {{value.getAsistenciaId()}})"><i class="fa fa-clock-o"></i> ATRASADO</a><br>
@@ -1326,9 +1444,7 @@ th.grid__cell , td.grid__cell{
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Indique la fecha en la que debió dictar su clase?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        
       </div>
       <div class="modal-body">
         <!--Material textarea-->
@@ -1336,8 +1452,11 @@ th.grid__cell , td.grid__cell{
         <input type="hidden" id="tipo_recuperar"/>
         <input type="hidden" id="btnId_recuperar"/>
          <input type="hidden" id="fecha_recuperar"/>
-        <label>Fecha de la Clase</label> <input name="fecha_recuperar_before" id="fecha_recuperar_before" type="date"/>
-          <input type="hidden" id="actionComentario" value="RECUPERAR_CLASES"/>
+        <label>Fecha:</label> 
+       <input style=" cursor:pointer; height:45px" type="text" id="fecha_recuperar_before" name="fecha_recuperar_before" value="{{'now'|date('Y-m-d')}}" class="form-rec-ext" required />
+								
+          <input type="hidden" id="actionComentario" value="RECUPERAR_CLASES"/><br>
+          <label>Comentario: </label>
         <textarea id="comentarioText_recuperar" name="comentarioText_recuperar" class="md-textarea form-control" rows="3"></textarea>
        
         </div>
