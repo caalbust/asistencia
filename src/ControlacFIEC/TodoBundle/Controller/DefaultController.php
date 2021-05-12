@@ -117,7 +117,7 @@ class DefaultController extends Controller
                 $AsistenciaCursoClase->setAsistenciaValue(-1);
                 $AsistenciaCursoClase->setAsistenciaListEstudiante($estudiantes_list[$j]);
                 $AsistenciaCursoClase->setAsistenciaCurso($cursosActivos);
-                $AsistenciaCursoClase->setAsistenciaComentario('RECUPERADA');
+                $AsistenciaCursoClase->setAsistenciaTipo('RECUPERADA_P');
                 $em->persist($AsistenciaCursoClase);
 
                 $em->flush();
@@ -175,7 +175,7 @@ class DefaultController extends Controller
         
         $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' => $fechaNow,'asistenciaListEstudiante'=>$estudiantes_list));
         $respuesta['asistenciaList']=$asistenciaList;
-      //  var_dump($asistenciaList);die;
+       // var_dump($asistenciaList);die;
         $respuesta['fecha']=$fechaNow;
         $respuesta['id_curso']=$id_curso;
         $listadoGeneral = array();
@@ -232,13 +232,18 @@ class DefaultController extends Controller
        $respuesta['sizeClases']= $length;
        $respuesta['semestre']= $semestre;
        $recuperar=0;
-       if($asistenciaList[0]->getAsistenciaTipo=='RECUPERADA'){
-           $fechaBefore=explode("/",$asistenciaList[0]->getAsistenciaComentario());
-           $fechaBefore=explode("=>",$fechaBefore);
+      
+       if($asistenciaList[0]->getAsistenciaTipo()=='RECUPERADA_P'){
            $recuperar=1;
-           $respuesta['fechaRecuperar']=$fechaBefore[1];
+           
+          
        }
-
+       if($asistenciaList[0]->getAsistenciaTipo()=='RECUPERADA'){
+        $fechaBefore=explode("/",$asistenciaList[0]->getAsistenciaComentario());
+        $fechaBefore=explode("=>",$fechaBefore);
+        $respuesta['fechaRecuperar']=$fechaBefore[1];
+       
+    }
        $respuesta['recuperar']=$recuperar;
       
      // var_dump($promedio['countMedio']); die;
@@ -266,6 +271,7 @@ class DefaultController extends Controller
            // $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante'=>$estudiantes_list,'asistenciaCurso'=>$idCurso),array('asistenciaListEstudiante'=>'ASC','asistenciaFecha'=>'ASC'));
             $listadoGeneral = array();
             $listadoPrevio = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante' => $estudiantes_list[0]),array('asistenciaFecha'=>'ASC'));
+            $noHuboClases = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaTipo' => 'NO HUBO CLASES'));
            
         
            /* foreach ($listadoPrevio as $tempEstud){
@@ -340,15 +346,22 @@ class DefaultController extends Controller
             }
             if($idEstudiante!=-1){
                 $cobertura=0;
+                $contador=0;
                 foreach($asistenciaList as $temp){
                     $value=$temp->getAsistenciaValue();
                     if($value==-1){
                         $value=0;
                     }
-                    $cobertura=$cobertura+$value;
+                    if($temp->getAsistenciaTipo()=="HO HUBO CLASES"){
+                        $contador++;
+                    }else{
+                        $cobertura=$cobertura+$value;
+                    }
+                    
                 }
                 //$coberturaC=$cobertura;
                 $coberturaC=$cobertura/sizeof($asistenciaList);
+                $coberturaC=$coberturaC-$contador;
                 $coberturaC=number_format($coberturaC, 2, '.', '');
             }
            
@@ -460,7 +473,8 @@ class DefaultController extends Controller
                 //    $phpExcelObject->getActiveSheet()->getStyle('E' . $i . '')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
                     // Miscellaneous glyphs, UTF-8
                     $value=$temp->getListEstudianteCobertura();
-                    $coberturaC=$value/sizeof($listadoPrevio);
+                    $TEMPcLASES= sizeof($listadoPrevio)- sizeof($noHuboClases);
+                    $coberturaC=$value/$TEMPcLASES;
                     $coberturaC=number_format($coberturaC, 2, '.', '');
                     if($coberturaC>40){
                         $tempApRp= 'APROBADO';
@@ -879,14 +893,14 @@ class DefaultController extends Controller
                     $resultado['var']=$var;
                     break;
                 case "RECUPERAR_CLASE":
-                    $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> "PRESENTE"));
+                    $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> "NO HUBO CLASES"));
   
                     $fechaBefore= $_POST['fechaBefore'];
                     $fechaBefore= new \DateTime($fechaBefore);
     
                     $asistenciaListBefore = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' =>  $fechaBefore,'asistenciaCurso'=>$_POST['id']));
                     foreach($asistenciaListBefore as $temp){
-                        $temp->setAsistenciaTipo("PRESENTE");
+                        $temp->setAsistenciaTipo("NO HUBO CLASES");
                         $temp->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
                         $temp->setAsistenciaComentario("RECUPERADO=>".$_POST['fechaNow']." / COMENTARIO=>".$_POST['comentario']);
                         $em->persist($temp);
