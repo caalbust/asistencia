@@ -336,13 +336,26 @@ th.grid__cell , td.grid__cell{
 			});
             $("#list_estudiantes").select2();
 		} );
+         function sendComentarioRECUPERAR(){
+                var comentario = $('#comentarioText_recuperar').val();
+                var tipo = $('#tipo_recuperar').val();
+                var btnId = $('#btnId_recuperar').val();
+                 var fechaNow = $('#fecha_recuperar').val();
+                 var fechaBefore = $('#fecha_recuperar_before').val();
+                  console.log(fechaNow);
+                  console.log(fechaBefore);
+              
+
+            
+         }
         function sendComentario(){
-            var comentario = $('#comentarioText').val();
-            var tipo = $('#tipo').val();
-            var btnId = $('#btnId').val();
             var action = $('#actionComentario').val();
             console.log(comentario);
             if(action=='MARCARAsistenciaJUSTIFICADO'){
+                 var comentario = $('#comentarioText').val();
+            var tipo = $('#tipo').val();
+            var btnId = $('#btnId').val();
+            var action = $('#actionComentario').val();
     $.ajax({
                     url:'{{ (path('pagina_ajax_asistencia')) }}',
                     type: "POST",
@@ -372,6 +385,10 @@ th.grid__cell , td.grid__cell{
                     }
                 });
             }else if(action=='MARCARALLJUSTIFICADO'){
+                 var comentario = $('#comentarioText').val();
+            var tipo = $('#tipo').val();
+            var btnId = $('#btnId').val();
+            var action = $('#actionComentario').val();
                  var fecha = $('#fecha').val();
                  $.ajax({
                     url:'{{ (path('pagina_ajax_asistencia')) }}',
@@ -413,6 +430,10 @@ th.grid__cell , td.grid__cell{
                 });
                  $("#modal-comentario").modal("hide");
             }else{
+                 var comentario = $('#comentarioText').val();
+            var tipo = $('#tipo').val();
+            var btnId = $('#btnId').val();
+           
                 $.ajax({
                 url:'{{ (path('pagina_ajax_asistencia')) }}',
                 type: "POST",
@@ -743,6 +764,12 @@ th.grid__cell , td.grid__cell{
                  $("#comentarioText").val('');
                 $("#modal-comentario").modal("show");
           
+            }else if(tipo=='RECUPERAR'){
+                $("#tipo_recuperar").val(tipo);
+                $("#btnId_recuperar").val(id_curso);
+                $("#comentarioText_recuperar").val('');
+                $("#fecha_recuperar").val(fecha);
+                $("#modal-recuperar").modal("show");
             }else{
                 $.ajax({
                     url:'{{ (path('pagina_ajax_asistencia')) }}',
@@ -963,8 +990,10 @@ th.grid__cell , td.grid__cell{
                                         <a  onclick="marcarAll('AUSENTE','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})"><i class="fa fa-close"></i> AUSENTE</a>
                                         <!--<a  onclick="marcarAll('JUSTIFICADO','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class="fa fa-ban"></i> JUSTIFICADO</a>-->
                                          <a  onclick="marcarAll('NO HUBO CLASES','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class=" fa fa-calendar-times-o"></i> SIN ACTIVIDAD</a>
+                                         <a  onclick="marcarAll('RECUPERAR','{{ fecha | date ('Y-m-d 00:00:00 ')}}', {{id_curso}})" ><i class="fa fa-history"></i> RECUPERAR CLASES</a>
                                     </div>
                                     </div>
+                                
                                 <table id="tabla_reunion" class="table table-striped table-bordered" style="    width: 96%;margin-left: 20px">
                                     <thead>
                                         <tr>
@@ -1286,6 +1315,35 @@ th.grid__cell , td.grid__cell{
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" onclick="sendComentario();">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modal-recuperar">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Indique la fecha en la que debió dictar su clase?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--Material textarea-->
+        <div class="md-form">
+        <input type="hidden" id="tipo_recuperar"/>
+        <input type="hidden" id="btnId_recuperar"/>
+         <input type="hidden" id="fecha_recuperar"/>
+        <label>Fecha de la Clase</label> <input name="fecha_recuperar_before" id="fecha_recuperar_before" type="date"/>
+          <input type="hidden" id="actionComentario" value="RECUPERAR_CLASES"/>
+        <textarea id="comentarioText_recuperar" name="comentarioText_recuperar" class="md-textarea form-control" rows="3"></textarea>
+       
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="sendComentarioRECUPERAR();">Guardar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>

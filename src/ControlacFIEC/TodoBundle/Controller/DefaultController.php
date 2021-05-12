@@ -866,6 +866,35 @@ class DefaultController extends Controller
                     $resultado['total']=$total;
                     $resultado['var']=$var;
                     break;
+                case "RECUPERAR_CLASE":
+                    $atrasado = $em->getRepository('TodoBundle:EsquemaCalificacion')->findOneBy(array('esquemaCalificacionTipo'=> "PRESENTE"));
+  
+                    $fechaBefore= $_POST['fechaBefore'];
+                    $fechaBefore= new \DateTime($fechaBefore);
+    
+                    $asistenciaListBefore = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' =>  $fechaBefore,'asistenciaCurso'=>$_POST['id']));
+                    foreach($asistenciaListBefore as $temp){
+                        $temp->setAsistenciaTipo("PRESENTE");
+                        $temp->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
+                        $temp->setAsistenciaComentario("RECUPERADO:".$_POST['fecha']);
+                        $em->persist($temp);
+                        $em->flush();
+                    }
+                    $fecha=  $_POST['fecha'];
+                    $fecha= new \DateTime($fecha);
+
+                    $asistenciaListNow = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' =>  $fecha,'asistenciaCurso'=>$_POST['id']));
+                    foreach($asistenciaListNow as $temp){
+                        $temp->setAsistenciaTipo("RECUPERADA");
+                        $temp->setAsistenciaComentario("FECHA:".$_POST['fechaBefore']);
+                        $em->persist($temp);
+                        $em->flush();
+                    }
+                    
+                    $resultado['id']=$_POST['id'];
+                    $resultado['total']=$total;
+                    $resultado['var']=$var;
+                    break;
         }
 
       
