@@ -271,7 +271,7 @@ class DefaultController extends Controller
            // $asistenciaList = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante'=>$estudiantes_list,'asistenciaCurso'=>$idCurso),array('asistenciaListEstudiante'=>'ASC','asistenciaFecha'=>'ASC'));
             $listadoGeneral = array();
             $listadoPrevio = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaListEstudiante' => $estudiantes_list[0]),array('asistenciaFecha'=>'ASC'));
-            $noHuboClases = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaTipo' => 'NO HUBO CLASES'));
+            $noHuboClases = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaTipo' => 'RECUPERADA'));
            
         
            /* foreach ($listadoPrevio as $tempEstud){
@@ -352,7 +352,7 @@ class DefaultController extends Controller
                     if($value==-1){
                         $value=0;
                     }
-                    if($temp->getAsistenciaTipo()=="HO HUBO CLASES"){
+                    if($temp->getAsistenciaTipo()=="RECUPERADA"){
                         $contador++;
                     }else{
                         $cobertura=$cobertura+$value;
@@ -921,6 +921,17 @@ class DefaultController extends Controller
                     $resultado['fecha']=$asistenciaListNow;
                     $resultado['fechaBefore']=$asistenciaListBefore;
                     break;
+                    case 'EXTRA':
+                        $fechaBefore= $_POST['fecha'];
+                        $fechaBefore= new \DateTime($fechaBefore);
+        
+                        $asistenciaListBefore = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' =>  $fechaBefore,'asistenciaCurso'=>$_POST['id_curso']));
+                        foreach($asistenciaListBefore as $temp){
+                            $temp->setAsistenciaTipo("");
+                            $em->persist($temp);
+                            $em->flush();
+                        }
+                        break;
         }
 
       
