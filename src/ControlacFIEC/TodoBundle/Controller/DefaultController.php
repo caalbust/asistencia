@@ -232,12 +232,13 @@ class DefaultController extends Controller
        $respuesta['sizeClases']= $length;
        $respuesta['semestre']= $semestre;
        $recuperar=0;
-      
+      //var_dump($asistenciaList[0]->getAsistenciaTipo());
        if($asistenciaList[0]->getAsistenciaTipo()=='RECUPERADA_P'){
            $recuperar=1;
            
           
        }
+      // var_dump($recuperar); die;
        if($asistenciaList[0]->getAsistenciaTipo()=='RECUPERADA'){
         $fechaBefore=explode("/",$asistenciaList[0]->getAsistenciaComentario());
         $fechaBefore=explode("=>",$fechaBefore);
@@ -900,8 +901,8 @@ class DefaultController extends Controller
     
                     $asistenciaListBefore = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' =>  $fechaBefore,'asistenciaCurso'=>$_POST['id']));
                     foreach($asistenciaListBefore as $temp){
-                        $temp->setAsistenciaTipo("NO HUBO CLASES");
-                        $temp->setAsistenciaValue($atrasado->getEsquemaCalificacionValue());
+                        $temp->setAsistenciaTipo("RECUPERADA");
+                        $temp->setAsistenciaValue(0);
                         $temp->setAsistenciaComentario("RECUPERADO=>".$_POST['fechaNow']." / COMENTARIO=>".$_POST['comentario']);
                         $em->persist($temp);
                         $em->flush();
@@ -911,7 +912,8 @@ class DefaultController extends Controller
 
                     $asistenciaListNow = $em->getRepository('TodoBundle:AsistenciaCursoClase')->findBy(array('asistenciaFecha' =>  $fecha,'asistenciaCurso'=>$_POST['id']));
                     foreach($asistenciaListNow as $temp){
-                        $temp->setAsistenciaTipo("RECUPERADA");
+                        $temp->setAsistenciaTipo("");
+                        
                         $temp->setAsistenciaComentario("FECHA QUE DICTO=>".$_POST['fechaBefore']." / COMENTARIO DEL DÍA=>".$_POST['comentario']);
                         $em->persist($temp);
                         $em->flush();

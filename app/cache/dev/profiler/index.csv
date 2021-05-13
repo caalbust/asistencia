@@ -1,0 +1,3 @@
+e0cddb,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/listado_asistencia/index/2/2021-05-13%2000:00:00/0,1620919180,,200
+a1975f,::1,POST,http://localhost:8080/asistencia/web/app_dev.php/backend/ajax_asistencia/,1620919207,,200
+bb3c8f,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/listado_asistencia/index/2/2021-05-13%2000:00:00/0,1620919208,,200

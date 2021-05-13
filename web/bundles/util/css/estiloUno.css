@@ -1,0 +1,459 @@
+﻿
+body {
+    margin: 0 0;
+    font-family: Helvetica, sans-serif;
+    font-size: 12px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.lineaCampo0 {
+    width: 95%;
+    height: 20px;
+    padding-left: 15px;
+}
+
+.formatolabelIzq {
+    float: left;
+    width: 25%;
+    height: 100%;
+    color: Black;
+    text-align: right;
+}
+
+.separador {
+    float: left;
+    width: 10px;
+    height: auto;
+}
+
+.formatoTexto {
+    font-family: Verdana;
+    Font-Size: 8pt;
+    text-align: left;
+}
+
+.fieldsetint {
+    background-color: White;
+    border-right: #cccccc thin solid;
+    border-top: #cccccc thin solid;
+    border-left: #cccccc thin solid;
+    border-bottom: #cccccc thin solid;
+}
+
+.btn-amarillo {
+    color: #5A4A42;
+    background-color: #F5b400;
+    border-color: #F5b400;
+}
+.btn-amarillo:hover, .btn-amarillo:focus, .btn-amarillo:active { border-color: #5A4A42; }
+
+.btn-azul {
+    color: #fff;
+    background-color: #001C43;
+    border-color: #001C43;
+    font-size: small;
+}
+
+.btn-azul:hover, .btn-azul:focus {
+    color: #F5b400;
+}
+
+.btn-gris {
+    color: #999999;
+    background-color: #E0E0E0;
+    border-color: #E0E0E0;
+}
+
+.tabnew {
+    color: #999999;
+    border-bottom: 1px solid #ddd;
+    background-color: #E0E0E0;
+    border-right: #585858;
+    border-color: #DDD #DDD transparent;
+}
+
+.tabnew > li {
+    border-left: #585858;
+}
+
+.tabs > ul > li > a:hover {
+    color: #F5b400;
+    background-color: #585858;
+}
+
+.nav-tabs > li.active > a:focus {
+    color: #F5b400;
+    background-color: #001c43;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #DDD #DDD transparent;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: #585858;
+    border-image: none;
+    cursor: default;
+}
+
+.nav-tabs > li > a {
+    /*color: #fff;
+    background-color: #F5b400;*/
+    color: #5A4A42;
+    background-color: #E0E0E0;
+}
+
+.nav-tabs > li.active > a {
+    color: #F5b400;
+    background-color: #001c43;
+}
+
+.nav-tabs > li > a:hover {
+    /*color: #fff;
+    background-color: #F5b400;*/
+    color: #F5b400;
+    background-color: #e6e6e6;
+    border-color: #d3d3d3;
+}
+
+.nav-tabs > li.active > a:hover {
+    /*color: #fff;
+    background-color: #F5b400;
+    color: #F5b400;
+    background-color: #585858;
+    border-color: #5A4A42;*/
+}
+
+.navbar {
+    position: relative;
+    min-height: 48px;
+    font-size: 14px;
+}
+
+.navbar-default {
+    background-color: #001c43;
+    border-color: #5A4A42;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color: #001c43;
+    color: #F5b400;
+}
+
+.dropdown-menu {
+    color: #e0e0e0;
+    background-color: #001c43;
+    font-size: 14px;
+}
+
+.open > .dropdown-menu {
+    display: block;
+    color: #e0e0e0;
+    background-color: #001c43;
+}
+
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 200;
+    line-height: 1.42857143;
+    color: #e0e0e0;
+    white-space: nowrap;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    text-decoration: none;
+    color: #F5b400;
+    background-color: #001c43;
+}
+
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+    text-decoration: none;
+    outline: 0;
+    color: #F5b400;
+    background-color: #001c43;
+}
+
+.nav-news > li {
+    float: left;
+}
+
+.nav-news > a {
+    color: #e0e0e0;
+    text-decoration: none;
+}
+
+.nav-news > li > a {
+    color: #e0e0e0;
+    border-radius: 4px;
+    background-color: #001c43;
+}
+
+.nav-news > li + li {
+    margin-left: 2px;
+}
+
+.nav-news > li.active > a,
+.nav-news > li.active > a:hover,
+.nav-news > li.active > a:focus {
+    color: #F5b400;
+    background-color: #001c43;
+}
+
+.nav-news > li > a > .badge {
+    margin-left: 3px;
+}
+
+.nav-news > li > a:hover, .nav-news > li > a:focus {
+    color: #F5b400;
+    text-decoration: none;
+    background-color: #001c43;
+}
+
+.nav-new .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #001c43;
+    border-color: #F5b400;
+}
+
+.footer {
+    height: 85px;
+}
+
+#footer1 {
+    padding-top: 25px;
+    background-color: #999999;
+    color: #ffffff;
+    min-height: 100px;
+    text-align: center;
+    font-size: 10px;
+}
+
+#footer2 {
+    background-color: #CCCCCC;
+    color: #999999;
+    min-height: 100px;
+    font-size: 9px;
+    text-align: center;
+}
+
+#titulo {
+    width: auto;
+    height: 50px;
+    font-family: Arial;
+    font-size: 21px;
+    text-align: left;
+    text-indent: 0px;
+    padding-top: 20px;
+}
+
+.fondobarrabtn {
+    background-color: #585858;
+    height: 35px;
+    padding-left: 1%;
+}
+
+.posbtn {
+    padding-top: 1%;
+}
+
+.btn-gris > Button:hover {
+    color: #999999;
+}
+
+.margenleft {
+    padding-left: 2%;
+}
+
+.FondoAplicacion {
+    background-color: Gray;
+    filter: alpha(opacity=70);
+    opacity: 0.3;
+}
+
+
+.tituloctrl3 {
+    text-align: center;
+    font-weight: bold;
+}
+
+.lblMsgError {
+    font-family: Helvetica, sans-serif;
+    font-size: 8.5pt;
+    color: Red;
+    width: 468px;
+}
+
+/* TABREPEAT*/
+.tabRepeat {
+    width: 100%;
+    text-align: center;
+}
+
+.tabRepeat th {
+    border: 1px solid #585858;
+    background-color: #001c43;
+    font-weight: bold;
+    font-size: 1.0em;
+}
+
+.tabRepeat td {
+    border: 1px solid #CCC;
+    font-size: 1.0em;
+}
+
+.tabRepeat botonera {
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    background-color: #CCC;
+}
+
+.tabRepeat botonera input {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    width: 20px;
+    height: 20px;
+}
+
+.tabRepeat .point:hover td {
+    background-color: #F5b400;
+    cursor: pointer;
+}
+
+.texto-error {
+    font-size: small;
+}
+
+#testTable {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#tablePagination {
+    background-color: Transparent;
+    font-size: 0.8em;
+    padding: 0px 5px;
+    height: 20px;
+}
+
+#tablePagination_paginater {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#tablePagination img {
+    padding: 0px 2px;
+}
+
+#tablePagination_perPage {
+    float: left;
+}
+
+#tablePagination_paginater {
+    float: right;
+}
+
+.esquinas {
+    -moz-border-radius: 20px 20px 0px 0px;
+    -webkit-border-radius: 20px 20px 0px 0px;
+    -khtml-border-radius: 20px 20px 0px 0px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.ascendente {
+    background-image: url('img/asc.gif');
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+.descendente {
+    background-image: url('img/desc.gif');
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+
+.inserter {
+    margin: 0 auto;
+    padding: 5px;
+    width: 100%;
+}
+
+.inserter table {
+    width: 100%;
+}
+
+.inserter table th {
+    text-align: center;
+    font-weight: bold;
+    background-color: #CCC;
+    font-size: 1.5em;
+}
+
+.inserter table td {
+    text-align: left;
+    border: 1px solid #CCC;
+    padding-left: 6px;
+}
+
+.topopup {
+    color: Blue;
+    cursor: pointer;
+}
+
+.topopup:hover {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu > a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #cccccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover > a:after {
+    border-left-color: #ffffff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}

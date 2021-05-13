@@ -2,7 +2,7 @@
 parameters:
     database_driver: pdo_pgsql
     database_host: localhost
-    database_port: 5433
+    database_port: 5432
     database_name: asistencia
     database_user: postgres
     database_password: admin
@@ -19,5 +19,5 @@ parameters:
     l3_cas_handleLogoutRequest: true
     l3_cas_casLogoutTarget: 'https://auth.espol.edu.ec/logout'
     l3_cas_force: true
-    cas_login_target: 'http://localhost:7070/asistenciaFIECCAS/'
+    cas_login_target: 'http://localhost:8080/asistenciaFIECCAS/'
     cas_host: auth.espol.edu.ec
