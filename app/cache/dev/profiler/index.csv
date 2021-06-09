@@ -1,3 +1,5 @@
-4a4924,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/login,1622562534,,302
-843881,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/login_check,1622562534,,302
-7e8c2d,::1,GET,http://localhost:8080/asistencia/web/app_dev.php/backend/inicio/index/,1622562535,,200
+a62560,::1,GET,http://localhost:7070/asistenciaFIECCAS/web/app_dev.php/backend/listado_asistencia/index/1/2021-06-09%2000:00:00/0,1623261727,,200
+9336cc,::1,POST,http://localhost:7070/asistenciaFIECCAS/web/app_dev.php/backend/ajax_asistencia/,1623261734,,200
+267697,::1,GET,http://localhost:7070/asistenciaFIECCAS/web/app_dev.php/backend/listado_asistencia/index/1/2021-06-09%2000:00:00/0,1623261735,,200
+d13462,::1,POST,http://localhost:7070/asistenciaFIECCAS/web/app_dev.php/backend/ajax_asistencia/,1623261738,,200
+5285a5,::1,GET,http://localhost:7070/asistenciaFIECCAS/web/app_dev.php/backend/listado_asistencia/index/1/2021-06-09%2000:00:00/0,1623261739,,200

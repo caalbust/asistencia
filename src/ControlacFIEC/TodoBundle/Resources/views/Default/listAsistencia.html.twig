@@ -990,6 +990,7 @@ th.grid__cell , td.grid__cell{
                                     }
                             break;
                         }*/
+						 location.reload();
                         var table = $("#tabla_reunion").DataTable();
                         table.clear();
                         for (i=0; i< data['asistenciaList'].length ;i++){
@@ -999,24 +1000,30 @@ th.grid__cell , td.grid__cell{
                             var btnAus='<button id="btnAus_'+data['asistenciaList'][i]['asistenciaId']+'" class="btnMarcar"  onclick="marcarAsistencia("AUSENTE", this.id)" ><i class="fa fa-close"></i></button>';
                             var btnJust='<button id="btnJust_'+data['asistenciaList'][i]['asistenciaId']+'" class="btnMarcar" onclick="marcarAsistencia("JUSTIFICADO", this.id)" ><i class="fa fa-ban"></i></button>';
                             var btnNoCla='<button id="btnNoCla_'+data['asistenciaList'][i]['asistenciaId']+'" class="btnMarcar" onclick="marcarAsistencia("NO HUBO CLASES", this.id)" ><i class=" fa fa-calendar-times-o"></i></button>';
-                            switch(tipo){
+                            var function_temp='';
+							switch(tipo){
                                 case 'PRESENTE':
-                                    btnPre='<button id="btnPr_'+data['asistenciaList'][i]['asistenciaId']+'"  style="background-color:#ABEB91" class="btnMarcar"  onclick="marcarAsistencia("PRESENTE", this.id)" ><i class="fa fa-check"></i></button>';
+									function_temp ="onclick='marcarAsistencia('PRESENTE',this.id)';";
+                                    btnPre='<button id="btnPr_'+data['asistenciaList'][i]['asistenciaId']+'"  style="background-color:#ABEB91" class="btnMarcar"  '+function_temp+' ><i class="fa fa-check"></i></button>';
                                 break;
                                 case 'AUSENTE':
-                                   btnAus='<button id="btnAus_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#EA7178" class="btnMarcar"  onclick="marcarAsistencia("AUSENTE", this.id)" ><i class="fa fa-close"></i></button>';
+									function_temp ='marcarAsistencia("AUSENTE",this.id);';
+                                   btnAus='<button id="btnAus_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#EA7178" class="btnMarcar"  onclick="'+function_temp+'" ><i class="fa fa-close"></i></button>';
                                   
                                 break;
                                 case 'JUSTIFICADO':
-                                    btnJust='<button id="btnJust_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#92E5DC" class="btnMarcar"  onclick="marcarAsistencia("JUSTIFICADO", this.id)" ><i class="fa fa-ban"></i></button>';
+									function_temp ='marcarAsistencia("JUSTIFICADO",this.id);';
+                                    btnJust='<button id="btnJust_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#92E5DC" class="btnMarcar"  onclick="'+function_temp+'" ><i class="fa fa-ban"></i></button>';
                                  
                                 break;
                                 case 'ATRASADO':
-                                     btnAtr='<button id="btnAtr_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#F9ED89" class="btnMarcar"   onclick="marcarAsistencia("ATRASADO", this.id)"><i class="fa fa-clock-o"></i></button>';
+									function_temp ='marcarAsistencia("ATRASADO",this.id);';
+                                     btnAtr='<button id="btnAtr_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#F9ED89" class="btnMarcar"   onclick="'+function_temp+'"><i class="fa fa-clock-o"></i></button>';
                                
                                 break;
                                 case 'NO HUBO CLASES':
-                                     btnNoCla='<button id="btnNoCla_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#000000" class="btnMarcar"  onclick="marcarAsistencia("NO HUBO CLASES", this.id)" ><i class=" fa fa-calendar-times-o"></i></button>';
+									function_temp ='marcarAsistencia("NO HUBO CLASES",this.id)';
+                                    btnNoCla='<button id="btnNoCla_'+data['asistenciaList'][i]['asistenciaId']+'" style="background-color:#000000" class="btnMarcar"  onclick="'+function_temp+'" ><i class=" fa fa-calendar-times-o"></i></button>';
                                
                                 break;
                             }
